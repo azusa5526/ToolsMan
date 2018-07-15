@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "582680160526",
+    "firebase_url": "https://toolsman-67217.firebaseio.com",
+    "project_id": "toolsman-67217",
+    "storage_bucket": "toolsman-67217.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:582680160526:android:126ab8e900e70aec",
+        "android_client_info": {
+          "package_name": "com.example.lai.toolsman"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "582680160526-janrcnee9frfcg28ol6fjb6nk8fmlio6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.lai.toolsman",
+            "certificate_hash": "43aad6b7d328766d2a07043222d64ea9d8a12c26"
+          }
+        },
+        {
+          "client_id": "582680160526-eue1uf8eps984gsstd2o81ma886s8bff.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.lai.toolsman",
+            "certificate_hash": "fa29e6655548a53bb249f4e2f2deebc350ef9157"
+          }
+        },
+        {
+          "client_id": "582680160526-clqudn7prujk2mk0rol5q50d3kkc0g5n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFmsi-RcH0GUpwSnvhdCj1cQGIgXQpT9s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "582680160526-clqudn7prujk2mk0rol5q50d3kkc0g5n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
