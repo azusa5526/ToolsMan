@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <Button
+        android:id="@+id/SendPic"
+        android:layout_width="184dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="38dp"
+        android:text="傳送"
+        android:textSize="35dp" />
+
+    <TextView
+        android:id="@+id/Name"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="45dp"
+        android:text="姓名:"
+        android:textSize="40dp" />
+
+    <EditText
+        android:id="@+id/VerifyName"
+        android:layout_width="wrap_content"
+        android:layout_height="57dp"
+        android:layout_alignBottom="@+id/Name"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="17dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="" />
+
+    <ImageView
+        android:id="@+id/Picture1"
+        android:layout_width="239dp"
+        android:layout_height="98dp"
+        android:layout_alignStart="@+id/Name"
+        android:layout_centerVertical="true"
+        app:srcCompat="?attr/actionBarDivider" />
+
+    <Button
+        android:id="@+id/Choose1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="214dp"
+        android:layout_toEndOf="@+id/SendPic"
+        android:text="選擇照片" />
+
+
+</RelativeLayout>
