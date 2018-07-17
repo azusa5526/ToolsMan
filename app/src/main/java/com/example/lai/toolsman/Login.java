@@ -53,8 +53,6 @@ public class Login extends AppCompatActivity {
              auth.signInWithEmailAndPassword(Email.getText().toString(),Password.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                  @Override
                  public void onSuccess(AuthResult authResult) {
-
-
                      Intent Success = new Intent();
                      Success.setClass(Login.this,Main.class);
                      startActivity(Success);

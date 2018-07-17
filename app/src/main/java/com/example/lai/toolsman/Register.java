@@ -20,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class Register extends AppCompatActivity {
     private DatabaseReference Database;
     FirebaseAuth auth = FirebaseAuth.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +28,7 @@ public class Register extends AppCompatActivity {
         Button Submit = findViewById(R.id.Submit);
         final EditText EmailRegister =(EditText) findViewById(R.id.EmailRegister);
         final EditText PasswordRegister =(EditText)findViewById(R.id.PasswordRegister);
+
         Submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,11 +47,6 @@ public class Register extends AppCompatActivity {
                        }
                    }
                });
-
-
-
-
-
             }
         });
 

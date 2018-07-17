@@ -4,14 +4,25 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:text="Register"
+        android:textAllCaps="false"
+        android:textSize="40sp" />
+
     <Button
         android:id="@+id/Submit"
-        android:layout_width="wrap_content"
+        android:layout_width="290dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="49dp"
-        android:text="提交" />
+        android:layout_marginBottom="126dp"
+        android:text="Register" />
 
     <TextView
         android:id="@+id/textView9"
@@ -19,37 +30,35 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="72dp"
-        android:textSize="25dp"
-        android:text="Email:" />
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="145dp"
+        android:text="Email:"
+        android:textSize="18dp" />
 
     <TextView
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/textView9"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="142dp"
-        android:textSize="25dp"
-        android:text="密碼:" />
+        android:layout_alignStart="@+id/textView9"
+        android:layout_below="@+id/EmailRegister"
+        android:text="Password"
+        android:textSize="18dp" />
 
     <EditText
         android:id="@+id/EmailRegister"
-        android:layout_width="wrap_content"
+        android:layout_width="290dp"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView9"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="33dp"
+        android:layout_below="@+id/textView9"
+        android:layout_centerHorizontal="true"
         android:ems="10"
         android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/PasswordRegister"
-        android:layout_width="wrap_content"
+        android:layout_width="290dp"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView11"
-        android:layout_alignStart="@+id/EmailRegister"
+        android:layout_below="@+id/textView11"
+        android:layout_centerHorizontal="true"
         android:ems="10"
         android:inputType="textPassword" />
 </RelativeLayout>
