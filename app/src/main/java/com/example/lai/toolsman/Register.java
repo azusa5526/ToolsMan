@@ -25,6 +25,8 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        getSupportActionBar().hide();
+
         Button Submit = findViewById(R.id.Submit);
         final EditText EmailRegister =(EditText) findViewById(R.id.EmailRegister);
         final EditText PasswordRegister =(EditText)findViewById(R.id.PasswordRegister);

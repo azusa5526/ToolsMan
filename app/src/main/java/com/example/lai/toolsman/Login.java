@@ -38,9 +38,10 @@ public class Login extends AppCompatActivity {
     };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        getSupportActionBar().hide();
+
         final Button login = (Button) findViewById(R.id.Login);
         Button Register = (Button)findViewById(R.id.Register);
         final EditText Email = findViewById(R.id.Email);
@@ -53,12 +54,12 @@ public class Login extends AppCompatActivity {
              auth.signInWithEmailAndPassword(Email.getText().toString(),Password.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                  @Override
                  public void onSuccess(AuthResult authResult) {
-                     Intent Success = new Intent();
-                     Success.setClass(Login.this,Main.class);
-                     startActivity(Success);
+                     Intent MainIntent = new Intent();
+                     MainIntent.setClass(Login.this,Main.class);
+                     MainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);  //設定切換應用程式畫面後不會登出系統
+                     startActivity(MainIntent);
                      finish();
                  }
-
              })
                      .addOnFailureListener(new OnFailureListener() {
                          @Override
