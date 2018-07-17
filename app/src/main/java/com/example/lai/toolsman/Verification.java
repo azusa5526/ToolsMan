@@ -76,13 +76,6 @@ public class Verification extends AppCompatActivity {
         Send.putExtra(Intent.EXTRA_SUBJECT,"帳號:  "+name+"   的"+title);
         Send.putExtra(Intent.EXTRA_TEXT,Picture);
 
-        File sdcard = Environment.getExternalStorageDirectory();
-
-        File file = new File(sdcard,"Picture1");
-        Send.putExtra(Intent.EXTRA_STREAM,
-                uri.parse("file://"+ file.getAbsolutePath()));
-
-        Send.setType("image/jpeg");
         Send.setType("text/plain");
         startActivity(Send.createChooser(Send,"選擇工具"));
 

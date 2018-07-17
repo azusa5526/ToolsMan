@@ -27,7 +27,11 @@
         <activity android:name=".Register" />
         <activity android:name=".PostWater" />
         <activity android:name=".PostElec" />
-        <activity android:name=".Verification"></activity>
+        <activity android:name=".Verification" />
+        <activity
+            android:name=".MainDrawer"
+            android:label="@string/title_activity_main_drawer"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

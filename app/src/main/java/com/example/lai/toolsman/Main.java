@@ -53,7 +53,7 @@ public class Main extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent ToHistory = new Intent();
-                ToHistory.setClass(Main.this, com.example.lai.toolsman.History.class);
+                ToHistory.setClass(Main.this, com.example.lai.toolsman.MainDrawer.class);
                 startActivity(ToHistory);
 
             }
