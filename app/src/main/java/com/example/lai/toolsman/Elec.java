@@ -16,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,7 +28,10 @@ public class Elec extends AppCompatActivity {
 
     private RecyclerView mList;
     private DatabaseReference mDatabase;
-    private ProgressDialog mProgress;
+    private FirebaseAuth mAuth;
+    //private FirebaseAuth.AuthStateListener mAuthListener;
+    private DatabaseReference mDatabaseUser;
+    //private ProgressDialog mProgress;
     private boolean mProcessLike = false;
     private DatabaseReference mDatabaseLike;
 
@@ -35,10 +40,16 @@ public class Elec extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_elec);
 
+        mAuth = FirebaseAuth.getInstance();
+
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Article");
+        mDatabaseUser = FirebaseDatabase.getInstance().getReference().child("Users");
         mDatabaseLike = FirebaseDatabase.getInstance().getReference().child("Likes");
+        mDatabaseUser.keepSynced(true);
+        mDatabase.keepSynced(true);
         mDatabaseLike.keepSynced(true);
-        mProgress = new ProgressDialog(this);
+
+        //mProgress = new ProgressDialog(this);
         mList = (RecyclerView) findViewById(R.id.list);
         mList.setHasFixedSize(true);
         mList.setLayoutManager(new LinearLayoutManager(this));
@@ -85,21 +96,44 @@ public class Elec extends AppCompatActivity {
                 @Override
                 protected void populateViewHolder(ArticleViewHolder viewHolder, Article model, int position) {
 
+                    final String post_key = getRef(position).getKey();
                     viewHolder.setTitle(model.getTitle());
                     viewHolder.setDesc(model.getDesc());
                     viewHolder.setUsername(model.getUsername());
+                    viewHolder.setLikeBtn(post_key);
 
                     viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Toast.makeText(Elec.this, "You Clicked a View", Toast.LENGTH_LONG).show();
+                            Toast.makeText(Elec.this, post_key, Toast.LENGTH_LONG).show();
                         }
                     });
 
+                    //Like Feature
                     viewHolder.mLikeBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             mProcessLike = true;
+
+                                mDatabaseLike.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        if (mProcessLike) {
+                                            if (dataSnapshot.child(post_key).hasChild(mAuth.getCurrentUser().getUid())) {
+                                                mDatabaseLike.child(post_key).child(mAuth.getCurrentUser().getUid()).removeValue();
+                                                mProcessLike = false;
+                                            } else {
+                                                mDatabaseLike.child(post_key).child(mAuth.getCurrentUser().getUid()).setValue("Random");
+                                                mProcessLike = false;
+                                            }
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+
+                                    }
+                                });
 
                         }
                     });
@@ -112,12 +146,34 @@ public class Elec extends AppCompatActivity {
     public static class ArticleViewHolder extends RecyclerView.ViewHolder{
         View mView;
         ImageButton mLikeBtn;
+        DatabaseReference mDatabaseLike;
+        FirebaseAuth mAuth;
         public ArticleViewHolder(View itemView) {
             super(itemView);
 
             mView = itemView;
-            mLikeBtn = (ImageButton) mView.findViewById(R.id.LikeBtn);
+            mLikeBtn =  mView.findViewById(R.id.LikeBtn);
+            mDatabaseLike = FirebaseDatabase.getInstance().getReference().child("Likes");
+            mAuth = FirebaseAuth.getInstance();
+            mDatabaseLike.keepSynced(true);
+        }
 
+        public void setLikeBtn(final String post_key){
+            mDatabaseLike.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.child(post_key).hasChild(mAuth.getCurrentUser().getUid())){
+                        mLikeBtn.setImageResource(R.mipmap.action_like_blue);
+                    } else {
+                        mLikeBtn.setImageResource(R.mipmap.action_like_gray);
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
         }
 
         public void setTitle(String title){
