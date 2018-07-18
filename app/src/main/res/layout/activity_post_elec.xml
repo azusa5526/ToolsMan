@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:layout_width="match_parent"
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -10,9 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="84dp"
-        android:textSize="30dp"
-        android:text="提交" />
+        android:text="提交"
+        android:textSize="30dp" />
 
     <EditText
         android:id="@+id/titleField"
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="89dp"
+        android:layout_marginTop="49dp"
         android:ems="10"
         android:inputType="textPersonName" />
 
@@ -28,9 +28,9 @@
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/titleField"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="-89dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="12dp"
         android:text="標題："
         android:textSize="20dp" />
 
@@ -38,9 +38,8 @@
         android:id="@+id/textView13"
         android:layout_width="61dp"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/descField"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="171dp"
         android:text="描述："
         android:textSize="20dp" />
 
@@ -48,8 +47,19 @@
         android:id="@+id/descField"
         android:layout_width="match_parent"
         android:layout_height="126dp"
+        android:layout_above="@+id/PostElec"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView13"
         android:ems="10"
         android:inputType="textPersonName" />
+
+    <ImageButton
+        android:id="@+id/imageSelect"
+        android:layout_width="match_parent"
+        android:layout_height="203dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/titleField"
+        android:background="@mipmap/add_btn"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/add_btn"
+        app:srcCompat="@color/cardview_shadow_end_color" />
 </RelativeLayout>

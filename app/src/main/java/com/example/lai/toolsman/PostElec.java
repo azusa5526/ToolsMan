@@ -2,6 +2,7 @@ package com.example.lai.toolsman;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -10,9 +11,14 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+<<<<<<< HEAD
 import android.widget.Toast;
+=======
+import android.widget.ImageButton;
+>>>>>>> 5de505d1c0a17cfea56337fe4612a39c9c518934
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -21,6 +27,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 public class PostElec extends AppCompatActivity {
 
@@ -29,10 +38,15 @@ public class PostElec extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseUser mCurrentUser;
     private DatabaseReference mDatabaseUser;
+    private static final int GALLERY_REQUEST = 1;
+    private StorageReference mStorage;
+
 
     private EditText mPostTitle;
     private EditText mPostDesc;
     private Button mSubmitBtn;
+    private ImageButton mSelectImage;
+    private Uri mImageUri = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +62,8 @@ public class PostElec extends AppCompatActivity {
         mPostTitle = (EditText) findViewById(R.id.titleField);
         mPostDesc = (EditText) findViewById(R.id.descField);
         mSubmitBtn = (Button) findViewById(R.id.PostElec);
+        mSelectImage = (ImageButton) findViewById(R.id.imageSelect);
+        mStorage = FirebaseStorage.getInstance().getReference();
 
 
         mSubmitBtn.setOnClickListener(new View.OnClickListener() {
@@ -57,7 +73,25 @@ public class PostElec extends AppCompatActivity {
 
             }
         });
+        mSelectImage.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                galleryIntent.setType("image/*");
+                startActivityForResult(galleryIntent, GALLERY_REQUEST);
+            }
+        });
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == GALLERY_REQUEST && resultCode == RESULT_OK){
+            mImageUri = data.getData();
+            mSelectImage.setImageURI(mImageUri);
+        }
     }
 
     private void startPosting() {
@@ -67,8 +101,18 @@ public class PostElec extends AppCompatActivity {
         final String title_value = mPostTitle.getText().toString().trim();
         final String desc_value = mPostDesc.getText().toString().trim();
 
-        if (!TextUtils.isEmpty(title_value) && !TextUtils.isEmpty(desc_value)) {
+        if (!TextUtils.isEmpty(title_value) && !TextUtils.isEmpty(desc_value) && mImageUri != null) {
+            StorageReference filepath = mStorage.child("Blog_Image").child(mImageUri.getLastPathSegment());
             mProgress.show();
+
+            filepath.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Uri downloadUri = taskSnapshot.getDownloadUrl();
+                    mProgress.dismiss();
+                }
+            });
+
             final DatabaseReference newPost = mDatabase.push();
 
             mDatabaseUser.addValueEventListener(new ValueEventListener() {
