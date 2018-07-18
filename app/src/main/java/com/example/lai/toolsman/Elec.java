@@ -55,7 +55,7 @@ public class Elec extends AppCompatActivity {
         mList.setLayoutManager(new LinearLayoutManager(this));
 
 
-        final Button ToPostElec = findViewById(R.id.PostElec);
+        /*final Button ToPostElec = findViewById(R.id.PostElec);
         ToPostElec.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,7 +63,7 @@ public class Elec extends AppCompatActivity {
                 ToPostElec.setClass(Elec.this,PostElec.class);
                 startActivity(ToPostElec);
             }
-        });
+        });*/
 
     }
 
@@ -105,7 +105,9 @@ public class Elec extends AppCompatActivity {
                     viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Toast.makeText(Elec.this, post_key, Toast.LENGTH_LONG).show();
+                            Intent singleArticleIntent = new Intent(Elec.this, SingleArticleElec.class);
+                            singleArticleIntent.putExtra("article_id", post_key);
+                            startActivity(singleArticleIntent);
                         }
                     });
 
