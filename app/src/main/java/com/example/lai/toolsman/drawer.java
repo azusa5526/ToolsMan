@@ -15,13 +15,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class drawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer);
+
+        mAuth = FirebaseAuth.getInstance();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Button GoWater = findViewById(R.id.button4);
@@ -103,35 +110,37 @@ public class drawer extends AppCompatActivity
 
         if (id == R.id.Favorite) {
             Intent GoFavorite = new Intent();
-            GoFavorite.setClass(drawer.this,Favorite.class);
+            GoFavorite.setClass(drawer.this, Favorite.class);
             startActivity(GoFavorite);
         } else if (id == R.id.BlackList) {
             Intent GoBlacklist= new Intent();
-            GoBlacklist.setClass(drawer.this,BlackList.class);
+            GoBlacklist.setClass(drawer.this, BlackList.class);
             startActivity(GoBlacklist);
             return true;
 
         } else if (id == R.id.Chat) {
             Intent GoChat= new Intent();
-            GoChat.setClass(drawer.this,Chat.class);
+            GoChat.setClass(drawer.this, Chat.class);
             startActivity(GoChat);
             return true;
 
         } else if (id == R.id.History) {
             Intent GoHistory= new Intent();
-            GoHistory.setClass(drawer.this,History.class);
+            GoHistory.setClass(drawer.this, History.class);
             startActivity(GoHistory);
             return true;
 
-        } else if (id == R.id.Setting) {
-            Intent GoSetting= new Intent();
-            GoSetting.setClass(drawer.this,Setting.class);
-            startActivity(GoSetting);
-            return true;
-        }
-        else if (id == R.id.LogOut) {
+        } else if (id == R.id.AccountSetting) {
+            Intent AccountSettingsIntent = new Intent(drawer.this, AccountSettings.class);
+            AccountSettingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(AccountSettingsIntent);
+            finish();
 
-
+        } else if (id == R.id.Logout) {
+            mAuth.signOut();
+            Intent loginIntent= new Intent(drawer.this, Login.class);
+            startActivity(loginIntent);
+            finish();
         }
 
 

@@ -21,13 +21,14 @@
 
             android:title="歷史紀錄" />
         <item
-            android:id="@+id/Setting"
+            android:id="@+id/AccountSetting"
 
-            android:title="設定" />
+            android:title="帳戶設定" />
         <item
             android:id="@+id/Logout"
 
             android:title="登出" />
+
 
     </group>
 
