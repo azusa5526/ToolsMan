@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -93,8 +94,7 @@ public class PostElec extends AppCompatActivity {
                 }
             });
         } else {
-            mProgress.setMessage("Title and Description can't be null");
-            mProgress.show();
+            Toast.makeText(PostElec.this,"Title and Desc can't be null", Toast.LENGTH_LONG).show();
         }
 
 
