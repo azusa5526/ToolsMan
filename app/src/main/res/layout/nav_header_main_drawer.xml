@@ -32,37 +32,39 @@
                 android:layout_weight="1">
 
                 <Button
-                    android:text="我的最愛"
+                    android:id="@+id/Favorite1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/Favorite"
-                    android:background="@android:color/transparent" />
+                    android:background="@android:color/transparent"
+                    android:text="我的最愛" />
 
                 <Button
-                    android:text="黑名單"
+                    android:id="@+id/BlackList1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/BlackList"
-                    android:background="@android:color/transparent" />
+                    android:background="@android:color/transparent"
+                    android:text="黑名單" />
 
                 <Button
-                    android:text="私訊功能"
+                    android:id="@+id/Chat1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/Chat"
-                    android:background="@android:color/transparent" />
+                    android:background="@android:color/transparent"
+                    android:text="私訊功能" />
+
                 <Button
-                    android:text="歷史查詢"
+                    android:id="@+id/History1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/History"
-                    android:background="@android:color/transparent" />
+                    android:background="@android:color/transparent"
+                    android:text="歷史查詢" />
+
                 <Button
-                    android:text="設定"
+                    android:id="@+id/Setting1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/Setting"
-                    android:background="@android:color/transparent" />
+                    android:background="@android:color/transparent"
+                    android:text="設定" />
                 <Button
                     android:text="登出"
                     android:layout_width="match_parent"
@@ -72,9 +74,11 @@
 
             </LinearLayout>
 
+
         </LinearLayout>
 
     </LinearLayout>
 
 </LinearLayout>
+
 

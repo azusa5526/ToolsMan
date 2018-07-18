@@ -2,7 +2,6 @@ package com.example.lai.toolsman;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -15,16 +14,45 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.Toast;
 
-public class MainDrawer extends AppCompatActivity{
+public class drawer extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_drawer);
+        setContentView(R.layout.activity_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Button GoWater = findViewById(R.id.button4);
+        Button GoElec = findViewById(R.id.button5);
+        GoWater.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent GoWater = new Intent();
+                GoWater.setClass(drawer.this,Water.class);
+                startActivity(GoWater);
+            }
+        });
+        GoElec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent GoElec = new Intent();
+                GoElec.setClass(drawer.this,Elec.class);
+                startActivity(GoElec);
+
+            }
+        });
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -32,15 +60,8 @@ public class MainDrawer extends AppCompatActivity{
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                return false;
-            }
-        });
-
-        }
-
+        navigationView.setNavigationItemSelectedListener(this);
+    }
 
     @Override
     public void onBackPressed() {
@@ -55,7 +76,7 @@ public class MainDrawer extends AppCompatActivity{
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main_drawer, menu);
+        getMenuInflater().inflate(R.menu.drawer, menu);
         return true;
     }
 
@@ -75,25 +96,44 @@ public class MainDrawer extends AppCompatActivity{
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
+    @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.Favorite1) {
-            Intent ff = new Intent();
-            ff.setClass(MainDrawer.this,Login.class);
-            startActivity(ff);
-        } else if (id == R.id.BlackList1) {
+        if (id == R.id.Favorite) {
+            Intent GoFavorite = new Intent();
+            GoFavorite.setClass(drawer.this,Favorite.class);
+            startActivity(GoFavorite);
+        } else if (id == R.id.BlackList) {
+            Intent GoBlacklist= new Intent();
+            GoBlacklist.setClass(drawer.this,BlackList.class);
+            startActivity(GoBlacklist);
+            return true;
 
-        } else if (id == R.id.Chat1) {
+        } else if (id == R.id.Chat) {
+            Intent GoChat= new Intent();
+            GoChat.setClass(drawer.this,Chat.class);
+            startActivity(GoChat);
+            return true;
 
-        } else if (id == R.id.History1) {
+        } else if (id == R.id.History) {
+            Intent GoHistory= new Intent();
+            GoHistory.setClass(drawer.this,History.class);
+            startActivity(GoHistory);
+            return true;
 
-        } else if (id == R.id.Setting1) {
+        } else if (id == R.id.Setting) {
+            Intent GoSetting= new Intent();
+            GoSetting.setClass(drawer.this,Setting.class);
+            startActivity(GoSetting);
+            return true;
+        }
+        else if (id == R.id.LogOut) {
 
-        } else if (id == R.id.LogOut) {
 
         }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

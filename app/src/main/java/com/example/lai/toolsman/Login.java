@@ -55,7 +55,7 @@ public class Login extends AppCompatActivity {
                  @Override
                  public void onSuccess(AuthResult authResult) {
                      Intent MainIntent = new Intent();
-                     MainIntent.setClass(Login.this,Main.class);
+                     MainIntent.setClass(Login.this,drawer.class);
                      MainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);  //設定切換應用程式畫面後不會登出系統
                      startActivity(MainIntent);
                      finish();
