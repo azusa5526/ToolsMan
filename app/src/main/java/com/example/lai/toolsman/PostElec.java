@@ -11,11 +11,9 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-<<<<<<< HEAD
 import android.widget.Toast;
-=======
 import android.widget.ImageButton;
->>>>>>> 5de505d1c0a17cfea56337fe4612a39c9c518934
+
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
