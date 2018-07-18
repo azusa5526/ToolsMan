@@ -1,5 +1,6 @@
 package com.example.lai.toolsman;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -53,5 +54,11 @@ public class AccountSettings extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent drawerIntent= new Intent(AccountSettings.this, drawer.class);
+        startActivity(drawerIntent);
     }
 }

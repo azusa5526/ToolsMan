@@ -132,7 +132,6 @@ public class drawer extends AppCompatActivity
 
         } else if (id == R.id.AccountSetting) {
             Intent AccountSettingsIntent = new Intent(drawer.this, AccountSettings.class);
-            AccountSettingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(AccountSettingsIntent);
             finish();
 
