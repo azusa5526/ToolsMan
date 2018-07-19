@@ -2,6 +2,7 @@ package com.example.lai.toolsman;
 
 import android.content.Intent;
 
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -38,6 +39,13 @@ public class Register extends AppCompatActivity {
             public void onClick(View v) {
                final String Email = EmailRegister.getText().toString();
                String Password = PasswordRegister.getText().toString();
+               if(Email.matches("")||Password.matches(""))
+               {
+                   Toast.makeText(Register.this, "註冊資料請勿空白", Toast.LENGTH_SHORT).show();
+
+
+               }
+               else{
                auth.createUserWithEmailAndPassword(Email,Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                    @Override
                    public void onComplete(@NonNull Task<AuthResult> task) {
@@ -72,6 +80,6 @@ public class Register extends AppCompatActivity {
                    }
                });
             }
-        });
+        }});
     }
 }
