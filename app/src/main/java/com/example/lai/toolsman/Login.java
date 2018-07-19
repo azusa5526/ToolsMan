@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -50,12 +51,22 @@ public class Login extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View v) {
+             if(Email.getText().toString().matches("")||Password.getText().toString().matches(""))
+             {
+                 Toast toast = Toast.makeText(Login.this, "帳號及密碼請勿空白", Toast.LENGTH_LONG);
+                 toast.show();
+             }
+             else{
 
              auth.signInWithEmailAndPassword(Email.getText().toString(),Password.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+
                  @Override
                  public void onSuccess(AuthResult authResult) {
-                     Intent MainIntent = new Intent();
+                     Intent MainIntent = new Intent(Login.this,drawer.class);
+                     String AccountName = Email.getText().toString();
+                     MainIntent.putExtra("AccountName",AccountName);
                      MainIntent.setClass(Login.this,drawer.class);
+
                      MainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);  //設定切換應用程式畫面後不會登出系統
                      startActivity(MainIntent);
                      finish();
@@ -68,7 +79,7 @@ public class Login extends AppCompatActivity {
                          }
                      });
          }
-     });
+     }});
 
         Register.setOnClickListener(new View.OnClickListener() {
             @Override
