@@ -16,28 +16,17 @@
         <TextView
             android:id="@+id/username"
             android:layout_width="228dp"
-            android:layout_height="wrap_content"
+            android:layout_height="29dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:text="Poster" />
 
         <TextView
-            android:id="@+id/post_title"
-            android:layout_width="343dp"
-            android:layout_height="38dp"
-            android:layout_above="@+id/post_desc"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="-1dp"
-            android:text="Post Title here"
-            android:textSize="15dp" />
-
-        <TextView
             android:id="@+id/post_desc"
             android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:layout_above="@+id/LikeBtn"
+            android:layout_height="79dp"
             android:layout_alignParentStart="true"
-            android:layout_marginBottom="-161dp"
+            android:layout_below="@+id/imageView3"
             android:text="Post Desc here"
             android:textSize="15dp" />
 
@@ -46,9 +35,9 @@
             android:id="@+id/LikeBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="161dp"
+            android:layout_marginBottom="16dp"
             android:background="#00ffffff"
             android:src="@mipmap/action_like_gray" />
 
@@ -56,7 +45,7 @@
             android:id="@+id/like_count"
             android:layout_width="50dp"
             android:layout_height="48dp"
-            android:layout_alignBottom="@+id/LikeBtn"
+            android:layout_alignTop="@+id/LikeBtn"
             android:layout_toEndOf="@+id/LikeBtn"
             android:text="0 Like" />
 
@@ -75,6 +64,22 @@
             android:layout_alignBottom="@+id/imageView8"
             android:layout_alignStart="@+id/username"
             android:text="Date" />
+
+        <TextView
+            android:id="@+id/post_title"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/imageView8"
+            android:text="Post Title here" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="197dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/post_title"
+            app:srcCompat="@mipmap/add_btn" />
 
 
     </RelativeLayout>

@@ -14,7 +14,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.ImageButton;
 
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -39,7 +38,6 @@ public class PostElec extends AppCompatActivity {
     private static final int GALLERY_REQUEST = 1;
     private StorageReference mStorage;
 
-
     private EditText mPostTitle;
     private EditText mPostDesc;
     private Button mSubmitBtn;
@@ -51,7 +49,7 @@ public class PostElec extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_elec);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Article");
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("ArticleElec");
         mProgress = new ProgressDialog(this);
         mAuth = FirebaseAuth.getInstance();
         mCurrentUser = mAuth.getCurrentUser();
@@ -62,7 +60,6 @@ public class PostElec extends AppCompatActivity {
         mSubmitBtn = (Button) findViewById(R.id.PostElec);
         mSelectImage = (ImageButton) findViewById(R.id.imageSelect);
         mStorage = FirebaseStorage.getInstance().getReference();
-
 
         mSubmitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +76,6 @@ public class PostElec extends AppCompatActivity {
                 startActivityForResult(galleryIntent, GALLERY_REQUEST);
             }
         });
-
     }
 
     @Override
@@ -94,7 +90,6 @@ public class PostElec extends AppCompatActivity {
 
     private void startPosting() {
         mProgress.setMessage("Posting");
-
 
         final String title_value = mPostTitle.getText().toString().trim();
         final String desc_value = mPostDesc.getText().toString().trim();
@@ -138,9 +133,5 @@ public class PostElec extends AppCompatActivity {
         } else {
             Toast.makeText(PostElec.this,"Title and Desc can't be null", Toast.LENGTH_LONG).show();
         }
-
-
-
-
     }
 }

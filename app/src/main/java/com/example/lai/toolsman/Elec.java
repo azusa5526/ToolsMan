@@ -1,5 +1,6 @@
 package com.example.lai.toolsman;
 
+import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.provider.ContactsContract;
@@ -29,9 +30,7 @@ public class Elec extends AppCompatActivity {
     private RecyclerView mList;
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
-    //private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference mDatabaseUser;
-    //private ProgressDialog mProgress;
     private boolean mProcessLike = false;
     private DatabaseReference mDatabaseLike;
 
@@ -41,36 +40,21 @@ public class Elec extends AppCompatActivity {
         setContentView(R.layout.activity_elec);
 
         mAuth = FirebaseAuth.getInstance();
-
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Article");
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("ArticleElec");
         mDatabaseUser = FirebaseDatabase.getInstance().getReference().child("Users");
         mDatabaseLike = FirebaseDatabase.getInstance().getReference().child("Likes");
         mDatabaseUser.keepSynced(true);
         mDatabase.keepSynced(true);
         mDatabaseLike.keepSynced(true);
 
-        //mProgress = new ProgressDialog(this);
-        mList = (RecyclerView) findViewById(R.id.list);
+        mList = findViewById(R.id.list);
         mList.setHasFixedSize(true);
         mList.setLayoutManager(new LinearLayoutManager(this));
-
-
-        /*final Button ToPostElec = findViewById(R.id.PostElec);
-        ToPostElec.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent ToPostElec = new Intent();
-                ToPostElec.setClass(Elec.this,PostElec.class);
-                startActivity(ToPostElec);
-            }
-        });*/
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.navigation, menu);
-
         return super.onCreateOptionsMenu(menu);
     }
     @Override
@@ -84,23 +68,20 @@ public class Elec extends AppCompatActivity {
     @Override
    protected void onStart() {
         super.onStart();
-
             FirebaseRecyclerAdapter<Article, ArticleViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Article, ArticleViewHolder>(
-
                     Article.class,
                     R.layout.article_elec,
                     ArticleViewHolder.class,
                     mDatabase
-
             ) {
                 @Override
                 protected void populateViewHolder(ArticleViewHolder viewHolder, Article model, int position) {
-
                     final String post_key = getRef(position).getKey();
+                    viewHolder.setLikeBtn(post_key);
                     viewHolder.setTitle(model.getTitle());
                     viewHolder.setDesc(model.getDesc());
                     viewHolder.setUsername(model.getUsername());
-                    viewHolder.setLikeBtn(post_key);
+                    //User data will be retrieved here...
 
                     viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -110,7 +91,6 @@ public class Elec extends AppCompatActivity {
                             startActivity(singleArticleIntent);
                         }
                     });
-
                     //Like Feature
                     viewHolder.mLikeBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -136,13 +116,11 @@ public class Elec extends AppCompatActivity {
 
                                     }
                                 });
-
                         }
                     });
                 }
             };
             mList.setAdapter(firebaseRecyclerAdapter);
-
         }
 
     public static class ArticleViewHolder extends RecyclerView.ViewHolder{
@@ -179,22 +157,18 @@ public class Elec extends AppCompatActivity {
         }
 
         public void setTitle(String title){
-
             TextView post_title = (TextView) mView.findViewById(R.id.post_title);
             post_title.setText(title);
         }
 
         public  void  setDesc(String desc){
-
             TextView post_desc = (TextView) mView.findViewById(R.id.post_desc);
             post_desc.setText(desc);
-
         }
 
         public  void setUsername(String username){
             TextView post_username = (TextView) mView.findViewById(R.id.username);
             post_username.setText(username);
-
         }
 
     }

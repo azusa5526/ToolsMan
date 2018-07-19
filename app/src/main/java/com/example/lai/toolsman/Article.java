@@ -7,7 +7,6 @@ public class Article {
     private String username;
 
     public Article(){
-
     }
 
     public Article(String title, String desc, String username) {
