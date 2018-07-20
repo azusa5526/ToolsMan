@@ -3,6 +3,8 @@ package com.example.lai.toolsman;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,6 +25,8 @@ public class AccountSettings extends AppCompatActivity {
     private CircleImageView mUserImage;
     private TextView mUserEmail;
     private TextView mUserStatus;
+    private Button mChangeStateBtn;
+    private Button mChangeImageBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +37,13 @@ public class AccountSettings extends AppCompatActivity {
         mUserImage = (CircleImageView) findViewById(R.id.displayImage);
         mUserEmail = (TextView) findViewById(R.id.displayEmail);
         mUserStatus = (TextView) findViewById(R.id.displayStatus);
+        mChangeStateBtn = (Button) findViewById(R.id.changeState);
+        mChangeImageBtn = (Button) findViewById(R.id.changeImage);
 
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
         String currentUid = mCurrentUser.getUid();
+
+
 
         mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUid);
         mUserDatabase.addValueEventListener(new ValueEventListener() {
@@ -54,7 +62,16 @@ public class AccountSettings extends AppCompatActivity {
 
             }
         });
+
+        mChangeStateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent statusIntent = new Intent(AccountSettings.this, StatusActivity.class);
+                startActivity(statusIntent);
+            }
+        });
     }
+
 
     @Override
     public void onBackPressed() {
