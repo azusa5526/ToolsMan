@@ -65,7 +65,7 @@ public class Login extends AppCompatActivity {
                      Intent MainIntent = new Intent(Login.this,drawer.class);
                      String AccountName = Email.getText().toString();
                      MainIntent.putExtra("AccountName",AccountName);
-                     MainIntent.setClass(Login.this,drawer.class);
+
 
                      MainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);  //設定切換應用程式畫面後不會登出系統
                      startActivity(MainIntent);

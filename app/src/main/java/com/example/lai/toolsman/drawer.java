@@ -22,6 +22,7 @@ public class drawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private FirebaseAuth mAuth;
+    String RealName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,8 @@ public class drawer extends AppCompatActivity
         setContentView(R.layout.activity_drawer);
         Intent GetName = getIntent();
         String AccountName = GetName.getStringExtra("AccountName");
+        RealName=AccountName;
+
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -136,9 +139,22 @@ public class drawer extends AppCompatActivity
         } else if (id == R.id.AccountSetting) {
             Intent AccountSettingsIntent = new Intent(drawer.this, AccountSettings.class);
             startActivity(AccountSettingsIntent);
-            finish();
+            finish();}
+        else if (id == R.id.Verification) {
+            String[] to={"t12340905@gmail.com"};
+            String title = "師傅驗證信";
+            String Picture="請於此附上證件照片";
+           String name = RealName;
+            Intent Send = new Intent(Intent.ACTION_SEND);
+            Send.putExtra(Intent.EXTRA_EMAIL,to);
+           Send.putExtra(Intent.EXTRA_SUBJECT,name+"   的"+title);
+            Send.putExtra(Intent.EXTRA_TEXT,Picture);
 
-        } else if (id == R.id.Logout) {
+            Send.setType("text/plain");
+            startActivity(Send.createChooser(Send,"選擇工具"));
+        }
+
+        else if (id == R.id.Logout) {
             mAuth.signOut();
             Intent loginIntent= new Intent(drawer.this, Login.class);
             startActivity(loginIntent);
@@ -149,5 +165,7 @@ public class drawer extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
+
+}
+
 }

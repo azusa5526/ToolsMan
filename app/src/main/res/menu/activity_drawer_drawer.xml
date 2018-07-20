@@ -25,6 +25,11 @@
 
             android:title="帳戶設定" />
         <item
+            android:id="@+id/Verification"
+
+            android:title="師傅驗證" />
+
+        <item
             android:id="@+id/Logout"
 
             android:title="登出" />
