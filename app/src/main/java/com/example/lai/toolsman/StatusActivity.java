@@ -42,12 +42,12 @@ public class StatusActivity extends AppCompatActivity {
         mProgress = new ProgressDialog(this);
 
         mSaveStatusBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mProgress = new ProgressDialog(StatusActivity.this);
-                mProgress.setTitle("Saving Changes");
-                mProgress.setMessage("Please wait while we save the changes");
-                mProgress.show();
+                    @Override
+                    public void onClick(View view) {
+                        mProgress = new ProgressDialog(StatusActivity.this);
+                        mProgress.setTitle("Saving Changes");
+                        mProgress.setMessage("Please wait while we save the changes");
+                        mProgress.show();
 
                 String status = mStatus.getText().toString();
                 mStatusDatabase.child("status").setValue(status).addOnCompleteListener(new OnCompleteListener<Void>() {

@@ -1,6 +1,7 @@
 package com.example.lai.toolsman;
 
 import android.accounts.Account;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -23,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -44,7 +46,8 @@ public class AccountSettings extends AppCompatActivity {
     private Button mChangeImageBtn;
 
     private static final int GALLERY_PICK = 1;
-    private static final int MAX_LENGTH = 50;
+
+    private ProgressDialog mProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +76,8 @@ public class AccountSettings extends AppCompatActivity {
 
                 mUserEmail.setText(email);
                 mUserStatus.setText(status);
+
+                Picasso.get().load(image).into(mUserImage);
             }
 
             @Override
@@ -98,7 +103,6 @@ public class AccountSettings extends AppCompatActivity {
                 galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(galleryIntent, "SELECT IMAGE"), GALLERY_PICK);
 
-
                 /*
                 CropImage.activity()
                         .setGuidelines(CropImageView.Guidelines.ON)
@@ -123,37 +127,40 @@ public class AccountSettings extends AppCompatActivity {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
+                mProgressDialog = new ProgressDialog(AccountSettings.this);
+                mProgressDialog.setTitle("Uploading Image...");
+                mProgressDialog.setMessage("Please wait upload and process the image");
+                mProgressDialog.show();
+
+                String currentUid = mCurrentUser.getUid();
                 Uri resultUri = result.getUri();
-                StorageReference filePath = mImageStorage.child("User_profile_images").child(random() + ".jpg");
+                StorageReference filePath = mImageStorage.child("User_profile_images").child(currentUid + ".jpg");
                 filePath.putFile(resultUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                         if(task.isSuccessful()) {
-                            Toast.makeText(AccountSettings.this, "Working", Toast.LENGTH_LONG).show();
+                            String downloadUrl = task.getResult().getDownloadUrl().toString();
+                            mUserDatabase.child("image").setValue(downloadUrl).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful()) {
+                                        mProgressDialog.dismiss();
+                                        Toast.makeText(AccountSettings.this, "Success Uploading", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            });
+                            //Toast.makeText(AccountSettings.this, "Working", Toast.LENGTH_LONG).show();
                         } else {
                             Toast.makeText(AccountSettings.this, "Error in uploading", Toast.LENGTH_LONG).show();
+                            mProgressDialog.dismiss();
                         }
                     }
                 });
-
 
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
             }
         }
-
-    }
-
-    public static String random() {
-        Random generator = new Random();
-        StringBuilder randomStringBuilder = new StringBuilder();
-        int randomLength = generator.nextInt(MAX_LENGTH);
-        char tempChar;
-        for (int i = 0; i < randomLength; i++){
-            tempChar = (char) (generator.nextInt(96) + 32);
-            randomStringBuilder.append(tempChar);
-        }
-        return randomStringBuilder.toString();
     }
 
     @Override
