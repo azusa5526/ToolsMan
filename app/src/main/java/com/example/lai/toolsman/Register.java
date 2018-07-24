@@ -23,7 +23,6 @@ public class Register extends AppCompatActivity {
     private DatabaseReference mDatabase;
     FirebaseAuth auth = FirebaseAuth.getInstance();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,13 +38,9 @@ public class Register extends AppCompatActivity {
             public void onClick(View v) {
                final String Email = EmailRegister.getText().toString();
                String Password = PasswordRegister.getText().toString();
-               if(Email.matches("")||Password.matches(""))
-               {
+               if(Email.matches("")||Password.matches(""))  {
                    Toast.makeText(Register.this, "註冊資料請勿空白", Toast.LENGTH_SHORT).show();
-
-
-               }
-               else{
+               } else {
                auth.createUserWithEmailAndPassword(Email,Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                    @Override
                    public void onComplete(@NonNull Task<AuthResult> task) {

@@ -28,6 +28,8 @@ import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import org.w3c.dom.Text;
+
 import java.util.Random;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -77,7 +79,10 @@ public class AccountSettings extends AppCompatActivity {
                 mUserEmail.setText(email);
                 mUserStatus.setText(status);
 
-                Picasso.get().load(image).into(mUserImage);
+                //Avoid default avatar disappears when a new user is created.
+                if(!image.equals("default")) {
+                    Picasso.get().load(image).into(mUserImage);
+                }
             }
 
             @Override
@@ -97,17 +102,10 @@ public class AccountSettings extends AppCompatActivity {
         mChangeImageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent galleryIntent = new Intent();
                 galleryIntent.setType("image/*");
                 galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(galleryIntent, "SELECT IMAGE"), GALLERY_PICK);
-
-                /*
-                CropImage.activity()
-                        .setGuidelines(CropImageView.Guidelines.ON)
-                        .start(AccountSettings.this);
-                        */
             }
         });
     }

@@ -1,6 +1,7 @@
 package com.example.lai.toolsman;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
@@ -54,7 +55,10 @@ public class StatusActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()) {
-                            mProgress.dismiss();;
+                            mProgress.dismiss();
+                            Intent accountSettingsIntent = new Intent(StatusActivity.this, AccountSettings.class);
+                            startActivity(accountSettingsIntent);
+                            finish();
                         } else {
                             Toast.makeText(getApplicationContext(), "There was some error in saving Changes", Toast.LENGTH_LONG).show();
                         }
