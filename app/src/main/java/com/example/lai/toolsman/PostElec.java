@@ -65,7 +65,9 @@ public class PostElec extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startPosting();
-
+                Intent Toelec = new Intent();
+                Toelec.setClass(PostElec.this,Elec.class);
+                startActivity(Toelec);
             }
         });
         mSelectImage.setOnClickListener(new View.OnClickListener(){
@@ -95,7 +97,7 @@ public class PostElec extends AppCompatActivity {
         final String desc_value = mPostDesc.getText().toString().trim();
 
         if (!TextUtils.isEmpty(title_value) && !TextUtils.isEmpty(desc_value) && mImageUri != null) {
-            StorageReference filepath = mStorage.child("Blog_Image").child(mImageUri.getLastPathSegment());
+            StorageReference filepath = mStorage.child("Elec").child(mImageUri.getLastPathSegment());
             mProgress.show();
 
             filepath.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
