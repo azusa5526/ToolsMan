@@ -26,10 +26,10 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/BlackList"
-        android:layout_width="339dp"
-        android:layout_height="362dp"
+        android:layout_width="323dp"
+        android:layout_height="381dp"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/BlackList"
-        android:layout_marginTop="115dp" />
+        android:layout_alignStart="@+id/Insert"
+        android:layout_marginTop="110dp" />
 
 </RelativeLayout>
