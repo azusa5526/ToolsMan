@@ -3,13 +3,15 @@ package com.example.lai.toolsman;
 public class ArticleWater {
     private String title;
     private String desc;
+    private String username;
 
     public ArticleWater(){
 
     }
-    public ArticleWater(String title, String desc) {
+    public ArticleWater(String title, String desc, String username) {
         this.title = title;
         this.desc = desc;
+        this.username = username;
     }
     public String getTitle() {
         return title;
@@ -27,5 +29,12 @@ public class ArticleWater {
         this.desc = desc;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
 }

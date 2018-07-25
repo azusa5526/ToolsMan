@@ -1,9 +1,6 @@
 package com.example.lai.toolsman;
 
-import android.app.ListActivity;
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,14 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,10 +33,11 @@ public class Elec extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_elec);
 
+
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("ArticleElec");
-        mDatabaseUser = FirebaseDatabase.getInstance().getReference().child("Users");
-        mDatabaseLike = FirebaseDatabase.getInstance().getReference().child("Likes");
+        mDatabaseUser = FirebaseDatabase.getInstance().getReference().child("UsersElec");
+        mDatabaseLike = FirebaseDatabase.getInstance().getReference().child("LikesElec");
         mDatabaseUser.keepSynced(true);
         mDatabase.keepSynced(true);
         mDatabaseLike.keepSynced(true);
@@ -68,7 +63,7 @@ public class Elec extends AppCompatActivity {
     @Override
    protected void onStart() {
         super.onStart();
-            FirebaseRecyclerAdapter<Article, ArticleViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Article, ArticleViewHolder>(
+            final FirebaseRecyclerAdapter<Article, ArticleViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Article, ArticleViewHolder>(
                     Article.class,
                     R.layout.article_elec,
                     ArticleViewHolder.class,
@@ -104,9 +99,11 @@ public class Elec extends AppCompatActivity {
                                             if (dataSnapshot.child(post_key).hasChild(mAuth.getCurrentUser().getUid())) {
                                                 mDatabaseLike.child(post_key).child(mAuth.getCurrentUser().getUid()).removeValue();
                                                 mProcessLike = false;
+
                                             } else {
                                                 mDatabaseLike.child(post_key).child(mAuth.getCurrentUser().getUid()).setValue("Random");
                                                 mProcessLike = false;
+
                                             }
                                         }
                                     }
@@ -144,6 +141,7 @@ public class Elec extends AppCompatActivity {
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if (dataSnapshot.child(post_key).hasChild(mAuth.getCurrentUser().getUid())){
                         mLikeBtn.setImageResource(R.mipmap.action_like_blue);
+
                     } else {
                         mLikeBtn.setImageResource(R.mipmap.action_like_gray);
                     }
