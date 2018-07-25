@@ -3,6 +3,7 @@ package com.example.lai.toolsman;
 import android.accounts.Account;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -30,9 +31,14 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 
 import org.w3c.dom.Text;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import id.zelory.compressor.Compressor;
 
 public class AccountSettings extends AppCompatActivity {
 
@@ -81,7 +87,7 @@ public class AccountSettings extends AppCompatActivity {
 
                 //Avoid default avatar disappears when a new user is created.
                 if(!image.equals("default")) {
-                    Picasso.get().load(image).into(mUserImage);
+                    Picasso.get().load(image).placeholder(R.drawable.defaultavatar).into(mUserImage);
                 }
             }
 
@@ -131,26 +137,59 @@ public class AccountSettings extends AppCompatActivity {
                 mProgressDialog.show();
 
                 String currentUid = mCurrentUser.getUid();
+
                 Uri resultUri = result.getUri();
+                File thumbImageFilePath = new File(resultUri.getPath());
+                Bitmap thumbBitmap = new Compressor(this)
+                        .setMaxWidth(100)
+                        .setMaxHeight(100)
+                        .setQuality(50)
+                        .compressToBitmap(thumbImageFilePath);
+
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                thumbBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                final byte[] thumbByte = baos.toByteArray();
+
                 StorageReference filePath = mImageStorage.child("User_profile_images").child(currentUid + ".jpg");
+                final StorageReference thumbFilePath = mImageStorage.child("User_profile_images").child("Thumbs").child(currentUid + ".jpg");
+
                 filePath.putFile(resultUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                         if(task.isSuccessful()) {
-                            String downloadUrl = task.getResult().getDownloadUrl().toString();
-                            mUserDatabase.child("image").setValue(downloadUrl).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            final String downloadUrl = task.getResult().getDownloadUrl().toString();    //auto final
+                            UploadTask uploadTask = thumbFilePath.putBytes(thumbByte);
+
+                            uploadTask.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                                 @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if(task.isSuccessful()) {
-                                        mProgressDialog.dismiss();
-                                        Toast.makeText(AccountSettings.this, "Success Uploading", Toast.LENGTH_LONG).show();
+                                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> thumbTask) {
+                                    String thumbDownloadUrl = thumbTask.getResult().getDownloadUrl().toString();
+
+                                    if(thumbTask.isSuccessful()) {
+                                        //don't use HashMap type.Because you want to change and update the children.
+                                        Map updateHashMap = new HashMap<>();
+                                        updateHashMap.put("image", downloadUrl);
+                                        updateHashMap.put("thumbImage", thumbDownloadUrl);
+
+                                        mUserDatabase.updateChildren(updateHashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if(task.isSuccessful()) {
+                                                    mProgressDialog.dismiss();
+                                                    Toast.makeText(AccountSettings.this, "Success Uploading", Toast.LENGTH_LONG).show();
+                                                } else {
+                                                    mProgressDialog.dismiss();
+                                                    Toast.makeText(AccountSettings.this, "Error in uploading thumbnail", Toast.LENGTH_LONG).show();
+                                                }
+                                            }
+                                        });
+
                                     }
                                 }
                             });
-                            //Toast.makeText(AccountSettings.this, "Working", Toast.LENGTH_LONG).show();
                         } else {
-                            Toast.makeText(AccountSettings.this, "Error in uploading", Toast.LENGTH_LONG).show();
                             mProgressDialog.dismiss();
+                            Toast.makeText(AccountSettings.this, "Error in uploading", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
