@@ -143,7 +143,7 @@ public class AccountSettings extends AppCompatActivity {
                 Bitmap thumbBitmap = new Compressor(this)
                         .setMaxWidth(100)
                         .setMaxHeight(100)
-                        .setQuality(50)
+                        .setQuality(70)
                         .compressToBitmap(thumbImageFilePath);
 
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();

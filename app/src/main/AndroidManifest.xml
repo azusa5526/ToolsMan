@@ -25,7 +25,7 @@
         <activity android:name=".Main" />
         <activity android:name=".Favorite" />
         <activity android:name=".BlackList" />
-        <activity android:name=".Chat" />
+        <activity android:name=".Chat"/>
         <activity android:name=".History" />
         <activity android:name=".Setting" />
         <activity android:name=".Water" />
