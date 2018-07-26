@@ -4,14 +4,16 @@ public class Article {
 
     private String title;
     private String desc;
+    private String image;
     private String username;
 
     public Article(){
     }
 
-    public Article(String title, String desc, String username) {
+    public Article(String title, String desc, String image, String username) {
         this.title = title;
         this.desc = desc;
+        this.image = image;
         this.username = username;
     }
 
@@ -37,5 +39,13 @@ public class Article {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.lai.toolsman;
 
+import android.content.Context;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
@@ -9,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -18,6 +20,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 public class Water extends AppCompatActivity {
 
@@ -63,13 +66,11 @@ public class Water extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        final FirebaseRecyclerAdapter<ArticleWater, ArticleViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<ArticleWater, ArticleViewHolder>(
+            FirebaseRecyclerAdapter<ArticleWater, ArticleViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<ArticleWater, ArticleViewHolder>(
                 ArticleWater.class,
                 R.layout.article_water,
                 ArticleViewHolder.class,
                 mDatabase
-
-
         ) {
             @Override
             protected void populateViewHolder(ArticleViewHolder viewHolder, ArticleWater model, int position) {
@@ -77,6 +78,7 @@ public class Water extends AppCompatActivity {
                 viewHolder.setLikeBtn(post_key);
                 viewHolder.setTitle(model.getTitle());
                 viewHolder.setDesc(model.getDesc());
+                viewHolder.setImage(getApplicationContext(), model.getImage());
                 viewHolder.setUsername(model.getUsername());
                 //User data will be retrieved here...
 
@@ -137,7 +139,7 @@ public class Water extends AppCompatActivity {
 
             mView = itemView;
             mLikeBtn =  mView.findViewById(R.id.LikeBtn);
-            mDatabaseLike = FirebaseDatabase.getInstance().getReference().child("Likes");
+            mDatabaseLike = FirebaseDatabase.getInstance().getReference().child("LikesWater");
             mAuth = FirebaseAuth.getInstance();
             mDatabaseLike.keepSynced(true);
         }
@@ -168,6 +170,11 @@ public class Water extends AppCompatActivity {
         public  void  setDesc(String desc){
             TextView post_desc = (TextView) mView.findViewById(R.id.post_desc);
             post_desc.setText(desc);
+        }
+
+        public void setImage(Context ctx, String image) {
+            ImageView post_image = mView.findViewById(R.id.post_image);
+            Picasso.get().load(image).into(post_image);
         }
 
         public  void setUsername(String username){
