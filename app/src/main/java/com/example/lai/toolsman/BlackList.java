@@ -9,10 +9,13 @@ import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,14 +32,17 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
+import java.util.ArrayList;
+
 public class BlackList extends AppCompatActivity {
     private  DatabaseReference mDataBase;
     private  DatabaseReference AccountDataBase;
      EditText Insert ;
     Button AddBlackList;
-    RecyclerView BlackList;
+    ListView BlackList;
     String AccountName;
-
+    String Email;
 
 
 
@@ -49,22 +55,21 @@ public class BlackList extends AppCompatActivity {
         AccountName=name;
         Insert = findViewById(R.id.Insert);
          AddBlackList =findViewById(R.id.AddBlackList);
-         BlackList= findViewById(R.id.BlackList);
+         BlackList= (ListView) findViewById(R.id.BlackList);
          mDataBase=FirebaseDatabase.getInstance().getReference().child("BlackList");
 
-
-
-
-        AddBlackList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                  add();
+                    AddBlackList.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    add();
                 }
-        });
+            });
 
-    }
-    public void add()
-    {
+        }
+
+
+        public void add()
+        {
         final String BlackEmail = Insert.getText().toString().trim();
 
         final DatabaseReference newPost = mDataBase.push();
@@ -74,17 +79,16 @@ public class BlackList extends AppCompatActivity {
                 newPost.child("Email").setValue(BlackEmail);
                 Toast toast = Toast.makeText(BlackList.this, "添加完成", Toast.LENGTH_LONG);
                 toast.show();
+                Email=BlackEmail;
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
+                Toast toast = Toast.makeText(BlackList.this, "添加失敗", Toast.LENGTH_LONG);
+                toast.show();
 
             }
         });
-
-
-
-
     }
 
 }
