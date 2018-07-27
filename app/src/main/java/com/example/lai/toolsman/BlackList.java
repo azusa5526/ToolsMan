@@ -43,6 +43,7 @@ public class BlackList extends AppCompatActivity {
     ListView BlackList;
     String AccountName;
     String Email;
+    private FirebaseUser mCurrentUser;
 
 
 
@@ -56,9 +57,11 @@ public class BlackList extends AppCompatActivity {
         Insert = findViewById(R.id.Insert);
          AddBlackList =findViewById(R.id.AddBlackList);
          BlackList= (ListView) findViewById(R.id.BlackList);
-         mDataBase=FirebaseDatabase.getInstance().getReference().child("BlackList");
+         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
+         String currentUid = mCurrentUser.getUid();
+         mDataBase=FirebaseDatabase.getInstance().getReference().child("BlackList").child(currentUid);
 
-                    AddBlackList.setOnClickListener(new View.OnClickListener() {
+         AddBlackList.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     add();
@@ -66,7 +69,6 @@ public class BlackList extends AppCompatActivity {
             });
 
         }
-
 
         public void add()
         {
