@@ -1,5 +1,6 @@
 package com.example.lai.toolsman;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -18,6 +20,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 public class Elec extends AppCompatActivity {
 
@@ -63,7 +66,7 @@ public class Elec extends AppCompatActivity {
     @Override
    protected void onStart() {
         super.onStart();
-            final FirebaseRecyclerAdapter<Article, ArticleViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Article, ArticleViewHolder>(
+            FirebaseRecyclerAdapter<Article, ArticleViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Article, ArticleViewHolder>(
                     Article.class,
                     R.layout.article_elec,
                     ArticleViewHolder.class,
@@ -75,6 +78,7 @@ public class Elec extends AppCompatActivity {
                     viewHolder.setLikeBtn(post_key);
                     viewHolder.setTitle(model.getTitle());
                     viewHolder.setDesc(model.getDesc());
+                    viewHolder.setImage(getApplicationContext(), model.getImage());
                     viewHolder.setUsername(model.getUsername());
                     //User data will be retrieved here...
 
@@ -130,7 +134,7 @@ public class Elec extends AppCompatActivity {
 
             mView = itemView;
             mLikeBtn =  mView.findViewById(R.id.LikeBtn);
-            mDatabaseLike = FirebaseDatabase.getInstance().getReference().child("Likes");
+            mDatabaseLike = FirebaseDatabase.getInstance().getReference().child("LikesElec");
             mAuth = FirebaseAuth.getInstance();
             mDatabaseLike.keepSynced(true);
         }
@@ -141,7 +145,6 @@ public class Elec extends AppCompatActivity {
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if (dataSnapshot.child(post_key).hasChild(mAuth.getCurrentUser().getUid())){
                         mLikeBtn.setImageResource(R.mipmap.action_like_blue);
-
                     } else {
                         mLikeBtn.setImageResource(R.mipmap.action_like_gray);
                     }
@@ -162,6 +165,11 @@ public class Elec extends AppCompatActivity {
         public  void  setDesc(String desc){
             TextView post_desc = (TextView) mView.findViewById(R.id.post_desc);
             post_desc.setText(desc);
+        }
+
+        public void setImage(Context ctx, String image) {
+            ImageView post_image = mView.findViewById(R.id.post_image);
+            Picasso.get().load(image).into(post_image);
         }
 
         public  void setUsername(String username){

@@ -11,6 +11,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 public class SingleArticleWater extends AppCompatActivity {
 
@@ -35,17 +36,20 @@ public class SingleArticleWater extends AppCompatActivity {
         mPoster = findViewById(R.id.poster);
         mTitle = findViewById(R.id.title);
         mDesc = findViewById(R.id.desc);
+        mImage = findViewById(R.id.image);
 
         mDatabase.child(mPost_key).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String post_title = (String) dataSnapshot.child("title").getValue();
                 String post_desc = (String) dataSnapshot.child("desc").getValue();
+                String post_image = (String) dataSnapshot.child("image").getValue();
                 String post_poster = (String) dataSnapshot.child("username").getValue();
 
                 mPoster.setText(post_poster);
                 mTitle.setText(post_title);
                 mDesc.setText(post_desc);
+                Picasso.get().load(post_image).into(mImage);
             }
 
             @Override

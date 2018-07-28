@@ -103,35 +103,38 @@ public class PostElec extends AppCompatActivity {
             filepath.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Uri downloadUri = taskSnapshot.getDownloadUrl();
+                    final Uri downloadUri = taskSnapshot.getDownloadUrl();
+                    final DatabaseReference newPost = mDatabase.push();
+
+                    mDatabaseUser.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            newPost.child("title").setValue(title_value);
+                            newPost.child("desc").setValue(desc_value);
+                            newPost.child("image").setValue(downloadUri.toString());
+                            newPost.child("uid").setValue(mCurrentUser.getUid());
+                            newPost.child("username").setValue(dataSnapshot.child("Name").getValue()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()){
+                                        startActivity(new Intent(PostElec.this, Elec.class));
+                                    }
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
                     mProgress.dismiss();
                 }
             });
 
-            final DatabaseReference newPost = mDatabase.push();
 
-            mDatabaseUser.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
 
-                    newPost.child("title").setValue(title_value);
-                    newPost.child("desc").setValue(desc_value);
-                    newPost.child("uid").setValue(mCurrentUser.getUid());
-                    newPost.child("username").setValue(dataSnapshot.child("Name").getValue()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()){
-                                startActivity(new Intent(PostElec.this, Elec.class));
-                            }
-                        }
-                    });
-                }
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
         } else {
             Toast.makeText(PostElec.this,"Title and Desc can't be null", Toast.LENGTH_LONG).show();
         }

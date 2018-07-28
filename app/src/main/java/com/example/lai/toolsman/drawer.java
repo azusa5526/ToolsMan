@@ -115,9 +115,11 @@ public class drawer extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.Favorite) {
-            Intent GoFavorite = new Intent();
-            GoFavorite.setClass(drawer.this, Favorite.class);
+            Intent GoFavorite = new Intent(drawer.this, Favorite.class);
+            GoFavorite.putExtra("AccountName",RealName);
+
             startActivity(GoFavorite);
+            return true;
         } else if (id == R.id.BlackList) {
             Intent GoBlacklist= new Intent(drawer.this, BlackList.class);
             GoBlacklist.putExtra("AccountName",RealName);
