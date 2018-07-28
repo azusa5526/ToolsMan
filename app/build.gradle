@@ -25,7 +25,7 @@ dependencies {
     implementation 'com.android.support:cardview-v7:27.1.1'
     implementation 'com.firebaseui:firebase-ui-database:0.4.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
-    implementation 'com.google.firebase:firebase-database:11.8.0'
+    implementation 'com.google.firebase:firebase-database:11.8.0'   //11.8.0
     implementation 'com.google.firebase:firebase-storage:11.8.0'
     implementation 'com.google.firebase:firebase-auth:11.8.0'
     implementation 'com.firebaseui:firebase-ui-database:0.4.0'
@@ -40,6 +40,14 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'id.zelory:compressor:2.0.0'
 
+    // FirebaseUI for Firebase Realtime Database
+    //implementation 'com.firebaseui:firebase-ui-database:2.3.0'
+
+    // glide
+    implementation 'com.github.bumptech.glide:glide:4.7.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
+
 }
 
 apply plugin: 'com.google.gms.google-services'
+
