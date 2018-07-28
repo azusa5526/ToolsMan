@@ -26,10 +26,10 @@
 
     <ListView
         android:id="@+id/BlackList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="289dp"
+        android:layout_height="343dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="11dp" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="64dp" />
 
 </RelativeLayout>
