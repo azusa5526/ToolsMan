@@ -51,68 +51,6 @@ public class Chat extends AppCompatActivity {
         mTabLayout = (TabLayout) findViewById(R.id.chat_tabs);
         mTabLayout.setupWithViewPager(mViewPager);
 
-        // RecyclerView
-        mSearchField = (EditText) findViewById(R.id.searchField);
-        mSearchBtn = (ImageButton) findViewById(R.id.searchBtn);
-        mResultList = (RecyclerView) findViewById(R.id.resultList);
-
-        mResultList.setLayoutManager(new LinearLayoutManager(this));
-        mSearchBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                String searchText = mSearchField.getText().toString();
-
-                firebaseUserSearch(searchText);
-            }
-        });
-
-    }
-
-    private void firebaseUserSearch(String searchText) {
-
-        Query firebaseSearchQuery = mUserDatabase.orderByChild("email").startAt(searchText).endAt(searchText + "\uf8ff");
-
-        FirebaseRecyclerAdapter<Users, UsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Users, UsersViewHolder>(
-                Users.class,
-                R.layout.list_layout,
-                UsersViewHolder.class,
-                mUserDatabase
-        ) {
-
-            @NonNull
-            @Override
-            public UsersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                return null;
-            }
-
-            @Override
-            protected void populateViewHolder(UsersViewHolder viewHolder, Users model, int position) {
-                viewHolder.setDetail(getApplicationContext(), model.getEmail(), model.getStatus(), model.getImage());
-            }
-        };
-
-        mResultList.setAdapter(firebaseRecyclerAdapter);
-    }
-
-
-    public static class UsersViewHolder extends RecyclerView.ViewHolder {
-        View mView;
-
-        public UsersViewHolder(View itemView) {
-            super(itemView);
-            mView = itemView;
-        }
-
-        public void setDetail(Context applicationContext, String user_name, String user_status, String profile_image) {
-            TextView userName = (TextView) mView.findViewById(R.id.nameText);
-            TextView userStatus = (TextView) mView.findViewById(R.id.statusText);
-            ImageView userImage = (ImageView) mView.findViewById(R.id.profileImage);
-
-            userName.setText(user_name);
-            userStatus.setText(user_status);
-            Glide.with(applicationContext).load(profile_image).into(userImage);
-        }
     }
 
 }
