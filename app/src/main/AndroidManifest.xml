@@ -23,8 +23,7 @@
         <activity android:name=".Main" />
         <activity android:name=".Favorite" />
         <activity android:name=".BlackList" />
-        <activity android:name=".Chat"
-            />
+        <activity android:name=".Chat" />
         <activity android:name=".History" />
         <activity android:name=".Setting" />
         <activity android:name=".Water" />
@@ -48,7 +47,11 @@
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
-        <activity android:name=".SingleArticleWater"></activity>
+        <activity android:name=".SingleArticleWater" />
+        <activity
+            android:name=".Air"
+            android:label="@string/title_activity_air"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

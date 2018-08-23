@@ -39,6 +39,16 @@ public class drawer extends AppCompatActivity
         setSupportActionBar(toolbar);
         Button GoWater = findViewById(R.id.button4);
         Button GoElec = findViewById(R.id.button5);
+        Button GoAir = findViewById(R.id.Air);
+        GoAir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent GoAir = new Intent();
+                GoAir.setClass(drawer.this,Air.class);
+                startActivity(GoAir);
+            }
+        });
+
         GoWater.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
