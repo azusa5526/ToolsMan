@@ -72,7 +72,7 @@ public class Elec extends AppCompatActivity {
                     ArticleViewHolder.class,
                     mDatabase
             ) {
-                @Override
+
                 protected void populateViewHolder(ArticleViewHolder viewHolder, Article model, int position) {
                     final String post_key = getRef(position).getKey();
                     viewHolder.setLikeBtn(post_key);

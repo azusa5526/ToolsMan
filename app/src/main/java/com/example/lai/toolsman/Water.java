@@ -24,7 +24,7 @@ import com.squareup.picasso.Picasso;
 
 public class Water extends AppCompatActivity {
 
-    private RecyclerView mList;
+    private  RecyclerView mList;
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabaseUser;
