@@ -2,12 +2,12 @@ package com.example.lai.toolsman;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -23,7 +23,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 public class Elec extends AppCompatActivity {
-
+    private Toolbar toolbar;
+    private FloatingActionButton addPostBtn;
+    
     private RecyclerView mList;
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
@@ -36,6 +38,8 @@ public class Elec extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_elec);
 
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("ArticleElec");
@@ -48,9 +52,18 @@ public class Elec extends AppCompatActivity {
         mList = findViewById(R.id.list);
         mList.setHasFixedSize(true);
         mList.setLayoutManager(new LinearLayoutManager(this));
+
+        addPostBtn = (FloatingActionButton) findViewById(R.id.add_post_btn);
+        addPostBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent newPostIntent = new Intent(Elec.this, com.example.lai.toolsman.PostElec.class);
+                startActivity(newPostIntent);
+            }
+        });
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.navigation, menu);
         return super.onCreateOptionsMenu(menu);
@@ -61,19 +74,19 @@ public class Elec extends AppCompatActivity {
             startActivity(new Intent(Elec.this, PostElec.class));
         }
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 
     @Override
    protected void onStart() {
         super.onStart();
-            FirebaseRecyclerAdapter<Article, ArticleViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Article, ArticleViewHolder>(
-                    Article.class,
+            FirebaseRecyclerAdapter<ArticleElec, ArticleViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<ArticleElec, ArticleViewHolder>(
+                    ArticleElec.class,
                     R.layout.article_elec,
                     ArticleViewHolder.class,
                     mDatabase
             ) {
 
-                protected void populateViewHolder(ArticleViewHolder viewHolder, Article model, int position) {
+                protected void populateViewHolder(ArticleViewHolder viewHolder, ArticleElec model, int position) {
                     final String post_key = getRef(position).getKey();
                     viewHolder.setLikeBtn(post_key);
                     viewHolder.setTitle(model.getTitle());

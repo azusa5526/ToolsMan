@@ -1,16 +1,16 @@
 package com.example.lai.toolsman;
 
-public class Article {
+public class ArticleElec {
 
     private String title;
     private String desc;
     private String image;
     private String username;
 
-    public Article(){
+    public ArticleElec(){
     }
 
-    public Article(String title, String desc, String image, String username) {
+    public ArticleElec(String title, String desc, String image, String username) {
         this.title = title;
         this.desc = desc;
         this.image = image;

@@ -3,10 +3,10 @@ package com.example.lai.toolsman;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
-import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -30,6 +30,7 @@ import com.google.firebase.storage.UploadTask;
 
 public class PostWater extends AppCompatActivity {
 
+    private Toolbar PostWaterBar;
     private DatabaseReference mDatabase;
     private ProgressDialog mProgress;
     private FirebaseAuth mAuth;
@@ -49,6 +50,10 @@ public class PostWater extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_water);
 
+        PostWaterBar = findViewById(R.id.post_air_bar);
+        setSupportActionBar(PostWaterBar);
+        getSupportActionBar().setTitle("Add New Post");
+
         mDatabase = FirebaseDatabase.getInstance().getReference().child("ArticleWater");
         mProgress = new ProgressDialog(this);
         mAuth = FirebaseAuth.getInstance();
@@ -57,7 +62,7 @@ public class PostWater extends AppCompatActivity {
 
         mPostTitle = (EditText) findViewById(R.id.titleField);
         mPostDesc = (EditText) findViewById(R.id.descField);
-        mSubmitBtn = (Button) findViewById(R.id.PostWater);
+        mSubmitBtn = (Button) findViewById(R.id.Submit);
         mSelectImage = (ImageButton) findViewById(R.id.imageSelect);
         mStorage = FirebaseStorage.getInstance().getReference();
 

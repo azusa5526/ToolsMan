@@ -52,7 +52,8 @@
             android:name=".Air"
             android:label="@string/title_activity_air"
             android:theme="@style/AppTheme" />
-        <activity android:name=".PostAir"></activity>
+        <activity android:name=".PostAir" />
+        <activity android:name=".SingleArticleAir"></activity>
     </application>
 
 </manifest>

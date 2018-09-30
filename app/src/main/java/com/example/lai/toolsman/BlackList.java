@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Adapter;
@@ -18,6 +19,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -38,9 +40,10 @@ import java.util.ArrayList;
 public class BlackList extends AppCompatActivity {
     private  DatabaseReference mDataBase;
     private  DatabaseReference AccountDataBase;
-     EditText Insert ;
+    EditText Insert ;
     Button AddBlackList;
-    ListView BlackList;
+    private RecyclerView BlackList;
+    //ListView BlackList;
     String AccountName;
     String Email;
     private FirebaseUser mCurrentUser;
@@ -56,7 +59,11 @@ public class BlackList extends AppCompatActivity {
         AccountName=name;
         Insert = findViewById(R.id.Insert);
          AddBlackList =findViewById(R.id.AddBlackList);
-         BlackList= (ListView) findViewById(R.id.BlackList);
+
+         BlackList= findViewById(R.id.BlackList);
+         BlackList.setHasFixedSize(true);
+         BlackList.setLayoutManager(new LinearLayoutManager(this));
+
          mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
          String currentUid = mCurrentUser.getUid();
          mDataBase=FirebaseDatabase.getInstance().getReference().child("BlackList").child(currentUid);
@@ -69,6 +76,8 @@ public class BlackList extends AppCompatActivity {
             });
 
         }
+
+
 
         public void add()
         {

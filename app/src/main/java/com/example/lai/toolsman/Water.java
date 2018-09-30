@@ -1,6 +1,8 @@
 package com.example.lai.toolsman;
 
 import android.content.Context;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
@@ -23,8 +25,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 public class Water extends AppCompatActivity {
-
-    private  RecyclerView mList;
+    private Toolbar toolbar;
+    private FloatingActionButton addPostBtn;
+    private RecyclerView mList;
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabaseUser;
@@ -36,6 +39,8 @@ public class Water extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_water);
 
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("ArticleWater");
@@ -48,8 +53,17 @@ public class Water extends AppCompatActivity {
         mList = findViewById(R.id.list);
         mList.setHasFixedSize(true);
         mList.setLayoutManager(new LinearLayoutManager(this));
+
+        addPostBtn = (FloatingActionButton) findViewById(R.id.add_post_btn);
+        addPostBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent newPostIntent = new Intent(Water.this, com.example.lai.toolsman.PostWater.class);
+                startActivity(newPostIntent);
+            }
+        });
     }
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.navigation, menu);
         return super.onCreateOptionsMenu(menu);
@@ -61,7 +75,7 @@ public class Water extends AppCompatActivity {
             startActivity(new Intent(Water.this, PostWater.class));
         }
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 
     @Override
     protected void onStart() {
