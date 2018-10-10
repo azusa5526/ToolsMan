@@ -1,14 +1,14 @@
 package com.example.lai.toolsman;
 
-public class SingleBlackList {
+public class SingleFavorite {
 
     private String Email;
 
-    public SingleBlackList(){
+    public SingleFavorite(){
 
     }
 
-    public SingleBlackList(String email){
+    public SingleFavorite(String email){
         this.Email = email;
     }
 

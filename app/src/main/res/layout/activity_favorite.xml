@@ -3,8 +3,9 @@
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+
     <EditText
-        android:id="@+id/InsertF"
+        android:id="@+id/Insert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -19,15 +20,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/InsertF"
+        android:layout_alignTop="@+id/Insert"
         android:layout_marginEnd="28dp"
-        android:text="Button" />
+        android:text="添加" />
 
-    <ListView
-        android:id="@+id/FavoriteList"
-        android:layout_width="289dp"
-        android:layout_height="343dp"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/Favorite"
+        android:layout_width="match_parent"
+        android:layout_height="461dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="45dp" />
+        android:layout_alignParentEnd="true" />
+
 </RelativeLayout>
