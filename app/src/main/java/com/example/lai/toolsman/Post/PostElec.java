@@ -1,0 +1,149 @@
+package com.example.lai.toolsman.Post;
+
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+import android.widget.ImageButton;
+
+import com.example.lai.toolsman.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+public class PostElec extends AppCompatActivity {
+
+    private Toolbar PostElecBar;
+
+    private DatabaseReference mDatabase;
+    private ProgressDialog mProgress;
+    private FirebaseAuth mAuth;
+    private FirebaseUser mCurrentUser;
+    private DatabaseReference mDatabaseUser;
+    private static final int GALLERY_REQUEST = 1;
+    private StorageReference mStorage;
+
+    private EditText mPostTitle;
+    private EditText mPostDesc;
+    private Button mSubmitBtn;
+    private ImageButton mSelectImage;
+    private Uri mImageUri = null;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_post_elec);
+
+        PostElecBar = findViewById(R.id.post_air_bar);
+        setSupportActionBar(PostElecBar);
+        getSupportActionBar().setTitle("Add New Post");
+
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("ArticleElec");
+        mProgress = new ProgressDialog(this);
+        mAuth = FirebaseAuth.getInstance();
+        mCurrentUser = mAuth.getCurrentUser();
+        mDatabaseUser = FirebaseDatabase.getInstance().getReference().child("User_Elec").child(mCurrentUser.getUid());
+
+        mPostTitle = (EditText) findViewById(R.id.titleField);
+        mPostDesc = (EditText) findViewById(R.id.descField);
+        mSubmitBtn = (Button) findViewById(R.id.Submit);
+        mSelectImage = (ImageButton) findViewById(R.id.imageSelect);
+        mStorage = FirebaseStorage.getInstance().getReference();
+
+        mSubmitBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startPosting();
+                Intent Toelec = new Intent();
+                Toelec.setClass(PostElec.this,Elec.class);
+                startActivity(Toelec);
+            }
+        });
+        mSelectImage.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                galleryIntent.setType("image/*");
+                startActivityForResult(galleryIntent, GALLERY_REQUEST);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == GALLERY_REQUEST && resultCode == RESULT_OK){
+            mImageUri = data.getData();
+            mSelectImage.setImageURI(mImageUri);
+        }
+    }
+
+    private void startPosting() {
+        mProgress.setMessage("Posting");
+
+        final String title_value = mPostTitle.getText().toString().trim();
+        final String desc_value = mPostDesc.getText().toString().trim();
+
+        if (!TextUtils.isEmpty(title_value) && !TextUtils.isEmpty(desc_value) && mImageUri != null) {
+            StorageReference filepath = mStorage.child("Elec").child(mImageUri.getLastPathSegment());
+            mProgress.show();
+
+            filepath.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    final Uri downloadUri = taskSnapshot.getDownloadUrl();
+                    final DatabaseReference newPost = mDatabase.push();
+
+                    mDatabaseUser.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            newPost.child("title").setValue(title_value);
+                            newPost.child("desc").setValue(desc_value);
+                            newPost.child("image").setValue(downloadUri.toString());
+                            newPost.child("uid").setValue(mCurrentUser.getUid());
+                            newPost.child("username").setValue(dataSnapshot.child("Name").getValue()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()){
+                                        startActivity(new Intent(PostElec.this, Elec.class));
+                                    }
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                    mProgress.dismiss();
+                }
+            });
+
+
+
+
+        } else {
+            Toast.makeText(PostElec.this,"Title and Desc can't be null", Toast.LENGTH_LONG).show();
+        }
+    }
+}
