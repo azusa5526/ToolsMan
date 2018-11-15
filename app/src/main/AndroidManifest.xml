@@ -25,24 +25,15 @@
         <activity android:name=".BlackList.BlackList" />
         <activity android:name=".ChatFunction.Chat" />
         <activity android:name=".HistoryFunction.History" />
-        <activity android:name=".Setting" />
+
         <activity android:name=".Post.Water" />
         <activity android:name=".Post.Elec" />
         <activity android:name=".RegisterFunction.Register" />
         <activity android:name=".Post.PostWater" />
         <activity android:name=".Post.PostElec" />
         <activity android:name=".VerificationFunction.Verification" />
-        <activity
-            android:name=".MainDrawer"
-            android:label="@string/title_activity_main_drawer"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".UserInfo.AccountSettings" />
-        <activity
-            android:name=".Main"
-            android:label="@string/title_activity_drawer"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Post.SingleArticleElec" />
-        <activity android:name=".UserInfo.StatusActivity" />
+
+
         //Android-Image-Cropper
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
