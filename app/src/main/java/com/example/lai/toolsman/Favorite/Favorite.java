@@ -25,36 +25,36 @@ import com.google.firebase.database.ValueEventListener;
 public class Favorite extends AppCompatActivity {
     private DatabaseReference mDataBase;
     private  DatabaseReference AccountDataBase;
-    EditText Insert ;
+    EditText InsertForFavorite ;
     Button AddFavorite;
-    private RecyclerView mFavorite;
+    private RecyclerView mFavoriteRecyclerView;
     ListView FavoriteList;
-    String AccountName;
-    String Email;
-    private FirebaseUser mCurrentUser;
+    String AccountNameForFavorite;
+    String EmailForFavorite;
+    private FirebaseUser mCurrentUserForFavorite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorite);
         Intent getName = getIntent();
-        String name = getName.getStringExtra("AccountName");
-        AccountName=name;
-        Insert = findViewById(R.id.Insert);
+        String nameForFavorite = getName.getStringExtra("AccountName");
+        AccountNameForFavorite=nameForFavorite;
+        InsertForFavorite = findViewById(R.id.Insert);
         AddFavorite =findViewById(R.id.AddFavorite);
 
-        mFavorite= findViewById(R.id.Favorite);
-        mFavorite.setHasFixedSize(true);
-        mFavorite.setLayoutManager(new LinearLayoutManager(this));
+        mFavoriteRecyclerView= findViewById(R.id.Favorite);
+        mFavoriteRecyclerView.setHasFixedSize(true);
+        mFavoriteRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
-        String currentUid = mCurrentUser.getUid();
+        mCurrentUserForFavorite = FirebaseAuth.getInstance().getCurrentUser();
+        String currentUid = mCurrentUserForFavorite.getUid();
         mDataBase= FirebaseDatabase.getInstance().getReference().child("Favorite").child(currentUid);
 
         AddFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                add();
+                addFavorite();
             }
         });
 
@@ -77,7 +77,7 @@ public class Favorite extends AppCompatActivity {
                 viewHolder.setEmail(model.getEmail());
             }
         };
-        mFavorite.setAdapter(firebaseRecyclerAdapter);
+        mFavoriteRecyclerView.setAdapter(firebaseRecyclerAdapter);
     }
 
     public static  class BlogViewHolder extends RecyclerView.ViewHolder {
@@ -98,9 +98,9 @@ public class Favorite extends AppCompatActivity {
 
     }
 
-    public void add()
+    public void addFavorite()
     {
-        final String FavoriteEmail = Insert.getText().toString().trim();
+        final String FavoriteEmail = InsertForFavorite.getText().toString().trim();
 
         final DatabaseReference newPost = mDataBase.push();
         mDataBase.addValueEventListener(new ValueEventListener() {
@@ -109,7 +109,7 @@ public class Favorite extends AppCompatActivity {
                 newPost.child("Email").setValue(FavoriteEmail);
                 Toast toast = Toast.makeText(Favorite.this, "添加完成", Toast.LENGTH_LONG);
                 toast.show();
-                Email=FavoriteEmail;
+                EmailForFavorite=FavoriteEmail;
             }
 
             @Override

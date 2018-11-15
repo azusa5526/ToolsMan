@@ -22,15 +22,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class BlackList extends AppCompatActivity {
-    private  DatabaseReference mDataBase;
+    private  DatabaseReference mBlackDataBase;
     private  DatabaseReference AccountDataBase;
-    EditText Insert ;
+    EditText InsertEmailForBlackList ;
     Button AddBlackList;
-    private RecyclerView mBlackList;
+    private RecyclerView mBlackListRecyclerView;
     //ListView BlackList;
-    String AccountName;
-    String Email;
-    private FirebaseUser mCurrentUser;
+    String AccountNameForBlackList;
+    String EmailForBlackList;
+    private FirebaseUser mCurrentUserForBlackList;
 
 
 
@@ -39,23 +39,23 @@ public class BlackList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_black_list);
         Intent getName = getIntent();
-        String name = getName.getStringExtra("AccountName");
-        AccountName=name;
-        Insert = findViewById(R.id.Insert);
+        String nameForBlaclName = getName.getStringExtra("AccountName");
+        AccountNameForBlackList = nameForBlaclName;
+        InsertEmailForBlackList = findViewById(R.id.Insert);
          AddBlackList =findViewById(R.id.AddBlackList);
 
-         mBlackList= findViewById(R.id.BlackList);
-         mBlackList.setHasFixedSize(true);
-         mBlackList.setLayoutManager(new LinearLayoutManager(this));
+         mBlackListRecyclerView= findViewById(R.id.BlackList);
+         mBlackListRecyclerView.setHasFixedSize(true);
+         mBlackListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
-         String currentUid = mCurrentUser.getUid();
-         mDataBase=FirebaseDatabase.getInstance().getReference().child("BlackList").child(currentUid);
+        mCurrentUserForBlackList = FirebaseAuth.getInstance().getCurrentUser();
+         String currentUid = mCurrentUserForBlackList.getUid();
+         mBlackDataBase=FirebaseDatabase.getInstance().getReference().child("BlackList").child(currentUid);
 
          AddBlackList.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    add();
+                    addBlackList();
                 }
             });
 
@@ -70,7 +70,7 @@ public class BlackList extends AppCompatActivity {
                 SingleBlackList.class,
                 R.layout.single_blacklist,
                 BlogViewHolder.class,
-                mDataBase
+                mBlackDataBase
         ) {
             @Override
             protected void populateViewHolder(BlogViewHolder viewHolder, SingleBlackList model, int position) {
@@ -78,10 +78,10 @@ public class BlackList extends AppCompatActivity {
                 viewHolder.setEmail(model.getEmail());
             }
         };
-        mBlackList.setAdapter(firebaseRecyclerAdapter);
+        mBlackListRecyclerView.setAdapter(firebaseRecyclerAdapter);
     }
 
-    public static  class BlogViewHolder extends RecyclerView.ViewHolder {
+    public static class BlogViewHolder extends RecyclerView.ViewHolder {
 
             View mView;
 
@@ -99,18 +99,18 @@ public class BlackList extends AppCompatActivity {
 
         }
 
-        public void add()
+        public void addBlackList()
         {
-        final String BlackEmail = Insert.getText().toString().trim();
+        final String BlackEmail = InsertEmailForBlackList.getText().toString().trim();
 
-        final DatabaseReference newPost = mDataBase.push();
-        mDataBase.addValueEventListener(new ValueEventListener() {
+        final DatabaseReference newPost = mBlackDataBase.push();
+            mBlackDataBase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 newPost.child("Email").setValue(BlackEmail);
                 Toast toast = Toast.makeText(BlackList.this, "添加完成", Toast.LENGTH_LONG);
                 toast.show();
-                Email=BlackEmail;
+                EmailForBlackList=BlackEmail;
             }
 
             @Override

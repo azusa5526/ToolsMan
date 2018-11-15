@@ -2,22 +2,22 @@ package com.example.lai.toolsman.Favorite;
 
 public class SingleFavorite {
 
-    private String Email;
+    private String EmailForFavorite;
 
     public SingleFavorite(){
 
     }
 
     public SingleFavorite(String email){
-        this.Email = email;
+        this.EmailForFavorite = email;
     }
 
     public String getEmail() {
-        return Email;
+        return EmailForFavorite;
     }
 
     public void setEmail(String email) {
-        this.Email = email;
+        this.EmailForFavorite = email;
     }
 }
 
