@@ -1,24 +1,24 @@
 package com.example.lai.toolsman.SearchUser;
 
 public class Users {
-    public String name, image, status;
+    public String email, image, status;
 
     public Users() {
 
     }
 
-    public Users(String name, String image, String status) {
-        this.name = name;
+    public Users(String email, String image, String status) {
+        this.email = email;
         this.image = image;
         this.status = status;
     }
 
-    public String getName() {
-        return name;
+    public String getEmail() {
+        return email;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getImage() {

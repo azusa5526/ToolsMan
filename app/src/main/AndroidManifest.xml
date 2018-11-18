@@ -31,6 +31,8 @@
         <activity android:name=".Post.PostWater" />
         <activity android:name=".Post.PostElec" />
         <activity android:name=".VerificationFunction.Verification" />
+        <activity android:name=".UserInfo.AccountSettings"/>
+        <activity android:name=".UserInfo.StatusActivity"/>
         //Android-Image-Cropper
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"

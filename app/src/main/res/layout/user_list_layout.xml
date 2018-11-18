@@ -7,12 +7,12 @@
 
     <ImageView
         android:id="@+id/profileImage"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
         app:srcCompat="@drawable/defaultavatar" />
 
     <TextView
@@ -21,10 +21,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_toEndOf="@+id/profileImage"
         android:text="Email"
-        android:textSize="18sp" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/statusText"

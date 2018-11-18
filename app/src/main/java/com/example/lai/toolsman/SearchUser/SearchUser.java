@@ -16,6 +16,7 @@ import com.example.lai.toolsman.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 public class SearchUser extends AppCompatActivity {
 
@@ -42,21 +43,25 @@ public class SearchUser extends AppCompatActivity {
         mSearchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                firebaseUserSearch();
+                String searchText = mSearchField.getText().toString();
+                firebaseUserSearch(searchText);
             }
         });
     }
 
-    public void firebaseUserSearch() {
+    public void firebaseUserSearch(String searchText) {
+
+        Query firebaseSearchQuery = mUserDatabase.orderByChild("email").startAt(searchText).endAt(searchText + "\uf8ff");
+
         FirebaseRecyclerAdapter<Users, UserViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Users, UserViewHolder>(
                 Users.class,
                 R.layout.user_list_layout,
                 UserViewHolder.class,
-                mUserDatabase
+                firebaseSearchQuery
         ) {
             @Override
             protected void populateViewHolder(UserViewHolder viewHolder, Users model, int position) {
-                viewHolder.setDetail(getApplicationContext(), model.getName(), model.getStatus(), model.getImage());
+                viewHolder.setDetail(getApplicationContext(), model.getEmail(), model.getStatus(), model.getImage());
 
 
             }
@@ -74,12 +79,12 @@ public class SearchUser extends AppCompatActivity {
             mView = itemView;
         }
 
-        public void setDetail(Context ctx, String userName, String userStatus, String userImage) {
+        public void setDetail(Context ctx, String userEmail, String userStatus, String userImage) {
             TextView user_email = (TextView) mView.findViewById(R.id.emailText);
             TextView user_status = (TextView) mView.findViewById(R.id.statusText);
             ImageView user_image = (ImageView) mView.findViewById(R.id.profileImage);
 
-            user_email.setText(userName);
+            user_email.setText(userEmail);
             user_status.setText(userStatus);
             Glide.with(ctx).load(userImage).into(user_image);
 
