@@ -58,7 +58,7 @@ public class Chat extends AppCompatActivity {
 
         mTabLayout = (TabLayout) findViewById(R.id.chat_tabs);
         mTabLayout.setupWithViewPager(mViewPager);
-
+/*
         mSearchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,9 +66,9 @@ public class Chat extends AppCompatActivity {
                 firebaseUserSearch(searchText);
             }
         });
-
+*/
     }
-
+/*
     public void firebaseUserSearch(String searchText) {
 
         Query firebaseSearchQuery = mUserDatabase.orderByChild("email").startAt(searchText).endAt(searchText + "\uf8ff");
@@ -107,5 +107,5 @@ public class Chat extends AppCompatActivity {
             Glide.with(ctx).load(userImage).into(user_image);
         }
     }
-
+*/
 }

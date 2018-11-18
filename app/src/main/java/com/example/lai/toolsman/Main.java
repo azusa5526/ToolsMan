@@ -23,6 +23,7 @@ import com.example.lai.toolsman.LoginFunction.Login;
 import com.example.lai.toolsman.Post.Air;
 import com.example.lai.toolsman.Post.Elec;
 import com.example.lai.toolsman.Post.Water;
+import com.example.lai.toolsman.SearchUser.SearchUser;
 import com.example.lai.toolsman.UserInfo.AccountSettings;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -143,6 +144,12 @@ public class Main extends AppCompatActivity
             Intent GoChat= new Intent();
             GoChat.setClass(Main.this, Chat.class);
             startActivity(GoChat);
+            return true;
+
+        } else if (id == R.id.SearchUser) {
+            Intent GoSearchUser= new Intent();
+            GoSearchUser.setClass(Main.this, SearchUser.class);
+            startActivity(GoSearchUser);
             return true;
 
         } else if (id == R.id.History) {
