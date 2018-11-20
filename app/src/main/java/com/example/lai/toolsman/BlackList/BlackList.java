@@ -23,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class BlackList extends AppCompatActivity {
     private  DatabaseReference mBlackDataBase;
-    private  DatabaseReference AccountDataBase;
+
     EditText InsertEmailForBlackList ;
     Button AddBlackList;
     private RecyclerView mBlackListRecyclerView;
@@ -36,12 +36,13 @@ public class BlackList extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_black_list);
         Intent getName = getIntent();
-        String nameForBlaclName = getName.getStringExtra("AccountName");
-        AccountNameForBlackList = nameForBlaclName;
-        InsertEmailForBlackList = findViewById(R.id.Insert);
+        String nameForBlackName = getName.getStringExtra("AccountName");
+         AccountNameForBlackList = nameForBlackName;
+         InsertEmailForBlackList = findViewById(R.id.Insert);
          AddBlackList =findViewById(R.id.AddBlackList);
 
          mBlackListRecyclerView= findViewById(R.id.BlackList);

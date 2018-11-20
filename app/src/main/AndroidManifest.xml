@@ -21,9 +21,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".Main" />
-        <activity android:name=".Favorite.Favorite" />
-        <activity android:name=".BlackList.BlackList" />
-        <activity android:name=".ChatFunction.Chat" />
+        <activity android:name=".Favorite.Favorite"
+
+            android:windowSoftInputMode="stateHidden" />   />
+        <activity android:name=".BlackList.BlackList"
+
+            android:windowSoftInputMode="stateHidden" />/>
+        <activity android:name=".ChatFunction.Chat"
+            android:windowSoftInputMode="stateHidden" />/>
         <activity android:name=".HistoryFunction.History" />
         <activity android:name=".Post.Water" />
         <activity android:name=".Post.Elec" />
@@ -33,6 +38,7 @@
         <activity android:name=".VerificationFunction.Verification" />
         <activity android:name=".UserInfo.AccountSettings"/>
         <activity android:name=".UserInfo.StatusActivity"/>
+
         //Android-Image-Cropper
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
