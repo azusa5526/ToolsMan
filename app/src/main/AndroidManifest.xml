@@ -50,6 +50,7 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".Post.PostAir" />
         <activity android:name=".Post.SingleArticleAir" />
+        <activity android:name=".Post.SingleArticleElec" />
         <activity android:name=".SearchUser.SearchUser"></activity>
     </application>
 
