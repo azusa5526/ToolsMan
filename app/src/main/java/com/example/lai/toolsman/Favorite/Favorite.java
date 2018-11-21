@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.lai.toolsman.BlackList.BlackList;
 import com.example.lai.toolsman.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -106,15 +107,24 @@ public class Favorite extends AppCompatActivity {
         mDataBase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                if(FavoriteEmail.matches(""))
+                {
+                    Toast toast = Toast.makeText(Favorite.this, "請勿空白", Toast.LENGTH_SHORT);
+                    toast.show();
+
+                }
+                else{
+
                 newPost.child("Email").setValue(FavoriteEmail);
-                Toast toast = Toast.makeText(Favorite.this, "添加完成", Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(Favorite.this, "添加完成", Toast.LENGTH_SHORT);
                 toast.show();
                 Email=FavoriteEmail;
-            }
+                    Insert.setText("");
+            }}
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast toast = Toast.makeText(Favorite.this, "添加失敗", Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(Favorite.this, "添加失敗", Toast.LENGTH_SHORT);
                 toast.show();
 
             }

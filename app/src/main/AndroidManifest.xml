@@ -23,10 +23,10 @@
         <activity android:name=".Main" />
         <activity android:name=".Favorite.Favorite"
 
-            android:windowSoftInputMode="stateHidden" />   />
+            android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity android:name=".BlackList.BlackList"
-
-            android:windowSoftInputMode="stateHidden" />/>
+            android:windowSoftInputMode="stateHidden|adjustPan"
+          />
         <activity android:name=".ChatFunction.Chat"
             android:windowSoftInputMode="stateHidden" />/>
         <activity android:name=".HistoryFunction.History" />

@@ -104,19 +104,30 @@ public class BlackList extends AppCompatActivity {
         {
         final String BlackEmail = Insert.getText().toString().trim();
 
+
         final DatabaseReference newPost = mDataBase.push();
             mDataBase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                newPost.child("Email").setValue(BlackEmail);
-                Toast toast = Toast.makeText(BlackList.this, "添加完成", Toast.LENGTH_LONG);
-                toast.show();
-                Email=BlackEmail;
-            }
+                    if(BlackEmail.matches(""))
+                    {
+                        Toast toast = Toast.makeText(BlackList.this, "請勿空白", Toast.LENGTH_SHORT);
+                        toast.show();
+
+                    }
+                    else{
+
+                    newPost.child("Email").setValue(BlackEmail);
+                    Toast toast = Toast.makeText(BlackList.this, "添加完成", Toast.LENGTH_SHORT);
+                    toast.show();
+                    Email = BlackEmail;
+                    Insert.setText("");
+
+            }}
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast toast = Toast.makeText(BlackList.this, "添加失敗", Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(BlackList.this, "添加失敗", Toast.LENGTH_SHORT);
                 toast.show();
 
             }
