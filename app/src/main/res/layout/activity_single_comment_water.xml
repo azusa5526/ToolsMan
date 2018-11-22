@@ -20,12 +20,12 @@
 
         <TextView
             android:id="@+id/postemail"
-            android:layout_width="267dp"
-            android:layout_height="49dp"
+            android:layout_width="259dp"
+            android:layout_height="29dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
-            android:layout_marginEnd="11dp"
-            android:text="Email"
+            android:layout_marginEnd="15dp"
+            android:text="Post"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/headsticker"
             app:layout_constraintTop_toTopOf="parent" />
@@ -37,6 +37,15 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/headsticker"
             android:text="TextView" />
+
+        <TextView
+            android:id="@+id/Date"
+            android:layout_width="259dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/headsticker"
+            android:layout_alignStart="@+id/postemail"
+            android:layout_marginStart="0dp"
+            android:text="Date" />
 
     </RelativeLayout>
 

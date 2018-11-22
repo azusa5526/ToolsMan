@@ -11,9 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.lai.toolsman.BlackList.BlackList;
 import com.example.lai.toolsman.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,6 +34,7 @@ public class SingleArticleWater extends AppCompatActivity {
     private TextView mDesc;
     private ImageView mImage;
 
+    private FirebaseUser mCurrentUser;
 
     EditText Comment;
     ImageButton AddComment;
@@ -62,24 +64,28 @@ public class SingleArticleWater extends AppCompatActivity {
                 addCommentList();
             }
         });
-        mCommentDB = FirebaseDatabase.getInstance().getReference().child("CommentWater");   //存留言的資料庫
+        mCommentDB = FirebaseDatabase.getInstance().getReference().child("ArticleWater").child(mPost_key).child("CommentWater");   //存留言的資料庫
 
         mCommentList = (RecyclerView) findViewById(R.id.CommentList);
         mCommentList.setHasFixedSize(true);
         mCommentList.setLayoutManager(new LinearLayoutManager(this));
 
+        mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String currentUid = mCurrentUser.getUid();
+
         mDatabase.child(mPost_key).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String post_title = (String) dataSnapshot.child("title").getValue();
-                String post_desc = (String) dataSnapshot.child("desc").getValue();
-                String post_image = (String) dataSnapshot.child("image").getValue();
-                String post_poster = (String) dataSnapshot.child("username").getValue();
+                //String post_desc = (String) dataSnapshot.child("desc").getValue();
+                //String post_image = (String) dataSnapshot.child("image").getValue();
+                //String post_poster = (String) dataSnapshot.child("username").getValue();
 
-                mPoster.setText(post_poster);
+
+                //mPoster.setText(post_poster);
                 mTitle.setText(post_title);
-                mDesc.setText(post_desc);
-                Picasso.get().load(post_image).into(mImage);
+                //mDesc.setText(post_desc);
+                //Picasso.get().load(post_image).into(mImage);
             }
 
             @Override

@@ -62,19 +62,7 @@ public class Water extends AppCompatActivity {
             }
         });
     }
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.navigation, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.action_add){
-            startActivity(new Intent(Water.this, PostWater.class));
-        }
-        return super.onOptionsItemSelected(item);
-    }*/
 
     @Override
     protected void onStart() {
