@@ -1,6 +1,7 @@
 package com.example.lai.toolsman.SearchUser;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.lai.toolsman.ChatFunction.ProfileActivity;
 import com.example.lai.toolsman.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
@@ -61,7 +63,20 @@ public class SearchUser extends AppCompatActivity {
         ) {
             @Override
             protected void populateViewHolder(UserViewHolder viewHolder, Users model, int position) {
+
+                final String userId = getRef(position).getKey();
+
                 viewHolder.setDetail(getApplicationContext(), model.getEmail(), model.getStatus(), model.getImage());
+
+                viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent profileIntent = new Intent(SearchUser.this, ProfileActivity.class);
+                        profileIntent.putExtra("user_id", userId);
+                        startActivity(profileIntent);
+
+                    }
+                });
 
 
             }

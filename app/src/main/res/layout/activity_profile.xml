@@ -2,13 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/settingImage"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserInfo.AccountSettings">
+    tools:context=".ChatFunction.ProfileActivity">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/displayImage"
+        android:id="@+id/profileImage"
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:layout_alignParentTop="true"
@@ -17,41 +16,40 @@
         android:adjustViewBounds="false"
         android:src="@drawable/defaultavatar" />
 
-    <Button
-        android:id="@+id/changeImage"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/changeState"
-        android:layout_centerHorizontal="true"
-        android:text="Change Image" />
-
-    <Button
-        android:id="@+id/changeState"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="84dp"
-        android:text="Change State" />
-
     <TextView
-        android:id="@+id/displayEmail"
+        android:id="@+id/profileEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/displayImage"
+        android:layout_below="@+id/profileImage"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:text="Display Account"
+        android:layout_marginTop="20dp"
+        android:text="Profile email"
         android:textSize="24sp" />
 
     <TextView
-        android:id="@+id/displayStatus"
+        android:id="@+id/profileStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/displayEmail"
+        android:layout_below="@+id/profileEmail"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="7dp"
-        android:text="defaultStatus"
-        android:textSize="16sp" />
+        android:layout_marginTop="15dp"
+        android:text="Profile status" />
 
+    <TextView
+        android:id="@+id/profileFriendsCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="100dp"
+        android:text="Profile friends count" />
+
+    <Button
+        android:id="@+id/profileSendRequestBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="45dp"
+        android:text="Send Friend Request" />
 </RelativeLayout>
