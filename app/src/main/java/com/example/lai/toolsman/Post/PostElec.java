@@ -47,6 +47,11 @@ public class PostElec extends AppCompatActivity {
     private ImageButton mSelectImage;
     private Uri mImageUri = null;
 
+    private DatabaseReference historyDatabase;
+    private FirebaseAuth historyAuth;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +66,10 @@ public class PostElec extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mCurrentUser = mAuth.getCurrentUser();
         mDatabaseUser = FirebaseDatabase.getInstance().getReference().child("User_Elec").child(mCurrentUser.getUid());
+        String currentHistoryUser = mCurrentUser.getUid();
+
+        historyDatabase = FirebaseDatabase.getInstance().getReference().child("History").child(currentHistoryUser);
+
 
         mPostTitle = (EditText) findViewById(R.id.titleField);
         mPostDesc = (EditText) findViewById(R.id.descField);
@@ -106,6 +115,31 @@ public class PostElec extends AppCompatActivity {
         if (!TextUtils.isEmpty(title_value) && !TextUtils.isEmpty(desc_value) && mImageUri != null) {
             StorageReference filepath = mStorage.child("Elec").child(mImageUri.getLastPathSegment());
             mProgress.show();
+
+            filepath.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    final Uri downloadUriForHistory = taskSnapshot.getDownloadUrl();
+                    final DatabaseReference newHistory = historyDatabase.push();
+
+                    mDatabaseUser.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            newHistory.child("title").setValue(title_value);
+                            newHistory.child("desc").setValue(desc_value);
+                            newHistory.child("image").setValue(downloadUriForHistory.toString());
+                            newHistory.child("uid").setValue(mCurrentUser.getUid());
+                            newHistory.child("username").setValue(dataSnapshot.child("Name").getValue());//
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
+                }
+            });
 
             filepath.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
