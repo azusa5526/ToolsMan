@@ -44,7 +44,9 @@
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
-        <activity android:name=".Post.SingleArticleWater" />
+        <activity
+            android:name=".Post.SingleArticleWater"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Post.Air"
             android:label="@string/title_activity_air"
@@ -54,6 +56,15 @@
         <activity android:name=".Post.SingleArticleElec" />
         <activity android:name=".SearchUser.SearchUser" />
         <activity android:name=".ChatFunction.ProfileActivity"></activity>
+        <activity android:name=".Post.SingleArticleAir"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Post.SingleArticleElec"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".SearchUser.SearchUser" />
+        <activity android:name=".Post.SingleCommentWater" />
+        <activity android:name=".Post.SingleCommentElec" />
+        <activity android:name=".Post.SingleCommentAir"></activity>
     </application>
 
 </manifest>

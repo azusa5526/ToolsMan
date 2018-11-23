@@ -10,7 +10,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="88dp"
-        android:textSize="40dp"
-        android:text="此處為歷史紀錄" />
+        android:layout_marginTop="32dp"
+        android:text="我發布的文章"
+        android:textSize="40dp" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/HistoryRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="461dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"/>
 </RelativeLayout>
