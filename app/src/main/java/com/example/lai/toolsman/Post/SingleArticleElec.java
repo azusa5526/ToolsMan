@@ -34,9 +34,6 @@ public class SingleArticleElec extends AppCompatActivity {
     private TextView mDesc;
     private ImageView mImage;
 
-
-    private FirebaseUser mCurrentUser;
-
     EditText Comment;
     ImageButton AddComment;
     String CommentText;
@@ -52,10 +49,12 @@ public class SingleArticleElec extends AppCompatActivity {
 
         mPost_key = getIntent().getExtras().getString("article_id");
         //Toast.makeText(SingleArticleElec.this, post_key, Toast.LENGTH_LONG).show();
-        mPoster = findViewById(R.id.poster);
+
+        //原來的singleArticle能夠取得貼文 現在暫時拿掉
+        /*mPoster = findViewById(R.id.poster);
         mTitle = findViewById(R.id.title);
         mDesc = findViewById(R.id.desc);
-        mImage = findViewById(R.id.image);
+        mImage = findViewById(R.id.image);*/
 
         //留言功能
         Comment = (EditText) findViewById(R.id.postComment);
@@ -72,21 +71,19 @@ public class SingleArticleElec extends AppCompatActivity {
         mCommentList.setHasFixedSize(true);
         mCommentList.setLayoutManager(new LinearLayoutManager(this));
 
-        mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
-        String currentUid = mCurrentUser.getUid();
 
         mDatabase.child(mPost_key).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String post_title = (String) dataSnapshot.child("title").getValue();
-                String post_desc = (String) dataSnapshot.child("desc").getValue();
-                String post_image = (String) dataSnapshot.child("image").getValue();
-                String post_poster = (String) dataSnapshot.child("username").getValue();
+                //String post_title = (String) dataSnapshot.child("title").getValue();
+                //String post_desc = (String) dataSnapshot.child("desc").getValue();
+                //String post_image = (String) dataSnapshot.child("image").getValue();
+                //String post_poster = (String) dataSnapshot.child("username").getValue();
 
-                mPoster.setText(post_poster);
-                mTitle.setText(post_title);
-                mDesc.setText(post_desc);
-                Picasso.get().load(post_image).into(mImage);
+                //mPoster.setText(post_poster);
+                //mTitle.setText(post_title);
+                //mDesc.setText(post_desc);
+                //Picasso.get().load(post_image).into(mImage);
             }
 
             @Override
@@ -111,6 +108,7 @@ public class SingleArticleElec extends AppCompatActivity {
                 viewHolder.setComment(model.getComment());
             }
         };
+        mCommentList.setAdapter(firebaseRecyclerAdapter);
     }
 
     public static class BlogViewHolder extends RecyclerView.ViewHolder {

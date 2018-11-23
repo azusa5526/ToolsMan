@@ -34,8 +34,6 @@ public class SingleArticleWater extends AppCompatActivity {
     private TextView mDesc;
     private ImageView mImage;
 
-    private FirebaseUser mCurrentUser;
-
     EditText Comment;
     ImageButton AddComment;
     String CommentText;
@@ -50,10 +48,12 @@ public class SingleArticleWater extends AppCompatActivity {
 
         mPost_key = getIntent().getExtras().getString("article_id");
         //Toast.makeText(SingleArticleElec.this, post_key, Toast.LENGTH_LONG).show();
-        mPoster = findViewById(R.id.poster);
+
+        //原來的singleArticle能夠取得貼文 現在暫時拿掉
+        /*mPoster = findViewById(R.id.poster);
         mTitle = findViewById(R.id.title);
         mDesc = findViewById(R.id.desc);
-        mImage = findViewById(R.id.image);
+        mImage = findViewById(R.id.image);*/
 
         //留言功能
         Comment = (EditText) findViewById(R.id.postComment);
@@ -70,8 +70,6 @@ public class SingleArticleWater extends AppCompatActivity {
         mCommentList.setHasFixedSize(true);
         mCommentList.setLayoutManager(new LinearLayoutManager(this));
 
-        mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
-        String currentUid = mCurrentUser.getUid();
 
         mDatabase.child(mPost_key).addValueEventListener(new ValueEventListener() {
             @Override
@@ -83,7 +81,7 @@ public class SingleArticleWater extends AppCompatActivity {
 
 
                 //mPoster.setText(post_poster);
-               // mTitle.setText(post_title);
+                // mTitle.setText(post_title);
                 //mDesc.setText(post_desc);
                 //Picasso.get().load(post_image).into(mImage);
             }

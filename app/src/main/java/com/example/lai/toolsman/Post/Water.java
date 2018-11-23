@@ -107,7 +107,7 @@ public class Water extends AppCompatActivity {
                                         mProcessLike = false;
 
                                     } else {
-                                        mDatabaseLike.child(post_key).child(mAuth.getCurrentUser().getUid()).setValue("random");
+                                        mDatabaseLike.child(post_key).child(mAuth.getCurrentUser().getUid()).setValue("Random");
                                         mProcessLike = false;
 
                                     }

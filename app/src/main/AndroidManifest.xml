@@ -52,13 +52,15 @@
             android:label="@string/title_activity_air"
             android:theme="@style/AppTheme" />
         <activity android:name=".Post.PostAir" />
-        <activity android:name=".Post.SingleArticleAir" />
-        <activity android:name=".Post.SingleArticleElec"
-            android:windowSoftInputMode="stateHidden"
-            />
+        <activity android:name=".Post.SingleArticleAir"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Post.SingleArticleElec"
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".SearchUser.SearchUser" />
         <activity android:name=".Post.SingleCommentWater" />
-        <activity android:name=".Post.SingleCommentElec"></activity>
+        <activity android:name=".Post.SingleCommentElec" />
+        <activity android:name=".Post.SingleCommentAir"></activity>
     </application>
 
 </manifest>

@@ -9,6 +9,7 @@ public class SingleCommentWater {
     public SingleCommentWater(String comment) {
         this.Comment = comment;
     }
+
     public String getComment() {
         return Comment;
     }
@@ -17,12 +18,4 @@ public class SingleCommentWater {
         Comment = comment;
     }
 
-
-    /*public String getCommentText() {
-        return Comment;
-    }
-
-    public void setCommentText(String comment) {
-        this.Comment = comment;
-    }*/
 }

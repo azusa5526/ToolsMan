@@ -1,21 +1,21 @@
 package com.example.lai.toolsman.Post;
 
-public class SingleCommentElec  {
+public class SingleCommentAir{
+
     private String Comment;
 
-    public SingleCommentElec() {
+    public SingleCommentAir() {
 
     }
-    public SingleCommentElec(String comment) {
+    public SingleCommentAir(String comment) {
         this.Comment = comment;
     }
 
     public String getComment() {
-        return  Comment;
+        return Comment;
     }
 
     public void setComment(String comment) {
         Comment = comment;
     }
-
 }

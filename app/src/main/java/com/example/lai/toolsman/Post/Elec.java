@@ -26,7 +26,6 @@ import com.squareup.picasso.Picasso;
 public class Elec extends AppCompatActivity {
     private Toolbar toolbar;
     private FloatingActionButton addPostBtn;
-    
     private RecyclerView mList;
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
@@ -64,18 +63,6 @@ public class Elec extends AppCompatActivity {
         });
     }
 
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.navigation, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.action_add){
-            startActivity(new Intent(Elec.this, PostElec.class));
-        }
-        return super.onOptionsItemSelected(item);
-    }*/
 
     @Override
    protected void onStart() {
@@ -104,6 +91,7 @@ public class Elec extends AppCompatActivity {
                             startActivity(singleArticleIntent);
                         }
                     });
+
                     //Like Feature
                     viewHolder.mLikeBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -139,10 +127,12 @@ public class Elec extends AppCompatActivity {
         }
 
     public static class ArticleViewHolder extends RecyclerView.ViewHolder{
+
         View mView;
         ImageButton mLikeBtn;
         DatabaseReference mDatabaseLike;
         FirebaseAuth mAuth;
+
         public ArticleViewHolder(View itemView) {
             super(itemView);
 
