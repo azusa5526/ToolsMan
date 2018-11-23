@@ -122,6 +122,9 @@ public class PostWater extends AppCompatActivity {
                             newPost.child("desc").setValue(desc_value);
                             newPost.child("image").setValue(downloadUri.toString());
                             newPost.child("uid").setValue(mCurrentUser.getUid());
+
+
+
                             newPost.child("username").setValue(dataSnapshot.child("Name").getValue()).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {

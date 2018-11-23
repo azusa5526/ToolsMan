@@ -76,14 +76,14 @@ public class SingleArticleWater extends AppCompatActivity {
         mDatabase.child(mPost_key).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String post_title = (String) dataSnapshot.child("title").getValue();
+                //String post_title = (String) dataSnapshot.child("title").getValue();
                 //String post_desc = (String) dataSnapshot.child("desc").getValue();
                 //String post_image = (String) dataSnapshot.child("image").getValue();
                 //String post_poster = (String) dataSnapshot.child("username").getValue();
 
 
                 //mPoster.setText(post_poster);
-                mTitle.setText(post_title);
+               // mTitle.setText(post_title);
                 //mDesc.setText(post_desc);
                 //Picasso.get().load(post_image).into(mImage);
             }
