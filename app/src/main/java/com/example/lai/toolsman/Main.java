@@ -55,6 +55,7 @@ public class Main extends AppCompatActivity
             public void onClick(View view) {
                 Intent GoAir = new Intent();
                 GoAir.setClass(Main.this,Air.class);
+                GoAir.putExtra("AccountName",RealName);
                 startActivity(GoAir);
             }
         });
@@ -64,6 +65,7 @@ public class Main extends AppCompatActivity
             public void onClick(View v) {
                 Intent GoWater = new Intent();
                 GoWater.setClass(Main.this,Water.class);
+                GoWater.putExtra("AccountName",RealName);
                 startActivity(GoWater);
             }
         });
@@ -72,6 +74,7 @@ public class Main extends AppCompatActivity
             public void onClick(View v) {
                 Intent GoElec = new Intent();
                 GoElec.setClass(Main.this,Elec.class);
+                GoElec.putExtra("AccountName",RealName);
                 startActivity(GoElec);
 
             }

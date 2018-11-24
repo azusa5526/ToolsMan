@@ -40,7 +40,7 @@ public class PostAir extends AppCompatActivity {
     private DatabaseReference mDatabaseUser;
     private static final int GALLERY_REQUEST = 1;
     private StorageReference mStorage;
-
+    String AccountName;
     private EditText mPostTitle;
     private EditText mPostDesc;
     private Button mSubmitBtn;
@@ -50,6 +50,8 @@ public class PostAir extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_air);
+        Intent GetName = getIntent();
+        AccountName = GetName.getStringExtra("AccountName");
 
         PostAirBar = findViewById(R.id.post_air_bar);
         setSupportActionBar(PostAirBar);
@@ -119,11 +121,13 @@ public class PostAir extends AppCompatActivity {
                             newPost.child("desc").setValue(desc_value);
                             newPost.child("image").setValue(downloadUri.toString());
                             newPost.child("uid").setValue(mCurrentUser.getUid());
-                            newPost.child("username").setValue(dataSnapshot.child("Name").getValue()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            newPost.child("username").setValue(AccountName).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()){
-                                        startActivity(new Intent(PostAir.this, Air.class));
+                                        Intent goBack = new Intent(PostAir.this,Air.class);
+                                        goBack.putExtra("AccountName",AccountName);
+                                        startActivity(goBack);
                                     }
                                 }
                             });

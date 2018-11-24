@@ -33,6 +33,7 @@ public class Air extends AppCompatActivity {
     private DatabaseReference mDatabaseUser;
     private boolean mProcessLike = false;
     private DatabaseReference mDatabaseLike;
+    String AccountName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,8 @@ public class Air extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Intent GetName = getIntent();
+        AccountName = GetName.getStringExtra("AccountName");
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("ArticleAir");
@@ -59,6 +62,7 @@ public class Air extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent newPostIntent = new Intent(Air.this, PostAir.class);
+                newPostIntent.putExtra("AccountName",AccountName);
                 startActivity(newPostIntent);
             }
         });

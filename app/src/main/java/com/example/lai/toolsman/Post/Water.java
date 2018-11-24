@@ -32,11 +32,14 @@ public class Water extends AppCompatActivity {
     private DatabaseReference mDatabaseUser;
     private boolean mProcessLike = false;
     private DatabaseReference mDatabaseLike;
+    String AccountName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_water);
+        Intent GetName = getIntent();
+        AccountName = GetName.getStringExtra("AccountName");
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -58,6 +61,7 @@ public class Water extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent newPostIntent = new Intent(Water.this, PostWater.class);
+                newPostIntent.putExtra("AccountName",AccountName);
                 startActivity(newPostIntent);
             }
         });

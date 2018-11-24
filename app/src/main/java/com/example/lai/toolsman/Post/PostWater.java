@@ -45,11 +45,14 @@ public class PostWater extends AppCompatActivity {
     private Button mSubmitBtn;
     private ImageButton mSelectImage;
     private Uri mImageUri = null;
+    String AccountName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_water);
+        Intent GetName = getIntent();
+        AccountName = GetName.getStringExtra("AccountName");
 
         PostWaterBar = findViewById(R.id.post_air_bar);
         setSupportActionBar(PostWaterBar);
@@ -125,11 +128,13 @@ public class PostWater extends AppCompatActivity {
 
 
 
-                            newPost.child("username").setValue(dataSnapshot.child("Name").getValue()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            newPost.child("username").setValue(AccountName).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()){
-                                        startActivity(new Intent(PostWater.this, Water.class));
+                                        Intent goBack = new Intent(PostWater.this,Water.class);
+                                        goBack.putExtra("AccountName",AccountName);
+                                        startActivity(goBack);
                                     }
                                 }
                             });

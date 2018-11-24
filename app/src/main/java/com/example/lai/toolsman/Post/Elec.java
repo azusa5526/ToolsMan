@@ -32,6 +32,7 @@ public class Elec extends AppCompatActivity {
     private DatabaseReference mDatabaseUser;
     private boolean mProcessLike = false;
     private DatabaseReference mDatabaseLike;
+    String AccountName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,8 @@ public class Elec extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Intent GetName = getIntent();
+        AccountName = GetName.getStringExtra("AccountName");
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("ArticleElec");
@@ -58,6 +61,7 @@ public class Elec extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent newPostIntent = new Intent(Elec.this, PostElec.class);
+                newPostIntent.putExtra("AccountName",AccountName);
                 startActivity(newPostIntent);
             }
         });
