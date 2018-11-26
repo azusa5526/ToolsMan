@@ -39,17 +39,29 @@
         android:id="@+id/profileFriendsCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/profileSendRequestBtn"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="10dp"
         android:text="Profile friends count" />
 
     <Button
         android:id="@+id/profileSendRequestBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="45dp"
+        android:layout_marginBottom="101dp"
         android:text="Send Friend Request" />
+
+    <Button
+        android:id="@+id/profileDeclineRequestBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/profileSendRequestBtn"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="1dp"
+        android:layout_marginBottom="45dp"
+        android:text="Decline Friend  Request" />
+
 </RelativeLayout>
