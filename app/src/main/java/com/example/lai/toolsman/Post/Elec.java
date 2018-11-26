@@ -26,8 +26,8 @@ import com.squareup.picasso.Picasso;
 public class Elec extends AppCompatActivity {
     private Toolbar toolbar;
     private FloatingActionButton addPostBtn;
-    private RecyclerView mList;
-    private DatabaseReference mDatabase;
+    private RecyclerView mList;//
+    private DatabaseReference mDatabase;//
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabaseUser;
     private boolean mProcessLike = false;

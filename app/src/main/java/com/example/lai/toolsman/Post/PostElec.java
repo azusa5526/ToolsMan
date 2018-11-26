@@ -48,7 +48,7 @@ public class PostElec extends AppCompatActivity {
     private Uri mImageUri = null;
 
     private DatabaseReference historyDatabase;
-    private FirebaseAuth historyAuth;
+    //private FirebaseAuth historyAuth;
 
 
 
@@ -126,11 +126,12 @@ public class PostElec extends AppCompatActivity {
                     mDatabaseUser.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
+                            newHistory.child("type").setValue("電器類");
                             newHistory.child("title").setValue(title_value);
                             newHistory.child("desc").setValue(desc_value);
                             newHistory.child("image").setValue(downloadUriForHistory.toString());
                             newHistory.child("uid").setValue(mCurrentUser.getUid());
-                            newHistory.child("username").setValue(dataSnapshot.child("Name").getValue());//
+                            newHistory.child("username").setValue(AccountName);//
                         }
 
                         @Override
