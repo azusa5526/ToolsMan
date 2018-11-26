@@ -9,7 +9,7 @@ public class ArticleHistory {
 
     public String getType(){return type;}
 
-    public void setType(String typr){this.type = type;}
+    public void setType(String type){this.type = type;}
 
     public String getTitle() {
         return title;

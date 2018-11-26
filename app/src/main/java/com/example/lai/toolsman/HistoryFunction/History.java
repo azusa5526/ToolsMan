@@ -14,6 +14,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.lai.toolsman.Post.Elec;
+import com.example.lai.toolsman.Post.SingleArticleAir;
+import com.example.lai.toolsman.Post.SingleArticleElec;
+import com.example.lai.toolsman.Post.SingleArticleWater;
+import com.example.lai.toolsman.Post.SingleCommentAir;
+import com.example.lai.toolsman.Post.SingleCommentElec;
+import com.example.lai.toolsman.Post.SingleCommentWater;
 import com.example.lai.toolsman.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,13 +33,10 @@ import com.squareup.picasso.Picasso;
 
 public class History extends AppCompatActivity {
     private Toolbar toolbar;
-    private FloatingActionButton addPostBtn;
     private DatabaseReference mhistoryDatabase;
     private RecyclerView mHistoryRecycleView;
     private FirebaseAuth mAuth;
     private DatabaseReference mhistoryDatabaseUser;
-    private boolean mProcessLike = false;
-    private DatabaseReference mhistoryDatabaseLike;
     String AccountName;
     private FirebaseUser mCurrentUserForHistory;
 
@@ -64,19 +67,44 @@ public class History extends AppCompatActivity {
 
         FirebaseRecyclerAdapter<ArticleHistory, History.ArticleViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<ArticleHistory, History.ArticleViewHolder>(
                 ArticleHistory.class,
-                R.layout.activity_history,
+                R.layout.article_history,
                 ArticleViewHolder.class,
                 mhistoryDatabase
         ) {
             @Override
             protected void populateViewHolder(ArticleViewHolder viewHolder, ArticleHistory model, int position) {
                 final String post_key = getRef(position).getKey();
+                final String typeForClick;
 
+                viewHolder.setType(model.getType());
+                typeForClick = model.getType();
                 viewHolder.setTitle(model.getTitle());
                 viewHolder.setDesc(model.getDesc());
                 viewHolder.setImage(getApplicationContext(), model.getImage());
+
+                viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+
+                        if(typeForClick.equals("水務類")){
+                            Intent historyArticle = new Intent(History.this, SingleArticleWater.class);
+                            historyArticle.putExtra("article_id", post_key);
+                            startActivity(historyArticle);
+                        }else if (typeForClick.equals("電器類")){
+                            Intent historyArticle = new Intent(History.this, SingleArticleElec.class);
+                            historyArticle.putExtra("article_id", post_key);
+                            startActivity(historyArticle);
+                        }else if(typeForClick.equals("冷氣類")){
+                            Intent historyArticle = new Intent(History.this, SingleArticleAir.class);
+                            historyArticle.putExtra("article_id", post_key);
+                            startActivity(historyArticle);
+                        }
+                    }
+                });
             }
         };
+        mHistoryRecycleView.setAdapter(firebaseRecyclerAdapter);
 
 
 
@@ -98,10 +126,10 @@ public class History extends AppCompatActivity {
 
         }
 
-        /*public void setType(String type){
+        public void setType(String type){
             TextView post_type = (TextView) mView.findViewById(R.id.post_type);
             post_type.setText(type);
-        }*/
+        }
 
         public void setTitle(String title){
             TextView post_title = (TextView) mView.findViewById(R.id.post_title);
