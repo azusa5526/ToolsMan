@@ -16,72 +16,83 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 
 public class Login extends AppCompatActivity {
-    FirebaseAuth auth = FirebaseAuth.getInstance();
 
-    private FirebaseAuth.AuthStateListener AuthStateListener= new FirebaseAuth.AuthStateListener() {
+    FirebaseAuth auth = FirebaseAuth.getInstance();
+    private DatabaseReference mUserDatabase;
+
+    private FirebaseAuth.AuthStateListener AuthStateListener = new FirebaseAuth.AuthStateListener() {
 
 
         public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
             FirebaseUser User = firebaseAuth.getCurrentUser();
-            if(User==null)
-            {
+            if (User == null) {
 
                 Intent go = new Intent();
-                go.setClass(Login.this,Login.class);
+                go.setClass(Login.this, Login.class);
                 startActivity(go);
-            }
-            else
-            {
+            } else {
                 //Do after Login
             }
         }
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        //getSupportActionBar().hide();
 
         final Button login = (Button) findViewById(R.id.Login);
-        Button Register = (Button)findViewById(R.id.Register);
+        Button Register = (Button) findViewById(R.id.Register);
         final EditText Email = findViewById(R.id.Email);
         final EditText Password = findViewById(R.id.Password);
+        mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
 
         login.setOnClickListener(new View.OnClickListener() {
-         @Override
-         public void onClick(View v) {
-             if(Email.getText().toString().matches("")||Password.getText().toString().matches(""))
-             {
-                 Toast toast = Toast.makeText(Login.this, "帳號及密碼請勿空白", Toast.LENGTH_LONG);
-                 toast.show();
-             }
-             else{
+            @Override
+            public void onClick(View v) {
+                if (Email.getText().toString().matches("") || Password.getText().toString().matches("")) {
+                    Toast toast = Toast.makeText(Login.this, "帳號及密碼請勿空白", Toast.LENGTH_LONG);
+                    toast.show();
+                } else {
 
-             auth.signInWithEmailAndPassword(Email.getText().toString(),Password.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    auth.signInWithEmailAndPassword(Email.getText().toString(), Password.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
 
-                 @Override
-                 public void onSuccess(AuthResult authResult) {
-                     Intent MainIntent = new Intent(Login.this,Main.class);
-                     String AccountName = Email.getText().toString();
-                     MainIntent.putExtra("AccountName",AccountName);
+                        @Override
+                        public void onSuccess(AuthResult authResult) {
 
+                            String currentUserId = auth.getCurrentUser().getUid();
+                            String deviceToken = FirebaseInstanceId.getInstance().getToken();
 
-                     MainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);  //設定切換應用程式畫面後不會登出系統
-                     startActivity(MainIntent);
-                     finish();
-                 }
-             })
-                     .addOnFailureListener(new OnFailureListener() {
-                         @Override
-                         public void onFailure(@NonNull Exception e) {
-                             login.setError("登入失敗，請檢查");
-                         }
-                     });
-         }
-     }});
+                            mUserDatabase.child(currentUserId).child("deviceToken").setValue(deviceToken).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Intent MainIntent = new Intent(Login.this, Main.class);
+                                    String AccountName = Email.getText().toString();
+                                    MainIntent.putExtra("AccountName", AccountName);
+
+                                    MainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);  //設定切換應用程式畫面後不會登出系統
+                                    startActivity(MainIntent);
+                                    finish();
+                                }
+                            });
+
+                        }
+                    })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    login.setError("登入失敗，請檢查");
+                                }
+                            });
+                }
+            }
+        });
 
         Register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,7 +103,6 @@ public class Login extends AppCompatActivity {
             }
         });
     }
-
 
 
 }

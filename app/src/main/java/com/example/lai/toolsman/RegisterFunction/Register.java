@@ -20,6 +20,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
+
 public class Register extends AppCompatActivity {
     private DatabaseReference mDatabase;
     FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -49,10 +51,13 @@ public class Register extends AppCompatActivity {
 
                            FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
                            String uid = currentUser.getUid();
+                           String deviceToken = FirebaseInstanceId.getInstance().getToken();
+
                            mDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
 
                            HashMap<String, String> userMap = new HashMap<>();
                            userMap.put("email", Email);
+                           userMap.put("deviceToken", deviceToken);
                            userMap.put("image", "default");
                            userMap.put("thumbImage", "default");
                            userMap.put("status", "Hi, I'm a General member in ToolsMan");
