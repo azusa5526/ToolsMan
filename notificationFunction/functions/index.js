@@ -15,19 +15,39 @@ exports.sendNotifiaction = functions.database.ref('/Notifications/{userId}/{noti
     console.log('A notification has been deleted from the database : ', notificationId);
   }
 
-  const deviceToken = admin.database().ref('/Users/'+userId+'/deviceToken').once('value');
-  return deviceToken.then(result => {
-    const tokenId = result.val();
-    const payload = {
-      notification: {
-        title : "Friend Request",
-        body : "You've received a new Friend request",
-        icon : "default"
-      }
-    };
 
-    return admin.messaging().sendToDevice(tokenId, payload).then(response => {
-      return console.log('This was the notification feature with:'+tokenId);
+  const fromUser = admin.database().ref('/Notifications/' + userId + '/' + notificationId).once('value');
+  return fromUser.then(fromUserResult => {
+
+    const fromUserId = fromUserResult.val().from;
+    console.log('You have new notification from : ', fromUserId);
+
+    const userQuery = admin.database().ref('/Users/' + fromUserId + '/email').once('value');
+    return userQuery.then(userResult => {
+      const userEmail = userResult.val();
+
+      const deviceToken = admin.database().ref('/Users/'+ userId +'/deviceToken').once('value');
+      return deviceToken.then(result => {
+        const tokenId = result.val();
+        const payload = {
+          notification: {
+            title : "Friend Request",
+            body : userEmail + " has sent you Friend request",
+            icon : "default",
+            clickAction : "com.example.lai.toolsman_TARGET_NOTIFICATION"
+
+          },
+          data : {
+            fromUserId : fromUserId
+          }
+        };
+
+        return admin.messaging().sendToDevice(tokenId, payload).then(response => {
+          return console.log('This was the notification feature with:'+ tokenId);
+        });
+
+      });
+
     });
 
   });
