@@ -221,8 +221,8 @@ public class ProfileActivity extends AppCompatActivity {
                     final String currentDate = DateFormat.getDateInstance().format(new Date());
 
                     Map friendsMap = new HashMap();
-                    friendsMap.put("Friends/" + mCurrentUser.getUid() + "/" + userId + "/data", currentDate);
-                    friendsMap.put("Friends/" +userId + "/" + mCurrentUser.getUid() + "/data", currentDate);
+                    friendsMap.put("Friends/" + mCurrentUser.getUid() + "/" + userId + "/date", currentDate);
+                    friendsMap.put("Friends/" +userId + "/" + mCurrentUser.getUid() + "/date", currentDate);
 
                     friendsMap.put("FriendRequest/" + mCurrentUser.getUid() + "/" + userId, null);
                     friendsMap.put("FriendRequest/" + userId + "/" + mCurrentUser.getUid(), null);
