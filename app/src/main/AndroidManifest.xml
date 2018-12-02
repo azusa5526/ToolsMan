@@ -7,15 +7,13 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-
-
+        android:name=".ToolsMan"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:name=".ToolsMan">
+        android:theme="@style/AppTheme">
         <activity android:name=".LoginFunction.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -60,19 +58,14 @@
         <activity android:name=".SearchUser.SearchUser" />
         <activity android:name=".ChatFunction.ProfileActivity">
             <intent-filter>
-                <action android:name="com.example.lai.toolsman_TARGET_NOTIFICATION"></action>
-                <category android:name="android.intent.category.DEFAULT"></category>
+                <action android:name="com.example.lai.toolsman_TARGET_NOTIFICATION" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-
-
-
         <activity android:name=".Post.SingleCommentWater" />
         <activity android:name=".Post.SingleCommentElec" />
-        <activity android:name=".Post.SingleCommentAir">
-
-        </activity>
+        <activity android:name=".Post.SingleCommentAir"></activity>
 
         <service android:name=".ChatFunction.FirebaseMessagingService">
             <intent-filter>
@@ -80,7 +73,8 @@
             </intent-filter>
         </service>
 
-
+        <activity android:name=".ChatFunction.ChatActivity"
+            android:parentActivityName=".ChatFunction.Chat"></activity>
     </application>
 
 </manifest>
