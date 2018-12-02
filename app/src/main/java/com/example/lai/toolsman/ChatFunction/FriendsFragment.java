@@ -87,7 +87,7 @@ public class FriendsFragment extends Fragment {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        String userEmail = dataSnapshot.child("email").getValue().toString();
+                        final String userEmail = dataSnapshot.child("email").getValue().toString();
                         String userThumb = dataSnapshot.child("thumbImage").getValue().toString();
 
                         friendsViewHolder.setEamil(userEmail);
@@ -117,6 +117,7 @@ public class FriendsFragment extends Fragment {
 
                                             Intent chatIntent = new Intent(getContext(), ChatActivity.class);
                                             chatIntent.putExtra("user_id", listUserId);
+                                            chatIntent.putExtra("user_email", userEmail);
                                             startActivity(chatIntent);
                                         }
 
