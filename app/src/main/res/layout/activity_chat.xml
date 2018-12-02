@@ -27,8 +27,12 @@
         android:id="@+id/chatPager"
         android:layout_width="match_parent"
         android:layout_height="518dp"
+        android:layout_alignTop="@+id/chat_tabs"
+        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true">
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="93dp"
+        android:layout_marginBottom="0dp">
 
     </android.support.v4.view.ViewPager>
 

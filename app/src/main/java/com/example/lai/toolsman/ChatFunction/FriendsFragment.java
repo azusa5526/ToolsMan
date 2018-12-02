@@ -90,8 +90,15 @@ public class FriendsFragment extends Fragment {
                         final String userEmail = dataSnapshot.child("email").getValue().toString();
                         String userThumb = dataSnapshot.child("thumbImage").getValue().toString();
 
+
+                        if(dataSnapshot.hasChild("online")) {
+                            Boolean userOnline = (boolean) dataSnapshot.child("online").getValue();
+                            friendsViewHolder.setUserOnline(userOnline);
+                        }
+
                         friendsViewHolder.setEamil(userEmail);
                         friendsViewHolder.setImage(userThumb, getContext());
+
 
                         friendsViewHolder.mView.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -166,6 +173,16 @@ public class FriendsFragment extends Fragment {
         public void setImage(String thumbImage, Context ctx) {
             ImageView userImageView = (ImageView) mView.findViewById(R.id.profileImage);
             Picasso.get().load(thumbImage).placeholder(R.drawable.defaultavatar).into(userImageView);
+        }
+
+        public void setUserOnline(boolean onlineStatus) {
+            ImageView userOnlineView = (ImageView) mView.findViewById(R.id.userSingleOnline);
+
+            if(onlineStatus == true) {
+                userOnlineView.setVisibility(View.VISIBLE);
+            } else {
+                userOnlineView.setVisibility(View.INVISIBLE);
+            }
         }
 
 

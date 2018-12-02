@@ -27,11 +27,18 @@ import com.example.lai.toolsman.Post.Water;
 import com.example.lai.toolsman.SearchUser.SearchUser;
 import com.example.lai.toolsman.UserInfo.AccountSettings;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Main extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private FirebaseAuth mAuth;
+    private DatabaseReference mUserRef;
     String RealName;
 
     @Override
@@ -42,8 +49,9 @@ public class Main extends AppCompatActivity
         String AccountName = GetName.getStringExtra("AccountName");
         RealName = AccountName;
 
-
         mAuth = FirebaseAuth.getInstance();
+        mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Button GoWater = findViewById(R.id.button4);
@@ -88,6 +96,44 @@ public class Main extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        mUserRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                if(dataSnapshot != null) {
+                    mUserRef.child("online").onDisconnect().setValue(false);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
+
+    public void onStart() {
+
+        super.onStart();
+
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if(currentUser == null) {
+
+        } else {
+            mUserRef.child("online").setValue(true);
+        }
+    }
+
+    public void onStop() {
+
+        super.onStop();
+        mUserRef.child("online").setValue(false);
     }
 
     @Override

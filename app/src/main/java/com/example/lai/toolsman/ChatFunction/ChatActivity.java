@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.lai.toolsman.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,6 +27,8 @@ public class ChatActivity extends AppCompatActivity {
     private Toolbar mChatToolbar;
 
     private DatabaseReference mRootRef;
+    private DatabaseReference mUserRef;
+    private FirebaseAuth mAuth;
 
     private TextView mTitleView;
     private TextView mLastSeenView;
@@ -44,6 +48,8 @@ public class ChatActivity extends AppCompatActivity {
         actionBar.setDisplayShowCustomEnabled(true);
 
         mRootRef = FirebaseDatabase.getInstance().getReference();
+        mAuth = FirebaseAuth.getInstance();
+        mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
 
         mChatUser = getIntent().getStringExtra("user_id");
         String userEamil = getIntent().getStringExtra("user_email");
@@ -78,5 +84,24 @@ public class ChatActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    public void onStart() {
+
+        super.onStart();
+
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if(currentUser == null) {
+
+        } else {
+            mUserRef.child("online").setValue(true);
+        }
+    }
+
+    public void onStop() {
+
+        super.onStop();
+        mUserRef.child("online").setValue(false);
     }
 }
