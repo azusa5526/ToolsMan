@@ -9,33 +9,43 @@
 
     <include
         android:id="@+id/chatAppBar"
-        layout="@layout/app_bar_main_drawer"></include>
+        layout="@layout/app_bar_main_drawer">
+
+    </include>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/liner"
+        android:layout_width="fill_parent"
         android:layout_height="50dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="0dp"
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="wrap_content"
+            android:id="@+id/chatAddBtn"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
 
+            android:layout_marginLeft="3.0dip"
             app:srcCompat="@drawable/baseline_add_24" />
 
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="200dp"
-            android:layout_height="match_parent"
-
-            android:text="TextView" />
-
-        <ImageButton
-            android:id="@+id/imageButton2"
+        <EditText
+            android:id="@+id/chatMessageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/liner"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <ImageButton
+            android:id="@+id/chatSendBtn"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+
+            android:layout_marginRight="3.0dip"
 
             app:srcCompat="@drawable/ic_menu_send" />
     </LinearLayout>
