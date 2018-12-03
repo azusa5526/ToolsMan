@@ -6,4 +6,8 @@
     <path
         android:fillColor="#3e92cf"
         android:pathData="M2.01,21L23,12 2.01,3 2,10l15,2 -15,2z"/>
+
+    <solid
+        android:color="#3e92cf"
+        />
 </vector>
