@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
 
     <EditText
@@ -13,7 +13,6 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="255dp"
-        android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
         android:ems="10"
         android:hint="E-mail"
         android:inputType="textEmailAddress"
@@ -26,18 +25,16 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="320dp"
-        android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
         android:textSize="20sp" />
 
 
-    <Button
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/Login"
-        android:layout_width="150dp"
-        android:layout_height="59dp"
-        android:layout_alignEnd="@+id/Email"
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="115dp"
@@ -48,17 +45,14 @@
 
     <Button
         android:id="@+id/Register"
-        android:layout_width="100dp"
-        android:layout_height="48dp"
-        android:layout_alignStart="@+id/Email"
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="50dp"
+        android:background="@color/colorPrimary"
         android:text="Register"
         android:textSize="16sp" />
-        android:background="@drawable/registerbtn"
-
-        android:textColor="#FFFFFF" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -70,6 +64,5 @@
         android:layout_marginStart="35dp"
         android:layout_marginTop="25dp"
         android:src="@drawable/toolsmanicon" />
-
 
 </RelativeLayout>
