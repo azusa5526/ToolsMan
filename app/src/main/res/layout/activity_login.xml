@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_height="match_parent">
 
 
     <EditText
@@ -13,6 +13,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="268dp"
+        android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
         android:ems="10"
         android:hint="E-mail"
         android:inputType="textEmailAddress"
@@ -25,32 +26,40 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="338dp"
+        android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
         android:textSize="20sp" />
 
 
-    <android.support.v7.widget.AppCompatButton
+    <Button
         android:id="@+id/Login"
-        android:layout_width="290dp"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="59dp"
+        android:layout_alignEnd="@+id/Email"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="110dp"
-        android:src="@drawable/loggin"/>
+        android:layout_marginEnd="11dp"
+        android:layout_marginBottom="102dp"
+        android:drawableRight="@drawable/loggin"
+
+
+        android:text="登入"
+
+        android:textSize="18sp" />
 
 
     <Button
         android:id="@+id/Register"
-        android:layout_width="290dp"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:layout_alignStart="@+id/Email"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="38dp"
-        android:background="@color/colorPrimary"
+        android:layout_marginStart="3dp"
+        android:layout_marginBottom="106dp"
+        android:background="@drawable/registerbtn"
         android:text="Register"
-        />
+        android:textColor="#FFFFFF" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -62,5 +71,6 @@
 
         android:layout_marginTop="21dp"
         android:src="@drawable/toolsmanicon" />
+
 
 </RelativeLayout>

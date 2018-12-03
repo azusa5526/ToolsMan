@@ -65,7 +65,7 @@
         </activity>
         <activity android:name=".Post.SingleCommentWater" />
         <activity android:name=".Post.SingleCommentElec" />
-        <activity android:name=".Post.SingleCommentAir"></activity>
+        <activity android:name=".Post.SingleCommentAir" />
 
         <service android:name=".ChatFunction.FirebaseMessagingService">
             <intent-filter>
@@ -73,8 +73,12 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".ChatFunction.ChatActivity"
-            android:parentActivityName=".ChatFunction.Chat"></activity>
+        <activity
+            android:name=".ChatFunction.ChatActivity"
+            android:parentActivityName=".ChatFunction.Chat" />
+
+
+
     </application>
 
 </manifest>
