@@ -163,12 +163,12 @@ public class AccountSettings extends AppCompatActivity {
                 StorageReference filePath = mImageStorage.child("User_profile_images").child(currentUid + ".jpg");
                 final StorageReference thumbFilePath = mImageStorage.child("User_profile_images").child("Thumbs").child(currentUid + ".jpg");
 
-                filePath.putFile(resultUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                        if(task.isSuccessful()) {
-                            final String downloadUrl = task.getResult().getDownloadUrl().toString();    //auto final
-                            UploadTask uploadTask = thumbFilePath.putBytes(thumbByte);
+                            filePath.putFile(resultUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                                    if(task.isSuccessful()) {
+                                        final String downloadUrl = task.getResult().getDownloadUrl().toString();    //auto final
+                                        UploadTask uploadTask = thumbFilePath.putBytes(thumbByte);
 
                             uploadTask.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                                 @Override

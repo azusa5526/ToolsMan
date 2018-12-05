@@ -8,23 +8,44 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/messageProfileLayout"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:layout_marginLeft="5dp"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
         android:src="@drawable/defaultavatar" />
+
+    <TextView
+        android:id="@+id/eamilTextLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/messageProfileLayout"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="24dp"
+        android:layout_toEndOf="@+id/messageProfileLayout"
+        android:text="TextView"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/timeTextLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/messageProfileLayout"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="26dp"
+        android:layout_toEndOf="@+id/eamilTextLayout"
+        android:text="TextView"
+        android:textSize="10sp" />
 
     <TextView
         android:id="@+id/messageTextLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/messageProfileLayout"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="12dp"
-        android:layout_toEndOf="@+id/messageProfileLayout"
-        android:background="@drawable/message_text_background"
 
-        android:padding="10dp"
+        android:layout_alignBottom="@+id/messageProfileLayout"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/messageProfileLayout"
+        android:layout_marginBottom="4dp"
         android:text="TextView"
-        android:textColor="@android:color/white" />
+        android:textSize="12sp" />
 
 </RelativeLayout>

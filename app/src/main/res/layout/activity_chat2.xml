@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChatFunction.ChatActivity">
+    tools:context=".ChatFunction.ChatActivity"
+    android:background="#D6DBDF">
 
 
     <include
@@ -13,19 +14,28 @@
 
     </include>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/messageList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/liner"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/messageSwipeLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="55dp"
         android:layout_marginBottom="50dp">
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/messageList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignBottom="@+id/liner"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="55dp"
+            android:layout_marginBottom="50dp">
 
-    </android.support.v7.widget.RecyclerView>
+
+        </android.support.v7.widget.RecyclerView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <LinearLayout
         android:id="@+id/liner"
@@ -35,14 +45,16 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="0dp"
         android:layout_marginBottom="0dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="#FDFEFE">
 
         <ImageButton
             android:id="@+id/chatAddBtn"
             android:layout_width="50dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
 
             android:layout_marginLeft="3.0dip"
+            android:background="#FDFEFE"
             app:srcCompat="@drawable/baseline_add_24" />
 
         <EditText
@@ -57,10 +69,11 @@
         <ImageButton
             android:id="@+id/chatSendBtn"
             android:layout_width="50dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
 
             android:layout_marginRight="3.0dip"
 
+            android:background="#FDFEFE"
             app:srcCompat="@drawable/ic_menu_send" />
     </LinearLayout>
 
