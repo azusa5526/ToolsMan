@@ -187,6 +187,11 @@ public class Water extends AppCompatActivity {
             post_username.setText(username);
         }
 
+        /*public void setUserImage(String userimage) {
+            ImageView user_image = (ImageView) mView.findViewById(R.id.profileImage);
+            Picasso.get().load(userimage).into(user_image);
+        }*/
+
     }
 
 
