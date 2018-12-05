@@ -76,7 +76,9 @@
         <activity
             android:name=".ChatFunction.ChatActivity"
             android:parentActivityName=".ChatFunction.Chat" />
-
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
 
     </application>
