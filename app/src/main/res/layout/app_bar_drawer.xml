@@ -23,31 +23,44 @@
 
     <Button
         android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="73dp"
         android:layout_marginTop="120dp"
-        android:text="水務類" />
+        android:background="@drawable/registerbtn"
+        android:drawableBottom="@drawable/water"
+        android:text="水務類"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/button5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
         android:layout_alignTop="@+id/button4"
+        android:layout_alignParentEnd="true"
         android:layout_marginEnd="71dp"
-        android:text="電器類" />
+        android:drawableBottom="@drawable/plug"
+        android:background="@drawable/registerbtn"
+        android:text="電器類"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"/>
 
     <Button
         android:id="@+id/Air"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
         android:layout_alignStart="@+id/button4"
-        android:layout_marginTop="203dp"
-        android:text="冷氣類" />
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="262dp"
+        android:background="@drawable/registerbtn"
+        android:drawableBottom="@drawable/aircon"
+        android:text="空調管線類"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"/>
 
 
 </RelativeLayout>
