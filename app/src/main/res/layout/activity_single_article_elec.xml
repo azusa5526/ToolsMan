@@ -6,35 +6,48 @@
     android:layout_height="match_parent"
     tools:context=".Post.SingleArticleElec">
 
-    <EditText
-        android:id="@+id/postComment"
-        android:layout_width="315dp"
-        android:layout_height="53dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/CommentList"
-        android:ems="10"
-        android:hint="Comment..."
-        android:inputType="textPersonName"
-        />
-
-    <ImageButton
-        android:id="@+id/AddCommentBtn"
-        android:layout_width="48dp"
-        android:layout_height="54dp"
-        android:layout_alignEnd="@+id/CommentList"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="8dp"
-        android:backgroundTint="@color/colorPrimaryDark"
-        app:srcCompat="@mipmap/comments" />
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/CommentList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="513dp"
+        android:layout_alignBottom="@+id/liner"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="60dp"
-        android:layout_marginEnd="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="0dp" />
+
+
+
+    <LinearLayout
+        android:id="@+id/liner"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="8dp" />
+        android:layout_marginBottom="0dp"
+        android:orientation="horizontal"
+        android:background="#FDFEFE">
+
+        <EditText
+            android:id="@+id/postComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/liner"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Comment..."
+            android:inputType="textPersonName" />
+
+        <ImageButton
+            android:id="@+id/AddCommentBtn"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+
+            android:layout_marginRight="3.0dip"
+
+            android:background="#FDFEFE"
+            app:srcCompat="@mipmap/comments_blue" />
+    </LinearLayout>
 
 </RelativeLayout>
