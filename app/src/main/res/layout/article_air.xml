@@ -4,65 +4,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="20dp">
+    android:layout_marginTop="5dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp">
 
 
     <RelativeLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="538dp">
+        android:layout_height="match_parent"
+        >
 
-
-        <TextView
-            android:id="@+id/username"
-            android:layout_width="228dp"
-            android:layout_height="29dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:text="Poster" />
-
-        <TextView
-            android:id="@+id/post_desc"
-            android:layout_width="match_parent"
-            android:layout_height="79dp"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/post_title"
-            android:text="Post Desc here"
-            android:textSize="15dp" />
-
-
-        <ImageButton
-            android:id="@+id/LikeBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="16dp"
-            android:background="#00ffffff"
-            android:src="@mipmap/action_like_gray" />
-
-        <TextView
-            android:id="@+id/like_count"
-            android:layout_width="50dp"
-            android:layout_height="48dp"
-            android:layout_alignTop="@+id/LikeBtn"
-            android:layout_toEndOf="@+id/LikeBtn"
-            android:text="0 Like" />
 
         <ImageView
             android:id="@+id/profileImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:src="@mipmap/headsticker_gray" />
+            android:src="@drawable/defaultavatar" />
+
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/profileImage"
+            android:text="Poster" />
 
         <TextView
             android:id="@+id/date"
-            android:layout_width="227dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
             android:layout_alignBottom="@+id/profileImage"
-            android:layout_alignStart="@+id/username"
+            android:layout_marginEnd="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/profileImage"
             android:text="Date" />
 
         <TextView
@@ -70,9 +49,22 @@
             android:layout_width="match_parent"
             android:layout_height="36dp"
             android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="77dp"
+            android:layout_below="@+id/profileImage"
+            android:layout_marginEnd="0dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="5dp"
             android:text="Post Title here" />
+
+        <TextView
+            android:id="@+id/post_desc"
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/post_title"
+            android:layout_marginTop="0dp"
+            android:text="Post Desc here"
+            android:textSize="15dp" />
+
 
         <ImageView
             android:id="@+id/post_image"
@@ -81,6 +73,17 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/post_desc"
             app:srcCompat="@mipmap/add_btn" />
+
+        <ImageButton
+            android:id="@+id/LikeBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/post_image"
+            android:layout_marginBottom="0dp"
+            android:layout_marginTop="39dp"
+            android:background="#00ffffff"
+            android:src="@mipmap/action_like_gray" />
 
 
     </RelativeLayout>

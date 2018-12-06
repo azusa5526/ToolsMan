@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="20dp">
+    android:layout_marginTop="5dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    >
 
 
     <RelativeLayout
@@ -14,38 +17,39 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/headsticker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/headsticker_gray" />
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/defaultavatar" />
 
         <TextView
             android:id="@+id/postemail"
             android:layout_width="259dp"
-            android:layout_height="29dp"
+            android:layout_height="25dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
-            android:layout_marginEnd="15dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="0dp"
             android:text="Post"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/headsticker"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_toEndOf="@+id/headsticker"
+            />
+
+        <TextView
+            android:id="@+id/Date"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_alignBottom="@+id/headsticker"
+            android:layout_marginStart="10dp"
+            android:text="Date"
+            android:layout_toEndOf="@+id/headsticker"/>
 
         <TextView
             android:id="@+id/postComment"
             android:layout_width="match_parent"
             android:layout_height="80dp"
+            android:layout_marginTop="5dp"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/headsticker"
             android:text="TextView" />
-
-        <TextView
-            android:id="@+id/Date"
-            android:layout_width="259dp"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/headsticker"
-            android:layout_alignStart="@+id/postemail"
-            android:layout_marginStart="0dp"
-            android:text="Date" />
 
     </RelativeLayout>
 
