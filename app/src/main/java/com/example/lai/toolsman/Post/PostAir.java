@@ -79,9 +79,6 @@ public class PostAir extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startPosting();
-                Intent Toelec = new Intent();
-                Toelec.setClass(PostAir.this,Air.class);
-                startActivity(Toelec);
             }
         });
         mSelectImage.setOnClickListener(new View.OnClickListener(){
@@ -157,6 +154,7 @@ public class PostAir extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()){
+                                        Toast.makeText(PostAir.this, "貼文成功", Toast.LENGTH_LONG).show();
                                         Intent goBack = new Intent(PostAir.this,Air.class);
                                         goBack.putExtra("AccountName",AccountName);
                                         startActivity(goBack);
