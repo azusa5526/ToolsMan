@@ -79,9 +79,6 @@ public class PostWater extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startPosting();
-                Intent Toelec = new Intent();
-                Toelec.setClass(PostWater.this,Water.class);
-                startActivity(Toelec);
             }
         });
         mSelectImage.setOnClickListener(new View.OnClickListener(){
@@ -163,6 +160,7 @@ public class PostWater extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()){
+                                        Toast.makeText(PostWater.this, "貼文成功", Toast.LENGTH_LONG).show();
                                         Intent goBack = new Intent(PostWater.this,Water.class);
                                         goBack.putExtra("AccountName",AccountName);
                                         startActivity(goBack);

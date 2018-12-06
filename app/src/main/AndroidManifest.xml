@@ -33,10 +33,16 @@
             android:windowSoftInputMode="stateHidden" />
         />
         <activity android:name=".HistoryFunction.History" />
-        <activity android:name=".Post.Water" />
-        <activity android:name=".Post.Elec" />
+        <activity android:name=".Post.Water"
+            android:label="Water"
+            android:parentActivityName=".Main"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".Post.Elec"
+            android:label="Elec"
+            android:theme="@style/AppTheme" />
         <activity android:name=".RegisterFunction.Register" />
-        <activity android:name=".Post.PostWater" />
+        <activity android:name=".Post.PostWater"
+            android:parentActivityName=".Post.Water" />
         <activity android:name=".Post.PostElec" />
         <activity android:name=".VerificationFunction.Verification" />
         <activity android:name=".UserInfo.AccountSettings" />
