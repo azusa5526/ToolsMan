@@ -32,13 +32,14 @@
             android:name=".ChatFunction.Chat"
             android:windowSoftInputMode="stateHidden" />
         />
-        <activity android:name=".HistoryFunction.History" />
+        <activity android:name=".HistoryFunction.History"
+            android:label="歷史紀錄"/>
         <activity android:name=".Post.Water"
-            android:label="Water"
+            android:label="水務類"
             android:parentActivityName=".Main"
             android:theme="@style/AppTheme" />
         <activity android:name=".Post.Elec"
-            android:label="Elec"
+            android:label="電器用品類"
             android:theme="@style/AppTheme" />
         <activity android:name=".RegisterFunction.Register" />
         <activity android:name=".Post.PostWater"
@@ -56,7 +57,7 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Post.Air"
-            android:label="@string/title_activity_air"
+            android:label="空調系統類"
             android:theme="@style/AppTheme" />
         <activity android:name=".Post.PostAir" />
         <activity android:name=".Post.SingleArticleAir"
