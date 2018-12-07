@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
 import com.example.lai.toolsman.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -63,6 +64,7 @@ public class Water extends AppCompatActivity {
                 Intent newPostIntent = new Intent(Water.this, PostWater.class);
                 newPostIntent.putExtra("AccountName",AccountName);
                 startActivity(newPostIntent);
+                finish();
             }
         });
     }

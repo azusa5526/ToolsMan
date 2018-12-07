@@ -63,6 +63,7 @@ public class Elec extends AppCompatActivity {
                 Intent newPostIntent = new Intent(Elec.this, PostElec.class);
                 newPostIntent.putExtra("AccountName",AccountName);
                 startActivity(newPostIntent);
+                finish();
             }
         });
     }

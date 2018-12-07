@@ -162,6 +162,7 @@ public class PostElec extends AppCompatActivity {
                                         Intent goBack = new Intent(PostElec.this,Elec.class);
                                         goBack.putExtra("AccountName",AccountName);
                                         startActivity(goBack);
+                                        finish();
                                     }
                                 }
                             });

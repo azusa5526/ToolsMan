@@ -164,6 +164,7 @@ public class PostWater extends AppCompatActivity {
                                         Intent goBack = new Intent(PostWater.this,Water.class);
                                         goBack.putExtra("AccountName",AccountName);
                                         startActivity(goBack);
+                                        finish();
                                     }
                                 }
                             });
@@ -183,4 +184,6 @@ public class PostWater extends AppCompatActivity {
         }
 
     }
+
+
 }

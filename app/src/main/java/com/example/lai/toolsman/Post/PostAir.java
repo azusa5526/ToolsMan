@@ -158,6 +158,7 @@ public class PostAir extends AppCompatActivity {
                                         Intent goBack = new Intent(PostAir.this,Air.class);
                                         goBack.putExtra("AccountName",AccountName);
                                         startActivity(goBack);
+                                        finish();
                                     }
                                 }
                             });
