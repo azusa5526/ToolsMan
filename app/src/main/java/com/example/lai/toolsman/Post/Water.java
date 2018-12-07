@@ -64,7 +64,7 @@ public class Water extends AppCompatActivity {
                 Intent newPostIntent = new Intent(Water.this, PostWater.class);
                 newPostIntent.putExtra("AccountName",AccountName);
                 startActivity(newPostIntent);
-                finish();
+                onStop();
             }
         });
     }

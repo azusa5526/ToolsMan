@@ -161,9 +161,10 @@ public class PostWater extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()){
                                         Toast.makeText(PostWater.this, "貼文成功", Toast.LENGTH_LONG).show();
-                                        Intent goBack = new Intent(PostWater.this,Water.class);
-                                        goBack.putExtra("AccountName",AccountName);
-                                        startActivity(goBack);
+                                        //Intent goBack = new Intent(PostWater.this,Water.class);
+                                        //goBack.putExtra("AccountName",AccountName);
+                                        //startActivity(goBack);
+                                        onRestart();
                                         finish();
                                     }
                                 }

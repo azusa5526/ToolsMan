@@ -64,7 +64,7 @@ public class Air extends AppCompatActivity {
                 Intent newPostIntent = new Intent(Air.this, PostAir.class);
                 newPostIntent.putExtra("AccountName",AccountName);
                 startActivity(newPostIntent);
-                finish();
+                onStop();
             }
         });
     }
