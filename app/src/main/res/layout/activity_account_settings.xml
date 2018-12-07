@@ -20,19 +20,30 @@
     <Button
         android:id="@+id/changeImage"
         android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:layout_above="@+id/changeState"
         android:layout_centerHorizontal="true"
-        android:text="Change Image" />
+        android:layout_marginBottom="2dp"
+        android:background="@drawable/registerbtn"
+        android:fontFamily="@font/salsa"
+        android:text="Change Image"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/changeState"
         android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="84dp"
-        android:text="Change State" />
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/registerbtn"
+        android:fontFamily="@font/salsa"
+        android:text="Change State"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/displayEmail"

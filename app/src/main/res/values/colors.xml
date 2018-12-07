@@ -2,8 +2,9 @@
 <resources>
     <color name="colorPrimary">#3e92cf</color>
     <color name="colorPrimaryDark">#303f9f</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#3e92cf</color>
 
     <color name="likeBtnGray">#747474</color>
     <color name="likeBtnAccent">#F44336</color>
+    <color name="loe">#FFFFFF</color>
 </resources>

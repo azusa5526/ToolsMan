@@ -23,44 +23,197 @@
 
     <Button
         android:id="@+id/button4"
-        android:layout_width="100dp"
-        android:layout_height="80dp"
-        android:layout_alignParentStart="true"
+        android:layout_width="70dp"
+        android:layout_height="65dp"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="73dp"
-        android:layout_marginTop="120dp"
-        android:background="@drawable/registerbtn"
-        android:drawableBottom="@drawable/water"
+        android:layout_marginTop="82dp"
+        android:layout_marginEnd="8dp"
+        android:layout_toStartOf="@+id/button5"
+        android:background="@drawable/serverstypebtn"
+        android:drawableBottom="@drawable/water" />
+    <TextView
+        android:id="@+id/WaterText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button4"
+        android:layout_marginEnd="38dp"
+        android:layout_toStartOf="@+id/ElecText"
+        android:layout_marginTop="7dp"
         android:text="水務類"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold" />
-
+        android:textSize="20dp"/>
     <Button
         android:id="@+id/button5"
-        android:layout_width="100dp"
-        android:layout_height="80dp"
-        android:layout_alignTop="@+id/button4"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="71dp"
-        android:drawableBottom="@drawable/plug"
-        android:background="@drawable/registerbtn"
-        android:text="電器類"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"/>
-
+        android:layout_width="70dp"
+        android:layout_height="65dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="82dp"
+        android:background="@drawable/serverstypebtn"
+        android:drawableBottom="@drawable/plug" />
+    <TextView
+        android:id="@+id/ElecText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button5"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="7dp"
+        android:text="電器用品類"
+        android:textSize="20dp"/>
     <Button
         android:id="@+id/Air"
-        android:layout_width="100dp"
-        android:layout_height="80dp"
-        android:layout_alignStart="@+id/button4"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="262dp"
-        android:background="@drawable/registerbtn"
-        android:drawableBottom="@drawable/aircon"
-        android:text="空調管線類"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"/>
+        android:layout_width="70dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="82dp"
+        android:layout_toEndOf="@+id/button5"
+        android:background="@drawable/serverstypebtn"
+        android:drawableBottom="@drawable/aircon" />
+    <TextView
+        android:id="@+id/AirText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Air"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="7dp"
+        android:layout_toEndOf="@+id/ElecText"
+        android:text="空調系統類"
+        android:textSize="20dp" />
+    <Button
+        android:id="@+id/Clean"
+        android:layout_width="70dp"
+        android:layout_height="65dp"
+        android:layout_below="@+id/WaterText"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="48dp"
+        android:layout_toStartOf="@+id/Toilet"
+        android:background="@drawable/serverstypebtn"
+        android:drawableBottom="@drawable/clean" />
+    <TextView
+        android:id="@+id/CleanText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Clean"
+        android:layout_marginEnd="38dp"
+        android:layout_toStartOf="@+id/ElecText"
+        android:layout_marginTop="7dp"
+        android:text="清潔類"
+        android:textSize="20dp"/>
+    <Button
+        android:id="@+id/Toilet"
+        android:layout_width="70dp"
+        android:layout_height="65dp"
+        android:layout_below="@+id/ElecText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="29dp"
+        android:background="@drawable/serverstypebtn"
+        android:drawableBottom="@drawable/toilet"
+        />
+    <TextView
+        android:id="@+id/ToiletText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Toilet"
+        android:layout_marginEnd="38dp"
+        android:layout_marginTop="7dp"
+        android:layout_centerHorizontal="true"
+        android:text="衛浴設備類"
+        android:textSize="20dp"/>
+    <Button
+        android:id="@+id/Lock"
+        android:layout_width="70dp"
+        android:layout_height="65dp"
+        android:layout_below="@+id/AirText"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="29dp"
+        android:layout_toEndOf="@+id/Toilet"
+        android:background="@drawable/serverstypebtn"
+        android:drawableBottom="@drawable/lock" />
+    <TextView
+        android:id="@+id/LockText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Lock"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="7dp"
+        android:layout_toEndOf="@+id/ElecText"
+        android:text="開鎖服務類"
+        android:textSize="20dp" />
+    <Button
+        android:id="@+id/LightDevice"
+        android:layout_width="70dp"
+        android:layout_height="65dp"
+        android:layout_below="@+id/CleanText"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="48dp"
+        android:layout_toStartOf="@+id/Paint"
+        android:background="@drawable/serverstypebtn"
+        android:drawableBottom="@drawable/light"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/LightDevice"
+        android:layout_marginEnd="38dp"
+        android:layout_toStartOf="@+id/ElecText"
+        android:layout_marginTop="7dp"
+        android:text="燈具類"
+        android:textSize="20dp"/>
+    <Button
+        android:id="@+id/Paint"
+        android:layout_width="70dp"
+        android:layout_height="65dp"
+        android:layout_below="@+id/ToiletText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="29dp"
+        android:background="@drawable/serverstypebtn"
+        android:drawableBottom="@drawable/paint"
+        />
+    <TextView
+        android:id="@+id/PaintText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Paint"
+        android:layout_marginEnd="38dp"
+        android:layout_marginTop="7dp"
+        android:layout_centerHorizontal="true"
+        android:text="油漆粉刷類"
+        android:textSize="20dp"/>
+    <Button
+        android:id="@+id/Computer"
+        android:layout_width="70dp"
+        android:layout_height="65dp"
+        android:layout_below="@+id/LockText"
+        android:layout_marginStart="50dp"
+        android:layout_toEndOf="@+id/Paint"
+        android:layout_marginTop="29dp"
+        android:background="@drawable/serverstypebtn"
+        android:drawableBottom="@drawable/computer"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Computer"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="7dp"
+        android:layout_toEndOf="@+id/ElecText"
+        android:text="3C產品類"
+        android:textSize="20dp" />
+
+    <ImageView
+        android:layout_width="182dp"
+        android:layout_height="113dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/toolsmanicon" />
+
+
+
+
+
+
+
 
 
 </RelativeLayout>
