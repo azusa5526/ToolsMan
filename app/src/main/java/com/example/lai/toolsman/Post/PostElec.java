@@ -82,9 +82,7 @@ public class PostElec extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startPosting();
-                Intent Toelec = new Intent();
-                Toelec.setClass(PostElec.this,Elec.class);
-                startActivity(Toelec);
+
             }
         });
         mSelectImage.setOnClickListener(new View.OnClickListener(){
@@ -160,6 +158,7 @@ public class PostElec extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()){
+                                        Toast.makeText(PostElec.this, "貼文成功", Toast.LENGTH_LONG).show();
                                         Intent goBack = new Intent(PostElec.this,Elec.class);
                                         goBack.putExtra("AccountName",AccountName);
                                         startActivity(goBack);
