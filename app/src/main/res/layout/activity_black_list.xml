@@ -12,16 +12,19 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="22dp"
         android:layout_marginTop="47dp"
+        android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
         android:ems="10"
-        android:inputType="textEmailAddress" />
+        android:inputType="textEmailAddress"
+        android:hint="E-mail"/>
 
     <Button
         android:id="@+id/AddBlackList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
+        android:layout_width="70dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/Insert"
-        android:layout_marginEnd="28dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="26dp"
+        android:background="@drawable/registerbtn"
         android:text="添加" />
 
     <android.support.v7.widget.RecyclerView
@@ -30,8 +33,16 @@
         android:layout_height="461dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-
         />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="1dp"
+        android:text="黑名單"
+        android:textSize="30dp" />
 
 
 </RelativeLayout>
