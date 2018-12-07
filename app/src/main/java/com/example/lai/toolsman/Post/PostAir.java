@@ -155,9 +155,10 @@ public class PostAir extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()){
                                         Toast.makeText(PostAir.this, "貼文成功", Toast.LENGTH_LONG).show();
-                                        Intent goBack = new Intent(PostAir.this,Air.class);
-                                        goBack.putExtra("AccountName",AccountName);
-                                        startActivity(goBack);
+                                        //Intent goBack = new Intent(PostAir.this,Air.class);
+                                        //goBack.putExtra("AccountName",AccountName);
+                                        //startActivity(goBack);
+                                        onRestart();
                                         finish();
                                     }
                                 }

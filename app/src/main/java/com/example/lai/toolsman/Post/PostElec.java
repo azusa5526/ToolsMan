@@ -159,9 +159,10 @@ public class PostElec extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()){
                                         Toast.makeText(PostElec.this, "貼文成功", Toast.LENGTH_LONG).show();
-                                        Intent goBack = new Intent(PostElec.this,Elec.class);
-                                        goBack.putExtra("AccountName",AccountName);
-                                        startActivity(goBack);
+                                        //Intent goBack = new Intent(PostElec.this,Elec.class);
+                                        //goBack.putExtra("AccountName",AccountName);
+                                        //startActivity(goBack);
+                                        onRestart();
                                         finish();
                                     }
                                 }
