@@ -27,17 +27,6 @@
         android:textSize="15sp" />
 
     <TextView
-        android:id="@+id/timeTextLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/messageProfileLayout"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="26dp"
-        android:layout_toEndOf="@+id/eamilTextLayout"
-        android:text="TextView"
-        android:textSize="10sp" />
-
-    <TextView
         android:id="@+id/messageTextLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
