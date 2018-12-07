@@ -15,7 +15,8 @@
         android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
         android:ems="10"
         android:inputType="textEmailAddress"
-        android:hint="E-mail"/>
+        android:hint="E-mail"
+        android:visibility="invisible"/>
 
     <Button
         android:id="@+id/AddFavorite"
@@ -25,14 +26,16 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="26dp"
         android:background="@drawable/registerbtn"
-        android:text="添加" />
+        android:text="添加"
+        android:visibility="invisible" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/Favorite"
         android:layout_width="match_parent"
-        android:layout_height="461dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" />
+        android:visibility="invisible" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,6 +43,11 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="1dp"
         android:text="我的最愛"
-        android:textSize="30dp" />
+        android:textSize="30dp"
+        android:visibility="invisible"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/errorwefuckup"/>
 
 </RelativeLayout>
