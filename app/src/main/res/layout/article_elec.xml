@@ -12,8 +12,7 @@
     <RelativeLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="wrap_content">
 
 
         <ImageView
@@ -69,9 +68,12 @@
         <ImageView
             android:id="@+id/post_image"
             android:layout_width="wrap_content"
-            android:layout_height="197dp"
+            android:layout_height="230dp"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/post_desc"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:scaleType="fitCenter"
             app:srcCompat="@mipmap/add_btn" />
 
         <ImageButton
@@ -81,7 +83,7 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/post_image"
             android:layout_marginBottom="0dp"
-            android:layout_marginTop="39dp"
+            android:layout_marginTop="35dp"
             android:background="#00ffffff"
             android:src="@mipmap/action_like_gray" />
 
