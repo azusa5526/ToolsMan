@@ -106,6 +106,14 @@ public class SingleArticleElec extends AppCompatActivity {
             @Override
             protected void populateViewHolder(BlogViewHolder viewHolder, SingleCommentElec model, int position) {
                 viewHolder.setComment(model.getComment());
+                viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast toast = Toast.makeText(SingleArticleElec.this, "選擇師傅", Toast.LENGTH_SHORT);
+                        toast.show();
+
+                    }
+                });
             }
         };
         mCommentList.setAdapter(firebaseRecyclerAdapter);

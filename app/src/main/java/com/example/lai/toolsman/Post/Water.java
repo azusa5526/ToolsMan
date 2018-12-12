@@ -96,7 +96,9 @@ public class Water extends AppCompatActivity {
                         singleArticleIntent.putExtra("article_id", post_key);
                         startActivity(singleArticleIntent);
                     }
-                });
+                }
+
+                );
 
                 //Like Feature
                 viewHolder.mLikeBtn.setOnClickListener(new View.OnClickListener() {

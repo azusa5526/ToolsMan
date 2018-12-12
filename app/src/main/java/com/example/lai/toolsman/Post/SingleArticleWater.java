@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.lai.toolsman.BlackList.BlackList;
 import com.example.lai.toolsman.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -106,10 +107,24 @@ public class SingleArticleWater extends AppCompatActivity {
             @Override
             protected void populateViewHolder(BlogViewHolder viewHolder, SingleCommentWater model, int position) {
                 viewHolder.setComment(model.getComment());
+                viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast toast = Toast.makeText(SingleArticleWater.this, "選擇師傅", Toast.LENGTH_SHORT);
+                        toast.show();
+
+
+
+                        ;
+
+                    }
+                });
             }
         };
         mCommentList.setAdapter(firebaseRecyclerAdapter);
     }
+
+
 
     public static class BlogViewHolder extends RecyclerView.ViewHolder {
 
