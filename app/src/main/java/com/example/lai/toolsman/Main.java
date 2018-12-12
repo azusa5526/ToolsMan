@@ -1,9 +1,11 @@
 package com.example.lai.toolsman;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -218,17 +220,29 @@ public class Main extends AppCompatActivity
             startActivity(AccountSettingsIntent);
             finish();
         } else if (id == R.id.Verification) {
-            String[] to = {"t12340905@gmail.com"};
-            String title = "師傅驗證信";
-            String Picture = "請於此附上證件照片";
-            String name = RealName;
-            Intent Send = new Intent(Intent.ACTION_SEND);
-            Send.putExtra(Intent.EXTRA_EMAIL, to);
-            Send.putExtra(Intent.EXTRA_SUBJECT, name + "   的" + title);
-            Send.putExtra(Intent.EXTRA_TEXT, Picture);
+            new AlertDialog.Builder(Main.this)
+                    .setTitle("請選擇GMAIL")
+                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
 
-            Send.setType("text/plain");
-            startActivity(Send.createChooser(Send, "選擇工具"));
+                                    String[] to = {"t12340905@gmail.com"};
+                                    String title = "師傅驗證信";
+                                    String Picture = "請於此附上證件照片";
+                                    String name = RealName;
+                                    Intent Send = new Intent(Intent.ACTION_SEND);
+                                    Send.putExtra(Intent.EXTRA_EMAIL, to);
+                                    Send.putExtra(Intent.EXTRA_SUBJECT, name + "   的" + title);
+                                    Send.putExtra(Intent.EXTRA_TEXT, Picture);
+
+                                    Send.setType("text/plain");
+                                    startActivity(Send.createChooser(Send, "選擇工具"));
+
+                                }
+                            }).show();
+
+
+
         } else if (id == R.id.Logout) {
             mAuth.signOut();
             Intent loginIntent = new Intent(Main.this, Login.class);
