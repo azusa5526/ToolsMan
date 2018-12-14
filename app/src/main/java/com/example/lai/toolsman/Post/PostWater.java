@@ -39,14 +39,14 @@ public class PostWater extends AppCompatActivity {
     private DatabaseReference mDatabaseUser;
     private static final int GALLERY_REQUEST = 1;
     private StorageReference mStorage;
-
+    String id="一般使用者";
     private EditText mPostTitle;
     private EditText mPostDesc;
     private Button mSubmitBtn;
     private ImageButton mSelectImage;
     private Uri mImageUri = null;
     String AccountName;
-
+    private  DatabaseReference userid;
     private DatabaseReference historyDatabase;
 
     @Override
@@ -64,7 +64,24 @@ public class PostWater extends AppCompatActivity {
         mProgress = new ProgressDialog(this);
         mAuth = FirebaseAuth.getInstance();
         mCurrentUser = mAuth.getCurrentUser();
-        mDatabaseUser = FirebaseDatabase.getInstance().getReference().child("User_Elec").child(mCurrentUser.getUid());
+        mDatabaseUser = FirebaseDatabase.getInstance().getReference().child("User_Water").child(mCurrentUser.getUid());
+
+        String currentUser=mCurrentUser.getUid();
+        userid=FirebaseDatabase.getInstance().getReference().child("Users").child(currentUser);
+        userid.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                id=dataSnapshot.child("id").getValue().toString();
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+
+            }
+        });
+
 
         String currentHistoryUser = mCurrentUser.getUid();
         historyDatabase = FirebaseDatabase.getInstance().getReference().child("History").child(currentHistoryUser);
@@ -128,7 +145,7 @@ public class PostWater extends AppCompatActivity {
                             newHistory.child("desc").setValue(desc_value);
                             newHistory.child("image").setValue(downloadUriForHistory.toString());
                             newHistory.child("uid").setValue(mCurrentUser.getUid());
-                            newHistory.child("username").setValue(AccountName);//
+                            newHistory.child("username").setValue(AccountName);
                         }
 
                         @Override
@@ -156,7 +173,7 @@ public class PostWater extends AppCompatActivity {
 
 
 
-                            newPost.child("username").setValue(AccountName).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            newPost.child("username").setValue(AccountName+"("+id+")").addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()){

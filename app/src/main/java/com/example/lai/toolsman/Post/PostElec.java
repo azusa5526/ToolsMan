@@ -46,8 +46,9 @@ public class PostElec extends AppCompatActivity {
     private Button mSubmitBtn;
     private ImageButton mSelectImage;
     private Uri mImageUri = null;
-
+    String id="一般使用者";
     private DatabaseReference historyDatabase;
+    private  DatabaseReference userid;
     //private FirebaseAuth historyAuth;
 
 
@@ -68,6 +69,24 @@ public class PostElec extends AppCompatActivity {
         mCurrentUser = mAuth.getCurrentUser();
         mDatabaseUser = FirebaseDatabase.getInstance().getReference().child("User_Elec").child(mCurrentUser.getUid());
         String currentHistoryUser = mCurrentUser.getUid();
+
+        String currentUser=mCurrentUser.getUid();
+        userid=FirebaseDatabase.getInstance().getReference().child("Users").child(currentUser);
+        userid.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                id=dataSnapshot.child("id").getValue().toString();
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+
+
+
+            }
+        });
 
         historyDatabase = FirebaseDatabase.getInstance().getReference().child("History").child(currentHistoryUser);
 
@@ -154,7 +173,7 @@ public class PostElec extends AppCompatActivity {
                             newPost.child("desc").setValue(desc_value);
                             newPost.child("image").setValue(downloadUri.toString());
                             newPost.child("uid").setValue(mCurrentUser.getUid());
-                            newPost.child("username").setValue(AccountName).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            newPost.child("username").setValue(AccountName+"("+id+")").addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()){

@@ -61,6 +61,7 @@ public class Register extends AppCompatActivity {
                            userMap.put("image", "default");
                            userMap.put("thumbImage", "default");
                            userMap.put("status", "Hi, I'm a General member in ToolsMan");
+                           userMap.put("id","一般使用者");
 
                            mDatabase.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                @Override

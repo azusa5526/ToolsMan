@@ -46,8 +46,10 @@ public class PostAir extends AppCompatActivity {
     private Button mSubmitBtn;
     private ImageButton mSelectImage;
     private Uri mImageUri = null;
+    String id="一般使用者";
 
     private DatabaseReference historyDatabase;
+    private  DatabaseReference userid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,7 @@ public class PostAir extends AppCompatActivity {
         setContentView(R.layout.activity_post_air);
         Intent GetName = getIntent();
         AccountName = GetName.getStringExtra("AccountName");
+
 
         PostAirBar = findViewById(R.id.post_air_bar);
         setSupportActionBar(PostAirBar);
@@ -66,8 +69,31 @@ public class PostAir extends AppCompatActivity {
         mCurrentUser = mAuth.getCurrentUser();
         mDatabaseUser = FirebaseDatabase.getInstance().getReference().child("User_Air").child(mCurrentUser.getUid());
 
+
+
+        String currentUser=mCurrentUser.getUid();
+        userid=FirebaseDatabase.getInstance().getReference().child("Users").child(currentUser);
+        userid.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                id=dataSnapshot.child("id").getValue().toString();
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+
+            }
+        });
+
+
+
+
         String currentHistoryUser = mCurrentUser.getUid();
         historyDatabase = FirebaseDatabase.getInstance().getReference().child("History").child(currentHistoryUser);
+
+
 
         mPostTitle = (EditText) findViewById(R.id.titleField);
         mPostDesc = (EditText) findViewById(R.id.descField);
@@ -150,7 +176,7 @@ public class PostAir extends AppCompatActivity {
                             newPost.child("desc").setValue(desc_value);
                             newPost.child("image").setValue(downloadUri.toString());
                             newPost.child("uid").setValue(mCurrentUser.getUid());
-                            newPost.child("username").setValue(AccountName).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            newPost.child("username").setValue(AccountName+"("+id+")").addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()){
