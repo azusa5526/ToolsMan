@@ -63,6 +63,7 @@ public class Register extends AppCompatActivity {
                            userMap.put("status", "Hi, I'm a General member in ToolsMan");
                            userMap.put("id","一般使用者");
                            userMap.put("Score","80");
+                           userMap.put("scoretime","1");
 
                            mDatabase.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                @Override

@@ -51,7 +51,8 @@ public class ProfileActivity extends AppCompatActivity {
     private Button Scorebtn;
     private String mCurrentState;
     int CurrentScore;
-    int newScore=0;
+    int CurrentTime;
+
 
 
 
@@ -101,6 +102,7 @@ public class ProfileActivity extends AppCompatActivity {
                 String status = dataSnapshot.child("status").getValue().toString();
                 String image = dataSnapshot.child("image").getValue().toString();
                 CurrentScore=Integer.parseInt(dataSnapshot.child("Score").getValue().toString());
+                CurrentTime=Integer.parseInt(dataSnapshot.child("scoretime").getValue().toString());
 
                 mProfileEmail.setText(email);
                 mProfileStatus.setText(status);
@@ -186,9 +188,11 @@ public class ProfileActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 EditText input = (EditText)ScoreInput.findViewById(R.id.ScoreInput);
-                                newScore = Integer.parseInt(input.getText().toString());
-                                CurrentScore=(CurrentScore+newScore)/2;
+                                int newScore = Integer.parseInt(input.getText().toString());
+                                CurrentScore=((CurrentScore*CurrentTime)+newScore)/(CurrentTime+1);
+                                CurrentTime=CurrentTime+1;
                                 mUsersDatabase.child("Score").setValue(CurrentScore);
+                                mUsersDatabase.child("scoretime").setValue(CurrentTime);
 
 
 
