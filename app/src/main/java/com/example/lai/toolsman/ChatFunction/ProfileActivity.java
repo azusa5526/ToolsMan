@@ -14,7 +14,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.lai.toolsman.Main;
 import com.example.lai.toolsman.R;
+import com.example.lai.toolsman.SearchUser.SearchUser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -52,7 +54,9 @@ public class ProfileActivity extends AppCompatActivity {
     private String mCurrentState;
     int CurrentScore;
     int CurrentTime;
-
+    String email;
+    String status;
+    String image;
 
 
 
@@ -95,12 +99,13 @@ public class ProfileActivity extends AppCompatActivity {
         mProfileDeclineBtn.setEnabled(false);
 
 
+
         mUsersDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String email = dataSnapshot.child("email").getValue().toString();
-                String status = dataSnapshot.child("status").getValue().toString();
-                String image = dataSnapshot.child("image").getValue().toString();
+                email = dataSnapshot.child("email").getValue().toString();
+                status = dataSnapshot.child("status").getValue().toString();
+                image = dataSnapshot.child("image").getValue().toString();
                 CurrentScore=Integer.parseInt(dataSnapshot.child("Score").getValue().toString());
                 CurrentTime=Integer.parseInt(dataSnapshot.child("scoretime").getValue().toString());
 
@@ -189,10 +194,26 @@ public class ProfileActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 EditText input = (EditText)ScoreInput.findViewById(R.id.ScoreInput);
                                 int newScore = Integer.parseInt(input.getText().toString());
-                                CurrentScore=((CurrentScore*CurrentTime)+newScore)/(CurrentTime+1);
-                                CurrentTime=CurrentTime+1;
-                                mUsersDatabase.child("Score").setValue(CurrentScore);
-                                mUsersDatabase.child("scoretime").setValue(CurrentTime);
+
+                                if(0<=newScore&&newScore<=100) {
+                                    CurrentScore = ((CurrentScore * CurrentTime) + newScore) / (CurrentTime + 1);
+                                    CurrentTime = CurrentTime + 1;
+                                    mUsersDatabase.child("Score").setValue(CurrentScore);
+                                    mUsersDatabase.child("scoretime").setValue(CurrentTime);
+                                    Intent Backtoprofile = new Intent();
+                                    Backtoprofile.setClass(ProfileActivity.this, Main.class);
+                                    startActivity(Backtoprofile);
+                                    Toast.makeText(ProfileActivity.this, "評分完成", Toast.LENGTH_SHORT).show();
+                                }
+                                else
+                                {
+                                    Intent Backtoprofile = new Intent();
+                                    Backtoprofile.setClass(ProfileActivity.this, Main.class);
+                                    startActivity(Backtoprofile);
+                                   Toast.makeText(ProfileActivity.this, "分數請介於0到100", Toast.LENGTH_SHORT).show();
+
+                                }
+
 
 
 
