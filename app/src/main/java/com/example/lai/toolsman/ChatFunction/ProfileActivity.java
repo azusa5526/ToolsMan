@@ -200,15 +200,15 @@ public class ProfileActivity extends AppCompatActivity {
                                     CurrentTime = CurrentTime + 1;
                                     mUsersDatabase.child("Score").setValue(CurrentScore);
                                     mUsersDatabase.child("scoretime").setValue(CurrentTime);
-                                    Intent Backtoprofile = new Intent();
-                                    Backtoprofile.setClass(ProfileActivity.this, Main.class);
+                                    Intent Backtoprofile =getIntent();
+                                    finish();
                                     startActivity(Backtoprofile);
                                     Toast.makeText(ProfileActivity.this, "評分完成", Toast.LENGTH_SHORT).show();
                                 }
                                 else
                                 {
-                                    Intent Backtoprofile = new Intent();
-                                    Backtoprofile.setClass(ProfileActivity.this, Main.class);
+                                    Intent Backtoprofile =getIntent();
+                                    finish();
                                     startActivity(Backtoprofile);
                                    Toast.makeText(ProfileActivity.this, "分數請介於0到100", Toast.LENGTH_SHORT).show();
 
