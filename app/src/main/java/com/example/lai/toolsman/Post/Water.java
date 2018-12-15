@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 
 import com.example.lai.toolsman.R;
+import com.example.lai.toolsman.SearchUser.Users;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -30,7 +31,8 @@ public class Water extends AppCompatActivity {
     private RecyclerView mList;
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
-    private DatabaseReference mDatabaseUser;
+    private DatabaseReference mUsersDatebase;
+    //private DatabaseReference mDatabaseUser;
     private boolean mProcessLike = false;
     private DatabaseReference mDatabaseLike;
     String AccountName;
@@ -47,9 +49,11 @@ public class Water extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("ArticleWater");
-        mDatabaseUser = FirebaseDatabase.getInstance().getReference().child("UsersWater");
+        mUsersDatebase = FirebaseDatabase.getInstance().getReference().child("Users");
+        mUsersDatebase.keepSynced(true);
+        //mDatabaseUser = FirebaseDatabase.getInstance().getReference().child("UsersWater");
         mDatabaseLike = FirebaseDatabase.getInstance().getReference().child("LikesWater");
-        mDatabaseUser.keepSynced(true);
+        //mDatabaseUser.keepSynced(true);
         mDatabase.keepSynced(true);
         mDatabaseLike.keepSynced(true);
 
@@ -70,9 +74,11 @@ public class Water extends AppCompatActivity {
     }
 
 
+
     @Override
     protected void onStart() {
         super.onStart();
+
             FirebaseRecyclerAdapter<ArticleWater, ArticleViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<ArticleWater, ArticleViewHolder>(
                 ArticleWater.class,
                 R.layout.article_water,
@@ -80,14 +86,32 @@ public class Water extends AppCompatActivity {
                 mDatabase
         ) {
             @Override
-            protected void populateViewHolder(ArticleViewHolder viewHolder, ArticleWater model, int position) {
+            protected void populateViewHolder(final ArticleViewHolder viewHolder, final ArticleWater model, int position) {
                 final String post_key = getRef(position).getKey();
+                final String listUserId = getRef(position).getKey();
                 viewHolder.setLikeBtn(post_key);
                 viewHolder.setTitle(model.getTitle());
                 viewHolder.setDesc(model.getDesc());
                 viewHolder.setImage(getApplicationContext(), model.getImage());
                 viewHolder.setUsername(model.getUsername());
                 //User data will be retrieved here...
+
+               /* mUsersDatebase.child(listUserId).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        String userThumb = dataSnapshot.child("thumbImage").getValue().toString();
+                        viewHolder.setImage(thumbImage);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                })*/
+
+                //String userThumb = mUsersDatebase.child("thumbImage").getKey().toString();
+                //viewHolder.setImage(userThumb);
+
 
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -191,12 +215,14 @@ public class Water extends AppCompatActivity {
             post_username.setText(username);
         }
 
-        /*public void setUserImage(String userimage) {
-            ImageView user_image = (ImageView) mView.findViewById(R.id.profileImage);
-            Picasso.get().load(userimage).into(user_image);
-        }*/
+        public void setImage(String thumbImage, Context ctx) {
+            ImageView userImageView = (ImageView) mView.findViewById(R.id.profileImage);
+            Picasso.get().load(thumbImage).placeholder(R.drawable.defaultavatar).into(userImageView);
+        }
 
     }
+
+
 
 
 }

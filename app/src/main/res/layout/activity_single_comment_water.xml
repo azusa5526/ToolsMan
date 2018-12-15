@@ -28,7 +28,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
             android:layout_marginStart="10dp"
-            android:layout_marginEnd="0dp"
+            android:layout_marginEnd="29dp"
             android:text="Post"
             android:layout_toEndOf="@+id/headsticker"
             />
@@ -50,6 +50,16 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/headsticker"
             android:text="TextView" />
+
+        <ImageButton
+            android:id="@+id/menu"
+            android:layout_width="29dp"
+            android:layout_height="25dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp"
+            android:backgroundTint="@color/cardview_light_background"
+            app:srcCompat="@mipmap/menu_gray" />
 
     </RelativeLayout>
 
