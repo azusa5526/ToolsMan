@@ -55,15 +55,15 @@ public class ProfileActivity extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        final View ScoreInput = getLayoutInflater().inflate(R.layout.score,null);
 
         final String userId = getIntent().getStringExtra("user_id");
 
-
+        final View ScoreInput = getLayoutInflater().inflate(R.layout.score,null);
         mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
         mFriendRequestDatabase = FirebaseDatabase.getInstance().getReference().child("FriendRequest");
         mFriendDatabase = FirebaseDatabase.getInstance().getReference().child("Friends");
@@ -185,7 +185,7 @@ public class ProfileActivity extends AppCompatActivity {
                         .setPositiveButton("確認", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                EditText input = (EditText)findViewById(R.id.ScoreInput);
+                                EditText input = (EditText)ScoreInput.findViewById(R.id.ScoreInput);
                                 newScore = Integer.parseInt(input.getText().toString());
                                 CurrentScore=(CurrentScore+newScore)/2;
                                 mUsersDatabase.child("Score").setValue(CurrentScore);
