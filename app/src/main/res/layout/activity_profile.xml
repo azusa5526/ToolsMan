@@ -39,9 +39,9 @@
         android:id="@+id/profileFriendsCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/profileSendRequestBtn"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="166dp"
         android:text="Profile friends count" />
 
     <Button
@@ -50,18 +50,33 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="101dp"
+        android:layout_marginBottom="68dp"
         android:text="Send Friend Request" />
 
     <Button
         android:id="@+id/profileDeclineRequestBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/profileSendRequestBtn"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="1dp"
-        android:layout_marginBottom="45dp"
+        android:layout_marginBottom="13dp"
         android:text="Decline Friend  Request" />
+
+    <Button
+        android:id="@+id/Scorebtn"
+        android:layout_width="62dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/profileImage"
+        android:layout_alignParentEnd="true"
+        android:text="評分" />
+
+    <TextView
+        android:id="@+id/UserScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="127dp"
+        android:text="Score" />
 
 </RelativeLayout>

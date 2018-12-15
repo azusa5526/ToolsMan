@@ -1,11 +1,16 @@
 package com.example.lai.toolsman.ChatFunction;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +40,7 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView mProfileEmail, mProfileStatus, mProfileFriendConut;
     private Button mProfileSendRequestBtn, mProfileDeclineBtn;
     private ProgressDialog mProgressDialog;
+    private TextView mScore;
 
     private DatabaseReference mUsersDatabase;
     private DatabaseReference mFriendRequestDatabase;
@@ -42,15 +48,21 @@ public class ProfileActivity extends AppCompatActivity {
     private DatabaseReference mNotificationDatabase;
     private DatabaseReference mRootRef;
     private FirebaseUser mCurrentUser;
-
+    private Button Scorebtn;
     private String mCurrentState;
+    int CurrentScore;
+    int newScore=0;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        final View ScoreInput = getLayoutInflater().inflate(R.layout.score,null);
 
         final String userId = getIntent().getStringExtra("user_id");
+
 
         mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
         mFriendRequestDatabase = FirebaseDatabase.getInstance().getReference().child("FriendRequest");
@@ -59,12 +71,16 @@ public class ProfileActivity extends AppCompatActivity {
         mRootRef = FirebaseDatabase.getInstance().getReference();
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
 
+
+
         mProfileImage = (CircleImageView) findViewById(R.id.profileImage);
         mProfileEmail = (TextView) findViewById(R.id.profileEmail);
         mProfileStatus = (TextView) findViewById(R.id.profileStatus);
         mProfileFriendConut = (TextView) findViewById(R.id.profileFriendsCount);
         mProfileSendRequestBtn = (Button) findViewById(R.id.profileSendRequestBtn);
         mProfileDeclineBtn = (Button) findViewById(R.id.profileDeclineRequestBtn);
+        mScore=(TextView)findViewById(R.id.UserScore);
+
 
         mCurrentState = "not_friends";
 
@@ -77,15 +93,19 @@ public class ProfileActivity extends AppCompatActivity {
         mProfileDeclineBtn.setVisibility(View.INVISIBLE);
         mProfileDeclineBtn.setEnabled(false);
 
+
         mUsersDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String email = dataSnapshot.child("email").getValue().toString();
                 String status = dataSnapshot.child("status").getValue().toString();
                 String image = dataSnapshot.child("image").getValue().toString();
+                CurrentScore=Integer.parseInt(dataSnapshot.child("Score").getValue().toString());
 
                 mProfileEmail.setText(email);
                 mProfileStatus.setText(status);
+                mScore.setText("用戶評分:"+CurrentScore);
+
                 Picasso.get().load(image).placeholder(R.drawable.defaultavatar).into(mProfileImage);
 
 
@@ -156,6 +176,27 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+        Scorebtn=(Button)findViewById(R.id.Scorebtn);
+        Scorebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(ProfileActivity.this).setTitle("請輸入評分")
+                        .setView(ScoreInput)
+                        .setPositiveButton("確認", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                EditText input = (EditText)findViewById(R.id.ScoreInput);
+                                newScore = Integer.parseInt(input.getText().toString());
+                                CurrentScore=(CurrentScore+newScore)/2;
+                                mUsersDatabase.child("Score").setValue(CurrentScore);
+
+
+
+
+                            }
+                        }).show();
+            }
+        });
         mProfileSendRequestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
