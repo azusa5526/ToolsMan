@@ -41,9 +41,8 @@ public class SingleArticleWater extends AppCompatActivity {
     private String mPost_key = null;
     private DatabaseReference mDatabase;
     private DatabaseReference mCommentDB;
-
-
-
+    private FirebaseAuth mAuth;
+    private FirebaseUser mCurrentUser;
 
     private ImageView mHeadsticker;
     private TextView mPoster;
@@ -63,7 +62,8 @@ public class SingleArticleWater extends AppCompatActivity {
         setContentView(R.layout.activity_single_article_water);
 
 
-
+        mAuth = FirebaseAuth.getInstance();
+        mCurrentUser = mAuth.getCurrentUser();
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("ArticleWater");
 
@@ -233,6 +233,7 @@ public class SingleArticleWater extends AppCompatActivity {
                 }
                 else{
                     newPost.child("Comment").setValue(comment);
+                    newPost.child("uid").setValue(mCurrentUser.getUid());
                     Toast toast = Toast.makeText(SingleArticleWater.this, "回覆成功", Toast.LENGTH_SHORT);
                     toast.show();
                     CommentText = comment;

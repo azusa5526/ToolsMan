@@ -27,7 +27,8 @@ public class SingleArticleElec extends AppCompatActivity {
     private String mPost_key = null;
     private DatabaseReference mDatabase;
     private DatabaseReference mCommentDB;
-
+    private FirebaseAuth mAuth;
+    private FirebaseUser mCurrentUser;
     private ImageView mHeadsticker;
     private TextView mPoster;
     private TextView mTitle;
@@ -46,6 +47,9 @@ public class SingleArticleElec extends AppCompatActivity {
         setContentView(R.layout.activity_single_article_elec);
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("ArticleElec");
+
+        mAuth = FirebaseAuth.getInstance();
+        mCurrentUser = mAuth.getCurrentUser();
 
         mPost_key = getIntent().getExtras().getString("article_id");
         //Toast.makeText(SingleArticleElec.this, post_key, Toast.LENGTH_LONG).show();
@@ -151,6 +155,7 @@ public class SingleArticleElec extends AppCompatActivity {
                 }
                 else{
                     newPost.child("Comment").setValue(comment);
+                    newPost.child("uid").setValue(mCurrentUser.getUid());
                     Toast toast = Toast.makeText(SingleArticleElec.this, "回覆成功", Toast.LENGTH_SHORT);
                     toast.show();
                     CommentText = comment;
