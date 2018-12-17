@@ -168,7 +168,7 @@ public class FriendsFragment extends Fragment {
         public void setEamil(String email) {
             TextView userEmailView = mView.findViewById(R.id.emailText);
             userEmailView.setText(email);
-    }
+        }
 
         public void setImage(String thumbImage, Context ctx) {
             ImageView userImageView = (ImageView) mView.findViewById(R.id.profileImage);
