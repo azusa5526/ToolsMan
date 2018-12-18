@@ -1,8 +1,10 @@
 package com.example.lai.toolsman.Post;
 
+import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.app.NotificationCompat;
@@ -21,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.lai.toolsman.ChatFunction.ChatActivity;
 import com.example.lai.toolsman.ChatFunction.ProfileActivity;
 import com.example.lai.toolsman.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -43,7 +46,8 @@ public class SingleArticleWater extends AppCompatActivity {
     private DatabaseReference mCommentDB;
     private FirebaseAuth mAuth;
     private FirebaseUser mCurrentUser;
-
+    private DatabaseReference mUsersDatebase;
+   // private DatabaseReference mIsSelect;
     private ImageView mHeadsticker;
     private TextView mPoster;
     private TextView mTitle;
@@ -61,6 +65,11 @@ public class SingleArticleWater extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_article_water);
 
+        mUsersDatebase = FirebaseDatabase.getInstance().getReference().child("Users");
+        mUsersDatebase.keepSynced(true);
+
+      //  mIsSelect = FirebaseDatabase.getInstance().getReference().child("ArticleWater").child(mPost_key).child("isselect");
+       // mIsSelect.keepSynced(true);
 
         mAuth = FirebaseAuth.getInstance();
         mCurrentUser = mAuth.getCurrentUser();
@@ -92,6 +101,7 @@ public class SingleArticleWater extends AppCompatActivity {
         mCommentList.setLayoutManager(new LinearLayoutManager(this));
 
 
+
         mDatabase.child(mPost_key).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -118,6 +128,7 @@ public class SingleArticleWater extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+
         FirebaseRecyclerAdapter<SingleCommentWater, BlogViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<SingleCommentWater, BlogViewHolder>(
                 SingleCommentWater.class,
                 R.layout.activity_single_comment_water,
@@ -129,16 +140,29 @@ public class SingleArticleWater extends AppCompatActivity {
                 viewHolder.setComment(model.getComment());
 
                 //viewHolder.setDetail(getApplicationContext(), model.getEmail(), model.getProfile());
-
+                viewHolder.mView.setBackgroundColor(Color.WHITE);
                 viewHolder.mMenu.setOnClickListener(new View.OnClickListener() {
-
                     @Override
                     public void onClick(View view) {
-                        viewHolder.mView.setBackgroundColor(Color.GRAY);
-                        Notification();
+                        CharSequence options[] = new CharSequence[]{"選擇師傅", "檢舉"};
+                        //final String[] list = {"選擇師傅", "檢舉"};
+                        AlertDialog.Builder builder = new AlertDialog.Builder(SingleArticleWater.this);
+
+                        builder.setTitle("Select options");
+                        builder.setItems(options, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                if(i == 0) {
+                                    viewHolder.mView.setBackgroundColor(Color.GRAY);        //點擊選擇師傅後comment改為灰色，isselect設為true
+                                }
+
+                                if(i == 1) {
+
+                                }
+                            }
+                        });
+                        builder.show();
                     }
-
-
                 });
 
                 /*viewHolder.mProfile.setOnClickListener(new View.OnClickListener() {
@@ -159,18 +183,12 @@ public class SingleArticleWater extends AppCompatActivity {
                         //viewHolder.mView.setBackgroundColor(Color.GRAY);
                         Toast toast = Toast.makeText(SingleArticleWater.this, "選擇師傅", Toast.LENGTH_SHORT);
                         toast.show();
-
-                        ;
-
                     }
                 });
             }
         };
         mCommentList.setAdapter(firebaseRecyclerAdapter);
     }
-
-
-
 
     public static class BlogViewHolder extends RecyclerView.ViewHolder {
 
@@ -191,7 +209,6 @@ public class SingleArticleWater extends AppCompatActivity {
             post_comment.setText(comment);
         }
 
-
        /* public void setDetail(Context ctx, String userEmail, String userImage) {
             TextView user_email = (TextView) mView.findViewById(R.id.postemail);
             ImageView user_image = (ImageView) mView.findViewById(R.id.headsticker);
@@ -200,8 +217,6 @@ public class SingleArticleWater extends AppCompatActivity {
             Glide.with(ctx).load(userImage).into(user_image);
 
         }*/
-
-
     }
 
     private void Notification() {
@@ -214,8 +229,6 @@ public class SingleArticleWater extends AppCompatActivity {
                 .build();
         NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         manager.notify(1,notification);
-
-
     }
 
     public void addCommentList() {
@@ -234,6 +247,7 @@ public class SingleArticleWater extends AppCompatActivity {
                 else{
                     newPost.child("Comment").setValue(comment);
                     newPost.child("uid").setValue(mCurrentUser.getUid());
+                    newPost.child("isselect").setValue("false");
                     Toast toast = Toast.makeText(SingleArticleWater.this, "回覆成功", Toast.LENGTH_SHORT);
                     toast.show();
                     CommentText = comment;

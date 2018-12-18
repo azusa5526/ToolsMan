@@ -32,17 +32,21 @@
             android:name=".ChatFunction.Chat"
             android:windowSoftInputMode="stateHidden" />
         />
-        <activity android:name=".HistoryFunction.History"
-            android:label="歷史紀錄"/>
-        <activity android:name=".Post.Water"
+        <activity
+            android:name=".HistoryFunction.History"
+            android:label="歷史紀錄" />
+        <activity
+            android:name=".Post.Water"
             android:label="水務類"
             android:parentActivityName=".Main"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Post.Elec"
+        <activity
+            android:name=".Post.Elec"
             android:label="電器用品類"
             android:theme="@style/AppTheme" />
         <activity android:name=".RegisterFunction.Register" />
-        <activity android:name=".Post.PostWater"
+        <activity
+            android:name=".Post.PostWater"
             android:parentActivityName=".Post.Water" />
         <activity android:name=".Post.PostElec" />
         <activity android:name=".VerificationFunction.Verification" />
@@ -60,9 +64,11 @@
             android:label="空調系統類"
             android:theme="@style/AppTheme" />
         <activity android:name=".Post.PostAir" />
-        <activity android:name=".Post.SingleArticleAir"
+        <activity
+            android:name=".Post.SingleArticleAir"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".Post.SingleArticleElec"
+        <activity
+            android:name=".Post.SingleArticleElec"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".SearchUser.SearchUser" />
         <activity android:name=".ChatFunction.ProfileActivity">
@@ -85,10 +91,10 @@
         <activity
             android:name=".ChatFunction.ChatActivity"
             android:parentActivityName=".ChatFunction.Chat" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
 
     </application>
 
