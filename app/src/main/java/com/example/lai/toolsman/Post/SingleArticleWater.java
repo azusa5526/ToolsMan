@@ -53,6 +53,8 @@ public class SingleArticleWater extends AppCompatActivity {
     private TextView mTitle;
     private TextView mDesc;
     private ImageView mImage;
+    private String selected;
+
 
 
     EditText Comment;
@@ -77,6 +79,8 @@ public class SingleArticleWater extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference().child("ArticleWater");
 
         mPost_key = getIntent().getExtras().getString("article_id");
+         String currentUser=mCurrentUser.getUid();
+
         //Toast.makeText(SingleArticleElec.this, post_key, Toast.LENGTH_LONG).show();
 
         //原來的singleArticle能夠取得貼文 現在暫時拿掉
@@ -95,6 +99,7 @@ public class SingleArticleWater extends AppCompatActivity {
             }
         });
         mCommentDB = FirebaseDatabase.getInstance().getReference().child("ArticleWater").child(mPost_key).child("CommentWater");   //存留言的資料庫
+
 
         mCommentList = (RecyclerView) findViewById(R.id.CommentList);
         mCommentList.setHasFixedSize(true);
@@ -139,6 +144,7 @@ public class SingleArticleWater extends AppCompatActivity {
             protected void populateViewHolder(final BlogViewHolder viewHolder, SingleCommentWater model, int position) {
                 viewHolder.setComment(model.getComment());
 
+                final String comment_key = getRef(position).getKey();
                 //viewHolder.setDetail(getApplicationContext(), model.getEmail(), model.getProfile());
                 viewHolder.mView.setBackgroundColor(Color.WHITE);
                 viewHolder.mMenu.setOnClickListener(new View.OnClickListener() {
@@ -154,9 +160,16 @@ public class SingleArticleWater extends AppCompatActivity {
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 if(i == 0) {
                                     viewHolder.mView.setBackgroundColor(Color.GRAY);        //點擊選擇師傅後comment改為灰色，isselect設為true
+
+                                    mCommentDB.child(comment_key).child("isselect").setValue("true");
+
+
+
                                 }
 
                                 if(i == 1) {
+                                    viewHolder.mView.setBackgroundColor(Color.WHITE);        //點擊選擇師傅後comment改為灰色，isselect設為true
+                                    mCommentDB.child(comment_key).child("isselect").setValue("false");
 
                                 }
                             }
@@ -180,9 +193,10 @@ public class SingleArticleWater extends AppCompatActivity {
 
                     @Override
                     public void onClick(View v) {
+
                         //viewHolder.mView.setBackgroundColor(Color.GRAY);
-                        Toast toast = Toast.makeText(SingleArticleWater.this, "選擇師傅", Toast.LENGTH_SHORT);
-                        toast.show();
+                        //Toast toast = Toast.makeText(SingleArticleWater.this, "選擇師傅", Toast.LENGTH_SHORT);
+                        //toast.show();
                     }
                 });
             }
@@ -262,4 +276,4 @@ public class SingleArticleWater extends AppCompatActivity {
             }
         });
     }
-}
+  }
