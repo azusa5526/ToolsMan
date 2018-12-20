@@ -284,30 +284,23 @@ public class SingleArticleWater extends AppCompatActivity {
 
 
         final DatabaseReference newPost = mCommentDB.push();
-        mCommentDB.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (comment.matches(""))
-                {
-                    Toast toast = Toast.makeText(SingleArticleWater.this, "請輸入回覆", Toast.LENGTH_SHORT);
-                    toast.show();
-                }
-                else{
-                    newPost.child("Comment").setValue(comment);
-                    newPost.child("uid").setValue(mCurrentUser.getUid());
-                    newPost.child("isselect").setValue("false");
-                    Toast toast = Toast.makeText(SingleArticleWater.this, "回覆成功", Toast.LENGTH_SHORT);
-                    toast.show();
-                    CommentText = comment;
-                    Comment.setText("");
-                }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Toast toast = Toast.makeText(SingleArticleWater.this, "回覆失敗", Toast.LENGTH_SHORT);
+            if (comment.matches(""))
+            {
+                Toast toast = Toast.makeText(SingleArticleWater.this, "請輸入回覆", Toast.LENGTH_SHORT);
                 toast.show();
             }
-        });
-    }
+            else{
+                newPost.child("Comment").setValue(comment);
+                newPost.child("uid").setValue(mCurrentUser.getUid());
+                newPost.child("isselect").setValue("false");
+                Toast toast = Toast.makeText(SingleArticleWater.this, "回覆成功", Toast.LENGTH_SHORT);
+                toast.show();
+                CommentText = comment;
+                Comment.setText("");
+            }
+        }
+
+
+
   }
