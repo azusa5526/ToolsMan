@@ -44,6 +44,7 @@ public class SingleArticleWater extends AppCompatActivity {
     private String mPost_key = null;
     private DatabaseReference mDatabase;
     private DatabaseReference mCommentDB;
+    private  DatabaseReference PosterDB;
     private FirebaseAuth mAuth;
     private FirebaseUser mCurrentUser;
     private DatabaseReference mUsersDatebase;
@@ -54,6 +55,9 @@ public class SingleArticleWater extends AppCompatActivity {
     private TextView mDesc;
     private ImageView mImage;
     private String selected;
+    String currentUser;//這行
+    String  Poster;//這行
+    String PcurrentUser;//這行
 
 
 
@@ -79,7 +83,9 @@ public class SingleArticleWater extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference().child("ArticleWater");
 
         mPost_key = getIntent().getExtras().getString("article_id");
-         String currentUser=mCurrentUser.getUid();
+         currentUser=mCurrentUser.getUid();//這行現在使用者
+        PcurrentUser=currentUser.toString();//這行
+
 
         //Toast.makeText(SingleArticleElec.this, post_key, Toast.LENGTH_LONG).show();
 
@@ -99,6 +105,20 @@ public class SingleArticleWater extends AppCompatActivity {
             }
         });
         mCommentDB = FirebaseDatabase.getInstance().getReference().child("ArticleWater").child(mPost_key).child("CommentWater");   //存留言的資料庫
+        PosterDB=FirebaseDatabase.getInstance().getReference().child("ArticleWater").child(mPost_key);//這行
+        PosterDB.addValueEventListener(new ValueEventListener() {////這行
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Poster=dataSnapshot.child("uid").getValue().toString();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
 
 
         mCommentList = (RecyclerView) findViewById(R.id.CommentList);
@@ -147,6 +167,20 @@ public class SingleArticleWater extends AppCompatActivity {
                 final String comment_key = getRef(position).getKey();
                 //viewHolder.setDetail(getApplicationContext(), model.getEmail(), model.getProfile());
                 viewHolder.mView.setBackgroundColor(Color.WHITE);
+                if(PcurrentUser.matches(Poster))//這行
+
+                   {
+                       viewHolder.mMenu.setVisibility(View.VISIBLE);
+
+
+
+                }
+                else
+                {
+                    viewHolder.mMenu.setVisibility(View.INVISIBLE);
+
+                }
+
                 viewHolder.mMenu.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

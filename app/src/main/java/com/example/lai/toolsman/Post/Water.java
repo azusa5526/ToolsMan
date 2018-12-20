@@ -118,6 +118,7 @@ public class Water extends AppCompatActivity {
                     public void onClick(View view) {
                         Intent singleArticleIntent = new Intent(Water.this, SingleArticleWater.class);
                         singleArticleIntent.putExtra("article_id", post_key);
+
                         startActivity(singleArticleIntent);
                     }
                 }
