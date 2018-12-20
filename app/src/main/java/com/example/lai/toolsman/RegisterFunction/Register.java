@@ -64,6 +64,7 @@ public class Register extends AppCompatActivity {
                            userMap.put("id","一般使用者");
                            userMap.put("Score","80");
                            userMap.put("scoretime","1");
+                           userMap.put("selecttime","0");
 
                            mDatabase.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                @Override

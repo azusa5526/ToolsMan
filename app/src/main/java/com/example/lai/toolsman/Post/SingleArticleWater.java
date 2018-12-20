@@ -58,6 +58,8 @@ public class SingleArticleWater extends AppCompatActivity {
     String currentUser;//這行
     String  Poster;//這行
     String PcurrentUser;//這行
+    private DatabaseReference PosterUser;
+    int PosterSelectTime;
 
 
 
@@ -105,6 +107,7 @@ public class SingleArticleWater extends AppCompatActivity {
             }
         });
         mCommentDB = FirebaseDatabase.getInstance().getReference().child("ArticleWater").child(mPost_key).child("CommentWater");   //存留言的資料庫
+
         PosterDB=FirebaseDatabase.getInstance().getReference().child("ArticleWater").child(mPost_key);//這行
         PosterDB.addValueEventListener(new ValueEventListener() {////這行
             @Override
@@ -117,6 +120,18 @@ public class SingleArticleWater extends AppCompatActivity {
 
             }
         });
+        PosterUser=FirebaseDatabase.getInstance().getReference().child("Users");
+        PosterUser.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                PosterSelectTime=Integer.parseInt(dataSnapshot.child(Poster).child("selecttime").getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });//這行
 
 
 
@@ -196,6 +211,9 @@ public class SingleArticleWater extends AppCompatActivity {
                                     viewHolder.mView.setBackgroundColor(Color.GRAY);        //點擊選擇師傅後comment改為灰色，isselect設為true
 
                                     mCommentDB.child(comment_key).child("isselect").setValue("true");
+                                    PosterSelectTime=PosterSelectTime+1;
+                                    PosterUser.child(Poster).child("selecttime").setValue(PosterSelectTime);
+
 
 
 
@@ -204,6 +222,9 @@ public class SingleArticleWater extends AppCompatActivity {
                                 if(i == 1) {
                                     viewHolder.mView.setBackgroundColor(Color.WHITE);        //點擊選擇師傅後comment改為灰色，isselect設為true
                                     mCommentDB.child(comment_key).child("isselect").setValue("false");
+                                    mCommentDB.child(comment_key).child("isselect").setValue("true");
+                                    PosterSelectTime=PosterSelectTime-1;
+                                    PosterUser.child(Poster).child("selecttime").setValue(PosterSelectTime);
 
                                 }
                             }
