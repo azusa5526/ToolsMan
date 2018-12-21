@@ -301,15 +301,6 @@ public class SingleArticleWater extends AppCompatActivity {
             ImageView user_profile = mView.findViewById(R.id.profile);
             Picasso.get().load(profile).placeholder(R.drawable.defaultavatar).into(user_profile);
         }
-
-       /* public void setDetail(Context ctx, String userEmail, String userImage) {
-            TextView user_email = (TextView) mView.findViewById(R.id.postemail);
-            ImageView user_image = (ImageView) mView.findViewById(R.id.headsticker);
-
-            user_email.setText(userEmail);
-            Glide.with(ctx).load(userImage).into(user_image);
-
-        }*/
     }
 
     /*private void Notification() {

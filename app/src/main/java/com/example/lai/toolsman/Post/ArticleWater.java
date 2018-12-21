@@ -5,15 +5,17 @@ public class ArticleWater {
     private String desc;
     private String image;
     private String username;
+    private String profile;
 
     public ArticleWater(){
 
     }
-    public ArticleWater(String title, String desc, String image, String username) {
+    public ArticleWater(String title, String desc, String image, String username, String profile) {
         this.title = title;
         this.desc = desc;
         this.username = username;
         this.image = image;
+        this.profile = profile;
     }
     public String getTitle() {
         return title;
@@ -45,5 +47,13 @@ public class ArticleWater {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getProfile() {
+        return profile;
+    }
+
+    public void setProfile(String profile) {
+        this.profile = profile;
     }
 }

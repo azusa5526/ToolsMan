@@ -18,6 +18,7 @@ import com.example.lai.toolsman.R;
 import com.example.lai.toolsman.SearchUser.Users;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,6 +37,9 @@ public class Water extends AppCompatActivity {
     private boolean mProcessLike = false;
     private DatabaseReference mDatabaseLike;
     String AccountName;
+    String image;
+    String currentUser;//這行
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,8 @@ public class Water extends AppCompatActivity {
         setContentView(R.layout.activity_water);
         Intent GetName = getIntent();
         AccountName = GetName.getStringExtra("AccountName");
+        mAuth = FirebaseAuth.getInstance();
+
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -53,6 +59,7 @@ public class Water extends AppCompatActivity {
         mUsersDatebase.keepSynced(true);
         //mDatabaseUser = FirebaseDatabase.getInstance().getReference().child("UsersWater");
         mDatabaseLike = FirebaseDatabase.getInstance().getReference().child("LikesWater");
+
         //mDatabaseUser.keepSynced(true);
         mDatabase.keepSynced(true);
         mDatabaseLike.keepSynced(true);
@@ -94,6 +101,8 @@ public class Water extends AppCompatActivity {
                 viewHolder.setDesc(model.getDesc());
                 viewHolder.setImage(getApplicationContext(), model.getImage());
                 viewHolder.setUsername(model.getUsername());
+                viewHolder.setProfile(model.getProfile());
+
                 //User data will be retrieved here...
 
                /* mUsersDatebase.child(listUserId).addValueEventListener(new ValueEventListener() {
@@ -167,12 +176,14 @@ public class Water extends AppCompatActivity {
         ImageButton mLikeBtn;
         DatabaseReference mDatabaseLike;
         FirebaseAuth mAuth;
+        ImageView mProfile;
 
         public ArticleViewHolder(View itemView) {
             super(itemView);
 
             mView = itemView;
             mLikeBtn =  mView.findViewById(R.id.LikeBtn);
+            mProfile = (ImageView) mView.findViewById(R.id.profile);
             mDatabaseLike = FirebaseDatabase.getInstance().getReference().child("LikesWater");
             mAuth = FirebaseAuth.getInstance();
             mDatabaseLike.keepSynced(true);
@@ -216,9 +227,9 @@ public class Water extends AppCompatActivity {
             post_username.setText(username);
         }
 
-        public void setImage(String thumbImage, Context ctx) {
-            ImageView userImageView = (ImageView) mView.findViewById(R.id.profileImage);
-            Picasso.get().load(thumbImage).placeholder(R.drawable.defaultavatar).into(userImageView);
+        public void setProfile(String profile) {
+            ImageView user_profile = mView.findViewById(R.id.profile);
+            Picasso.get().load(profile).placeholder(R.drawable.defaultavatar).into(user_profile);
         }
 
     }

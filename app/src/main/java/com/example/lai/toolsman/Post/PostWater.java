@@ -48,6 +48,7 @@ public class PostWater extends AppCompatActivity {
     String AccountName;
     private  DatabaseReference userid;
     private DatabaseReference historyDatabase;
+    String image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +73,7 @@ public class PostWater extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 id=dataSnapshot.child("id").getValue().toString();
-
+               image=dataSnapshot.child("thumbImage").getValue().toString();
             }
 
             @Override
@@ -146,6 +147,7 @@ public class PostWater extends AppCompatActivity {
                             newHistory.child("image").setValue(downloadUriForHistory.toString());
                             newHistory.child("uid").setValue(mCurrentUser.getUid());
                             newHistory.child("username").setValue(AccountName);
+
                         }
 
                         @Override
@@ -171,6 +173,7 @@ public class PostWater extends AppCompatActivity {
                             newPost.child("image").setValue(downloadUri.toString());
                             newPost.child("uid").setValue(mCurrentUser.getUid());
                             newPost.child("select").setValue("false");
+                            newPost.child("Profile").setValue(image);
 
 
 
@@ -179,9 +182,6 @@ public class PostWater extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()){
                                         Toast.makeText(PostWater.this, "貼文成功", Toast.LENGTH_LONG).show();
-                                        //Intent goBack = new Intent(PostWater.this,Water.class);
-                                        //goBack.putExtra("AccountName",AccountName);
-                                        //startActivity(goBack);
                                         onRestart();
                                         finish();
                                     }

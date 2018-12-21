@@ -7,7 +7,7 @@
     tools:context=".ChatFunction.ProfileActivity">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profileImage"
+        android:id="@+id/profile"
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:layout_alignParentTop="true"
@@ -20,7 +20,7 @@
         android:id="@+id/profileEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/profileImage"
+        android:layout_below="@+id/profile"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:text="Profile email"
@@ -66,7 +66,7 @@
         android:id="@+id/Scorebtn"
         android:layout_width="62dp"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/profileImage"
+        android:layout_alignBottom="@+id/profile"
         android:layout_alignParentEnd="true"
         android:text="評分" />
 

@@ -97,7 +97,7 @@ public class SearchUser extends AppCompatActivity {
         public void setDetail(Context ctx, String userEmail, String userStatus, String userImage) {
             TextView user_email = (TextView) mView.findViewById(R.id.emailText);
             TextView user_status = (TextView) mView.findViewById(R.id.statusText);
-            ImageView user_image = (ImageView) mView.findViewById(R.id.profileImage);
+            ImageView user_image = (ImageView) mView.findViewById(R.id.profile);
 
             user_email.setText(userEmail);
             user_status.setText(userStatus);

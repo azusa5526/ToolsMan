@@ -171,7 +171,7 @@ public class FriendsFragment extends Fragment {
         }
 
         public void setImage(String thumbImage, Context ctx) {
-            ImageView userImageView = (ImageView) mView.findViewById(R.id.profileImage);
+            ImageView userImageView = (ImageView) mView.findViewById(R.id.profile);
             Picasso.get().load(thumbImage).placeholder(R.drawable.defaultavatar).into(userImageView);
         }
 
