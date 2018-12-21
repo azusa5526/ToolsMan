@@ -57,6 +57,7 @@ public class ProfileActivity extends AppCompatActivity {
     String email;
     String status;
     String image;
+    int SelectedTime;
 
 
 
@@ -108,10 +109,12 @@ public class ProfileActivity extends AppCompatActivity {
                 image = dataSnapshot.child("image").getValue().toString();
                 CurrentScore=Integer.parseInt(dataSnapshot.child("Score").getValue().toString());
                 CurrentTime=Integer.parseInt(dataSnapshot.child("scoretime").getValue().toString());
+                SelectedTime=Integer.parseInt(dataSnapshot.child("selecttime").getValue().toString());
+
 
                 mProfileEmail.setText(email);
                 mProfileStatus.setText(status);
-                mScore.setText("用戶評分:"+CurrentScore);
+                mScore.setText("服務過:"+SelectedTime+"人");//這行
 
                 Picasso.get().load(image).placeholder(R.drawable.defaultavatar).into(mProfileImage);
 
@@ -136,7 +139,7 @@ public class ProfileActivity extends AppCompatActivity {
                                 mProfileSendRequestBtn.setText("Cancel friend request");
 
                                 mProfileDeclineBtn.setVisibility(View.INVISIBLE);
-                                mProfileDeclineBtn.setEnabled(false);
+                                 mProfileDeclineBtn.setEnabled(false);
                             }
 
                             mProgressDialog.dismiss();
@@ -183,7 +186,8 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        Scorebtn=(Button)findViewById(R.id.Scorebtn);
+      Scorebtn=(Button)findViewById(R.id.Scorebtn);
+      Scorebtn.setVisibility(View.INVISIBLE);
         Scorebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -77,6 +77,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="127dp"
-        android:text="Score" />
+        android:text="服務過" />
 
 </RelativeLayout>

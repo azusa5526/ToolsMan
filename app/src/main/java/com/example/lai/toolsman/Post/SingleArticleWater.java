@@ -63,6 +63,7 @@ public class SingleArticleWater extends AppCompatActivity {
 
 
 
+
     EditText Comment;
     ImageButton AddComment;
     String CommentText;
@@ -113,6 +114,7 @@ public class SingleArticleWater extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Poster=dataSnapshot.child("uid").getValue().toString();
+                selected=dataSnapshot.child("select").getValue().toString();
             }
 
             @Override
@@ -199,7 +201,7 @@ public class SingleArticleWater extends AppCompatActivity {
                 viewHolder.mMenu.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        CharSequence options[] = new CharSequence[]{"選擇師傅", "檢舉"};
+                        CharSequence options[] = new CharSequence[]{"選擇師傅", "檢舉","取消選擇"};
                         //final String[] list = {"選擇師傅", "檢舉"};
                         AlertDialog.Builder builder = new AlertDialog.Builder(SingleArticleWater.this);
 
@@ -213,6 +215,8 @@ public class SingleArticleWater extends AppCompatActivity {
                                     mCommentDB.child(comment_key).child("isselect").setValue("true");
                                     PosterSelectTime=PosterSelectTime+1;
                                     PosterUser.child(Poster).child("selecttime").setValue(PosterSelectTime);
+                                    selected="true";
+                                    PosterDB.child("select").setValue(selected);
 
 
 
@@ -220,11 +224,18 @@ public class SingleArticleWater extends AppCompatActivity {
                                 }
 
                                 if(i == 1) {
-                                    viewHolder.mView.setBackgroundColor(Color.WHITE);        //點擊選擇師傅後comment改為灰色，isselect設為true
+
+
+                                }
+                                if(i==2)
+                                {
+                                    viewHolder.mView.setBackgroundColor(Color.WHITE);
                                     mCommentDB.child(comment_key).child("isselect").setValue("false");
-                                    mCommentDB.child(comment_key).child("isselect").setValue("true");
                                     PosterSelectTime=PosterSelectTime-1;
                                     PosterUser.child(Poster).child("selecttime").setValue(PosterSelectTime);
+                                    selected="false";
+                                    PosterDB.child("select").setValue(selected);
+
 
                                 }
                             }
