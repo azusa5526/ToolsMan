@@ -180,6 +180,7 @@ public class SingleArticleWater extends AppCompatActivity {
             @Override
             protected void populateViewHolder(final BlogViewHolder viewHolder, SingleCommentWater model, int position) {
                 viewHolder.setComment(model.getComment());
+                viewHolder.setEmail(model.getEmail());
 
                 final String comment_key = getRef(position).getKey();
                 //viewHolder.setDetail(getApplicationContext(), model.getEmail(), model.getProfile());
@@ -300,6 +301,11 @@ public class SingleArticleWater extends AppCompatActivity {
             post_comment.setText(comment);
         }
 
+        public void setEmail(String email) {
+            TextView post_email = mView.findViewById(R.id.postemail);
+            post_email.setText(email);
+        }
+
        /* public void setDetail(Context ctx, String userEmail, String userImage) {
             TextView user_email = (TextView) mView.findViewById(R.id.postemail);
             ImageView user_image = (ImageView) mView.findViewById(R.id.headsticker);
@@ -310,7 +316,7 @@ public class SingleArticleWater extends AppCompatActivity {
         }*/
     }
 
-    private void Notification() {
+    /*private void Notification() {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
 
         Notification notification = builder.setSmallIcon(R.drawable.notification_icon)
@@ -320,7 +326,7 @@ public class SingleArticleWater extends AppCompatActivity {
                 .build();
         NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         manager.notify(1,notification);
-    }
+    }*/
 
     public void addCommentList() {
         final String comment = Comment.getText().toString().trim();
@@ -337,6 +343,7 @@ public class SingleArticleWater extends AppCompatActivity {
                 newPost.child("Comment").setValue(comment);
                 newPost.child("uid").setValue(mCurrentUser.getUid());
                 newPost.child("isselect").setValue("false");
+                newPost.child("email").setValue(mCurrentUser.getEmail());
                 Toast toast = Toast.makeText(SingleArticleWater.this, "回覆成功", Toast.LENGTH_SHORT);
                 toast.show();
                 CommentText = comment;
