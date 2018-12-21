@@ -201,7 +201,7 @@ public class SingleArticleWater extends AppCompatActivity {
                 viewHolder.mMenu.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        CharSequence options[] = new CharSequence[]{"選擇師傅", "檢舉","取消選擇"};
+                        CharSequence options[] = new CharSequence[]{"選擇師傅", "取消選擇","檢舉"};
                         //final String[] list = {"選擇師傅", "檢舉"};
                         AlertDialog.Builder builder = new AlertDialog.Builder(SingleArticleWater.this);
 
@@ -210,31 +210,42 @@ public class SingleArticleWater extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 if(i == 0) {
-                                    viewHolder.mView.setBackgroundColor(Color.GRAY);        //點擊選擇師傅後comment改為灰色，isselect設為true
+                                    if(selected.matches("false")) {
+                                        viewHolder.mView.setBackgroundColor(Color.GRAY);        //點擊選擇師傅後comment改為灰色，isselect設為true
+                                        mCommentDB.child(comment_key).child("isselect").setValue("true");
+                                        PosterSelectTime = PosterSelectTime + 1;
+                                        PosterUser.child(Poster).child("selecttime").setValue(PosterSelectTime);
+                                        selected = "true";
+                                        PosterDB.child("select").setValue(selected);
+                                    }
+                                    else
+                                    {
+                                         Toast toast = Toast.makeText(SingleArticleWater.this, "此師傅已被選擇，無法重複選擇", Toast.LENGTH_SHORT);
+                                        toast.show();
 
-                                    mCommentDB.child(comment_key).child("isselect").setValue("true");
-                                    PosterSelectTime=PosterSelectTime+1;
-                                    PosterUser.child(Poster).child("selecttime").setValue(PosterSelectTime);
-                                    selected="true";
-                                    PosterDB.child("select").setValue(selected);
 
-
-
+                                    }
 
                                 }
 
                                 if(i == 1) {
-
+                                    if(selected.matches("true")) {
+                                        viewHolder.mView.setBackgroundColor(Color.WHITE);
+                                        mCommentDB.child(comment_key).child("isselect").setValue("false");
+                                        PosterSelectTime = PosterSelectTime - 1;
+                                        PosterUser.child(Poster).child("selecttime").setValue(PosterSelectTime);
+                                        selected = "false";
+                                        PosterDB.child("select").setValue(selected);
+                                    }
+                                    else{
+                                        Toast toast = Toast.makeText(SingleArticleWater.this, "此師傅尚未被選擇", Toast.LENGTH_SHORT);
+                                        toast.show();
+                                    }
 
                                 }
                                 if(i==2)
                                 {
-                                    viewHolder.mView.setBackgroundColor(Color.WHITE);
-                                    mCommentDB.child(comment_key).child("isselect").setValue("false");
-                                    PosterSelectTime=PosterSelectTime-1;
-                                    PosterUser.child(Poster).child("selecttime").setValue(PosterSelectTime);
-                                    selected="false";
-                                    PosterDB.child("select").setValue(selected);
+
 
 
                                 }
