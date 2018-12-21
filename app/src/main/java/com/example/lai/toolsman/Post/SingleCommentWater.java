@@ -8,9 +8,10 @@ public class SingleCommentWater {
     public SingleCommentWater() {
 
     }
-    public SingleCommentWater(String comment, String email) {
+    public SingleCommentWater(String comment, String email, String profile) {
         this.Comment = comment;
         this.Email = email;
+        this.Profile = profile;
     }
 
     public String getComment() {

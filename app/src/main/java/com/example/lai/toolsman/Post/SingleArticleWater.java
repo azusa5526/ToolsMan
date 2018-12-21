@@ -1,30 +1,20 @@
 package com.example.lai.toolsman.Post;
 
 import android.app.AlertDialog;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
-import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.PopupMenu;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.lai.toolsman.ChatFunction.ChatActivity;
-import com.example.lai.toolsman.ChatFunction.ProfileActivity;
 import com.example.lai.toolsman.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,9 +25,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class SingleArticleWater extends AppCompatActivity {
 
@@ -60,6 +47,7 @@ public class SingleArticleWater extends AppCompatActivity {
     String PcurrentUser;//這行
     private DatabaseReference PosterUser;
     int PosterSelectTime;
+    String image;
 
 
 
@@ -127,6 +115,8 @@ public class SingleArticleWater extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 PosterSelectTime=Integer.parseInt(dataSnapshot.child(Poster).child("selecttime").getValue().toString());
+                image=dataSnapshot.child(currentUser).child("thumbImage").getValue().toString();
+
             }
 
             @Override
@@ -181,6 +171,7 @@ public class SingleArticleWater extends AppCompatActivity {
             protected void populateViewHolder(final BlogViewHolder viewHolder, SingleCommentWater model, int position) {
                 viewHolder.setComment(model.getComment());
                 viewHolder.setEmail(model.getEmail());
+                viewHolder.setProfile(model.getProfile());
 
                 final String comment_key = getRef(position).getKey();
                 //viewHolder.setDetail(getApplicationContext(), model.getEmail(), model.getProfile());
@@ -292,7 +283,7 @@ public class SingleArticleWater extends AppCompatActivity {
             super(itemView);
 
             mView = itemView;
-            mProfile = (ImageView) mView.findViewById(R.id.headsticker);
+            mProfile = (ImageView) mView.findViewById(R.id.profile);
             mMenu = (ImageButton) mView.findViewById(R.id.menu);
         }
 
@@ -304,6 +295,11 @@ public class SingleArticleWater extends AppCompatActivity {
         public void setEmail(String email) {
             TextView post_email = mView.findViewById(R.id.postemail);
             post_email.setText(email);
+        }
+
+        public void setProfile(String profile) {
+            ImageView user_profile = mView.findViewById(R.id.profile);
+            Picasso.get().load(profile).placeholder(R.drawable.defaultavatar).into(user_profile);
         }
 
        /* public void setDetail(Context ctx, String userEmail, String userImage) {
@@ -344,6 +340,7 @@ public class SingleArticleWater extends AppCompatActivity {
                 newPost.child("uid").setValue(mCurrentUser.getUid());
                 newPost.child("isselect").setValue("false");
                 newPost.child("email").setValue(mCurrentUser.getEmail());
+                newPost.child("profile").setValue(image);
                 Toast toast = Toast.makeText(SingleArticleWater.this, "回覆成功", Toast.LENGTH_SHORT);
                 toast.show();
                 CommentText = comment;
