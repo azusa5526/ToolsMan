@@ -4,14 +4,25 @@ public class SingleCommentWater {
     private String Comment;
     private String Email;
     private String Profile;
+    private String uid;
 
     public SingleCommentWater() {
 
     }
-    public SingleCommentWater(String comment, String email, String profile) {
-        this.Comment = comment;
-        this.Email = email;
-        this.Profile = profile;
+
+    public SingleCommentWater(String comment, String email, String profile, String uid) {
+        Comment = comment;
+        Email = email;
+        Profile = profile;
+        this.uid = uid;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public String getComment() {

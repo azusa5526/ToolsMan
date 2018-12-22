@@ -178,6 +178,7 @@ public class SingleArticleWater extends AppCompatActivity {
                 viewHolder.setProfile(model.getProfile());
 
                 final String comment_key = getRef(position).getKey();
+                final String userId = model.getUid();
                 //viewHolder.setDetail(getApplicationContext(), model.getEmail(), model.getProfile());
                 //viewHolder.mView.setBackgroundColor(Color.WHITE);
 
@@ -194,6 +195,8 @@ public class SingleArticleWater extends AppCompatActivity {
                 else if (mCommentDB.child(comment_key).child("isselect").equals("true")){
                     viewHolder.mView.setBackgroundColor(Color.GRAY);
                 }*/
+
+
 
                 if(PcurrentUser.matches(Poster))//這行
 
@@ -217,9 +220,9 @@ public class SingleArticleWater extends AppCompatActivity {
                         AlertDialog.Builder builder = new AlertDialog.Builder(SingleArticleWater.this);
 
                         builder.setTitle("Select options");
-                        builder.setItems(options, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
+                                builder.setItems(options, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
                                 if(i == 0) {
                                     if(selected.matches("false")) {
                                         //viewHolder.mView.setBackgroundColor(Color.GRAY);        //點擊選擇師傅後comment改為灰色，isselect設為true
@@ -275,24 +278,17 @@ public class SingleArticleWater extends AppCompatActivity {
                 });*/
 
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
-
                     @Override
                     public void onClick(View v) {
-                        /*if (mCommentDB.child("isselect").equals("false")) {
-                            viewHolder.mView.setBackgroundColor(Color.WHITE);
-                        } else {
-                            viewHolder.mView.setBackgroundColor(Color.GRAY);
-                        }*/
-                        /*if (selected.matches("false")) {
-                            viewHolder.mView.setBackgroundColor(Color.WHITE);
-                        }
-                        else {
-                            viewHolder.mView.setBackgroundColor(Color.GRAY);
-                        }*/
-                }
+                        Intent profileIntent = new Intent(SingleArticleWater.this, ProfileActivity.class);
+                        profileIntent.putExtra("user_id", userId);
+                        startActivity(profileIntent);
+                    }
                 });
+
             }
         };
+
         mCommentList.setAdapter(firebaseRecyclerAdapter);
     }
 
@@ -324,6 +320,8 @@ public class SingleArticleWater extends AppCompatActivity {
             ImageView user_profile = mView.findViewById(R.id.profile);
             Picasso.get().load(profile).placeholder(R.drawable.defaultavatar).into(user_profile);
         }
+
+
     }
 
     /*private void Notification() {
