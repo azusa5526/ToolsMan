@@ -222,9 +222,9 @@ public class Water extends AppCompatActivity {
             Picasso.get().load(image).into(post_image);
         }
 
-        public  void setUsername(String username){
-            TextView post_username = (TextView) mView.findViewById(R.id.username);
-            post_username.setText(username);
+        public void setUsername(String email) {
+            TextView post_email = mView.findViewById(R.id.postemail);
+            post_email.setText(email);
         }
 
         public void setProfile(String profile) {

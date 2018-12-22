@@ -2,6 +2,7 @@ package com.example.lai.toolsman.Post;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.lai.toolsman.ChatFunction.ProfileActivity;
 import com.example.lai.toolsman.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -262,12 +264,12 @@ public class SingleArticleWater extends AppCompatActivity {
                     }
                 });
 
-                /*viewHolder.mProfile.setOnClickListener(new View.OnClickListener() {
+               /* viewHolder.mProfile.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        //Intent profileIntent = new Intent(SingleArticleWater.this, ProfileActivity.class);
-                        //profileIntent.putExtra("user_id", userId);
-                        //startActivity(profileIntent);
+                        Intent profileIntent = new Intent(SingleArticleWater.this, ProfileActivity.class);
+                        profileIntent.putExtra("user_id",comment_key );
+                        startActivity(profileIntent);
                         Toast toast = Toast.makeText(SingleArticleWater.this, "師傅頁面", Toast.LENGTH_SHORT);
                         toast.show();
                     }
@@ -288,7 +290,9 @@ public class SingleArticleWater extends AppCompatActivity {
                         else {
                             viewHolder.mView.setBackgroundColor(Color.GRAY);
                         }*/
-                    }
+
+                }
+
                 });
             }
         };

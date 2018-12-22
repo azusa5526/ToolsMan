@@ -249,6 +249,12 @@ public class Main extends AppCompatActivity
             startActivity(loginIntent);
             finish();
         }
+        else if(id==R.id.about)
+        {
+            Intent aboutus=new Intent(Main.this,Contact.class);
+            startActivity(aboutus);
+
+        }
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

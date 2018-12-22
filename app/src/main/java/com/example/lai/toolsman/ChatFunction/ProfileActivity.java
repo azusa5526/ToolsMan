@@ -108,7 +108,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                 mProfileEmail.setText(email);
                 mProfileStatus.setText(status);
-                mScore.setText("服務過:"+SelectedTime+"人");//這行
+                mScore.setText("服務人數:"+SelectedTime);//這行
 
                 Picasso.get().load(image).placeholder(R.drawable.defaultavatar).into(mProfileImage);
 

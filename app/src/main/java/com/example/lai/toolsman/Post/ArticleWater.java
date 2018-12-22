@@ -5,6 +5,7 @@ public class ArticleWater {
     private String desc;
     private String image;
     private String username;
+    private String Email;
     private String profile;
 
     public ArticleWater(){
@@ -56,4 +57,5 @@ public class ArticleWater {
     public void setProfile(String profile) {
         this.profile = profile;
     }
+
 }
