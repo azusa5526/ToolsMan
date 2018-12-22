@@ -175,7 +175,22 @@ public class SingleArticleWater extends AppCompatActivity {
 
                 final String comment_key = getRef(position).getKey();
                 //viewHolder.setDetail(getApplicationContext(), model.getEmail(), model.getProfile());
-                viewHolder.mView.setBackgroundColor(Color.WHITE);
+                //viewHolder.mView.setBackgroundColor(Color.WHITE);
+
+
+                /*if (selected.matches("false")) {
+                    viewHolder.mView.setBackgroundColor(Color.WHITE);
+                }
+                else {
+                    viewHolder.mView.setBackgroundColor(Color.GRAY);
+                }*/
+                /*if (mCommentDB.child(comment_key).child("isselect").equals("false")) {
+                    viewHolder.mView.setBackgroundColor(Color.WHITE);
+                }
+                else if (mCommentDB.child(comment_key).child("isselect").equals("true")){
+                    viewHolder.mView.setBackgroundColor(Color.GRAY);
+                }*/
+
                 if(PcurrentUser.matches(Poster))//這行
 
                    {
@@ -203,7 +218,7 @@ public class SingleArticleWater extends AppCompatActivity {
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 if(i == 0) {
                                     if(selected.matches("false")) {
-                                        viewHolder.mView.setBackgroundColor(Color.GRAY);        //點擊選擇師傅後comment改為灰色，isselect設為true
+                                        //viewHolder.mView.setBackgroundColor(Color.GRAY);        //點擊選擇師傅後comment改為灰色，isselect設為true
                                         mCommentDB.child(comment_key).child("isselect").setValue("true");
                                         PosterSelectTime = PosterSelectTime + 1;
                                         PosterUser.child(Poster).child("selecttime").setValue(PosterSelectTime);
@@ -212,7 +227,7 @@ public class SingleArticleWater extends AppCompatActivity {
                                     }
                                     else
                                     {
-                                         Toast toast = Toast.makeText(SingleArticleWater.this, "此師傅已被選擇，無法重複選擇", Toast.LENGTH_SHORT);
+                                        Toast toast = Toast.makeText(SingleArticleWater.this, "師傅已被選擇，無法重複選擇", Toast.LENGTH_SHORT);
                                         toast.show();
 
 
@@ -222,7 +237,7 @@ public class SingleArticleWater extends AppCompatActivity {
 
                                 if(i == 1) {
                                     if(selected.matches("true")) {
-                                        viewHolder.mView.setBackgroundColor(Color.WHITE);
+                                        //viewHolder.mView.setBackgroundColor(Color.WHITE);
                                         mCommentDB.child(comment_key).child("isselect").setValue("false");
                                         PosterSelectTime = PosterSelectTime - 1;
                                         PosterUser.child(Poster).child("selecttime").setValue(PosterSelectTime);
@@ -262,10 +277,17 @@ public class SingleArticleWater extends AppCompatActivity {
 
                     @Override
                     public void onClick(View v) {
-
-                        //viewHolder.mView.setBackgroundColor(Color.GRAY);
-                        //Toast toast = Toast.makeText(SingleArticleWater.this, "選擇師傅", Toast.LENGTH_SHORT);
-                        //toast.show();
+                        /*if (mCommentDB.child("isselect").equals("false")) {
+                            viewHolder.mView.setBackgroundColor(Color.WHITE);
+                        } else {
+                            viewHolder.mView.setBackgroundColor(Color.GRAY);
+                        }*/
+                        /*if (selected.matches("false")) {
+                            viewHolder.mView.setBackgroundColor(Color.WHITE);
+                        }
+                        else {
+                            viewHolder.mView.setBackgroundColor(Color.GRAY);
+                        }*/
                     }
                 });
             }
@@ -301,7 +323,12 @@ public class SingleArticleWater extends AppCompatActivity {
             ImageView user_profile = mView.findViewById(R.id.profile);
             Picasso.get().load(profile).placeholder(R.drawable.defaultavatar).into(user_profile);
         }
+
+
+
     }
+
+
 
     /*private void Notification() {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
@@ -314,6 +341,8 @@ public class SingleArticleWater extends AppCompatActivity {
         NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         manager.notify(1,notification);
     }*/
+
+
 
     public void addCommentList() {
         final String comment = Comment.getText().toString().trim();
