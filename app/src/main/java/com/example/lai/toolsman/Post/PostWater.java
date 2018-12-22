@@ -67,7 +67,7 @@ public class PostWater extends AppCompatActivity {
         mCurrentUser = mAuth.getCurrentUser();
         mDatabaseUser = FirebaseDatabase.getInstance().getReference().child("User_Water").child(mCurrentUser.getUid());
 
-        String currentUser=mCurrentUser.getUid();
+        final String currentUser=mCurrentUser.getUid();
         userid=FirebaseDatabase.getInstance().getReference().child("Users").child(currentUser);
         userid.addValueEventListener(new ValueEventListener() {
             @Override

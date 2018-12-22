@@ -50,6 +50,7 @@ public class SingleArticleWater extends AppCompatActivity {
     private DatabaseReference PosterUser;
     int PosterSelectTime;
     String image;
+    String id;
 
 
 
@@ -118,6 +119,7 @@ public class SingleArticleWater extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 PosterSelectTime=Integer.parseInt(dataSnapshot.child(Poster).child("selecttime").getValue().toString());
                 image=dataSnapshot.child(currentUser).child("thumbImage").getValue().toString();
+                id=dataSnapshot.child(currentUser).child("id").getValue().toString();
 
             }
 
@@ -250,12 +252,9 @@ public class SingleArticleWater extends AppCompatActivity {
                                         Toast toast = Toast.makeText(SingleArticleWater.this, "此師傅尚未被選擇", Toast.LENGTH_SHORT);
                                         toast.show();
                                     }
-
                                 }
                                 if(i==2)
                                 {
-
-
 
                                 }
                             }
@@ -290,9 +289,7 @@ public class SingleArticleWater extends AppCompatActivity {
                         else {
                             viewHolder.mView.setBackgroundColor(Color.GRAY);
                         }*/
-
                 }
-
                 });
             }
         };
@@ -327,12 +324,7 @@ public class SingleArticleWater extends AppCompatActivity {
             ImageView user_profile = mView.findViewById(R.id.profile);
             Picasso.get().load(profile).placeholder(R.drawable.defaultavatar).into(user_profile);
         }
-
-
-
     }
-
-
 
     /*private void Notification() {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
@@ -346,11 +338,8 @@ public class SingleArticleWater extends AppCompatActivity {
         manager.notify(1,notification);
     }*/
 
-
-
     public void addCommentList() {
         final String comment = Comment.getText().toString().trim();
-
 
         final DatabaseReference newPost = mCommentDB.push();
 
@@ -363,7 +352,7 @@ public class SingleArticleWater extends AppCompatActivity {
                 newPost.child("Comment").setValue(comment);
                 newPost.child("uid").setValue(mCurrentUser.getUid());
                 newPost.child("isselect").setValue("false");
-                newPost.child("email").setValue(mCurrentUser.getEmail());
+                newPost.child("email").setValue(mCurrentUser.getEmail()+"("+id+")");
                 newPost.child("profile").setValue(image);
                 Toast toast = Toast.makeText(SingleArticleWater.this, "回覆成功", Toast.LENGTH_SHORT);
                 toast.show();
@@ -371,7 +360,4 @@ public class SingleArticleWater extends AppCompatActivity {
                 Comment.setText("");
             }
         }
-
-
-
   }

@@ -102,7 +102,6 @@ public class Water extends AppCompatActivity {
                 viewHolder.setImage(getApplicationContext(), model.getImage());
                 viewHolder.setUsername(model.getUsername());
                 viewHolder.setProfile(model.getProfile());
-
                 //User data will be retrieved here...
 
                /* mUsersDatebase.child(listUserId).addValueEventListener(new ValueEventListener() {

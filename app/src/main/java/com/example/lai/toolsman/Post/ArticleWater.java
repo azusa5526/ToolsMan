@@ -5,8 +5,7 @@ public class ArticleWater {
     private String desc;
     private String image;
     private String username;
-    private String Email;
-    private String profile;
+    private String Profile;
 
     public ArticleWater(){
 
@@ -16,7 +15,7 @@ public class ArticleWater {
         this.desc = desc;
         this.username = username;
         this.image = image;
-        this.profile = profile;
+        this.Profile = profile;
     }
     public String getTitle() {
         return title;
@@ -50,12 +49,12 @@ public class ArticleWater {
         this.image = image;
     }
 
+
     public String getProfile() {
-        return profile;
+        return Profile;
     }
 
     public void setProfile(String profile) {
-        this.profile = profile;
+        this.Profile = profile;
     }
-
 }
