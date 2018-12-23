@@ -102,6 +102,8 @@ public class Water extends AppCompatActivity {
                 viewHolder.setImage(getApplicationContext(), model.getImage());
                 viewHolder.setUsername(model.getUsername());
                 viewHolder.setProfile(model.getProfile());
+
+                viewHolder.setDate(model.getDate());
                 //User data will be retrieved here...
 
                /* mUsersDatebase.child(listUserId).addValueEventListener(new ValueEventListener() {
@@ -231,6 +233,10 @@ public class Water extends AppCompatActivity {
             Picasso.get().load(profile).placeholder(R.drawable.defaultavatar).into(user_profile);
         }
 
+        public  void  setDate(String date){
+            TextView post_date = (TextView) mView.findViewById(R.id.date);
+            post_date.setText(date);
+        }
     }
 
 

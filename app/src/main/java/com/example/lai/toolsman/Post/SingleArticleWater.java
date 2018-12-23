@@ -3,7 +3,6 @@ package com.example.lai.toolsman.Post;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,8 +13,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
 import com.example.lai.toolsman.ChatFunction.ProfileActivity;
 import com.example.lai.toolsman.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -27,6 +24,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
+import java.text.DateFormat;
+import java.util.Date;
 
 public class SingleArticleWater extends AppCompatActivity {
 
@@ -37,12 +36,6 @@ public class SingleArticleWater extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseUser mCurrentUser;
     private DatabaseReference mUsersDatebase;
-   // private DatabaseReference mIsSelect;
-    private ImageView mHeadsticker;
-    private TextView mPoster;
-    private TextView mTitle;
-    private TextView mDesc;
-    private ImageView mImage;
     private String selected;
     String currentUser;//這行
     String  Poster;//這行
@@ -67,27 +60,13 @@ public class SingleArticleWater extends AppCompatActivity {
 
         mUsersDatebase = FirebaseDatabase.getInstance().getReference().child("Users");
         mUsersDatebase.keepSynced(true);
-
-      //  mIsSelect = FirebaseDatabase.getInstance().getReference().child("ArticleWater").child(mPost_key).child("isselect");
-       // mIsSelect.keepSynced(true);
-
         mAuth = FirebaseAuth.getInstance();
         mCurrentUser = mAuth.getCurrentUser();
-
         mDatabase = FirebaseDatabase.getInstance().getReference().child("ArticleWater");
 
         mPost_key = getIntent().getExtras().getString("article_id");
-         currentUser=mCurrentUser.getUid();//這行現在使用者
+        currentUser=mCurrentUser.getUid();//這行現在使用者
         PcurrentUser=currentUser.toString();//這行
-
-
-        //Toast.makeText(SingleArticleElec.this, post_key, Toast.LENGTH_LONG).show();
-
-        //原來的singleArticle能夠取得貼文 現在暫時拿掉
-        /*mPoster = findViewById(R.id.poster);
-        mTitle = findViewById(R.id.title);
-        mDesc = findViewById(R.id.desc);
-        mImage = findViewById(R.id.image);*/
 
         //留言功能
         Comment = (EditText) findViewById(R.id.postComment);
@@ -120,7 +99,6 @@ public class SingleArticleWater extends AppCompatActivity {
                 PosterSelectTime=Integer.parseInt(dataSnapshot.child(Poster).child("selecttime").getValue().toString());
                 image=dataSnapshot.child(currentUser).child("thumbImage").getValue().toString();
                 id=dataSnapshot.child(currentUser).child("id").getValue().toString();
-
             }
 
             @Override
@@ -129,14 +107,9 @@ public class SingleArticleWater extends AppCompatActivity {
             }
         });//這行
 
-
-
-
         mCommentList = (RecyclerView) findViewById(R.id.CommentList);
         mCommentList.setHasFixedSize(true);
         mCommentList.setLayoutManager(new LinearLayoutManager(this));
-
-
 
         mDatabase.child(mPost_key).addValueEventListener(new ValueEventListener() {
             @Override
@@ -164,7 +137,6 @@ public class SingleArticleWater extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-
         FirebaseRecyclerAdapter<SingleCommentWater, BlogViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<SingleCommentWater, BlogViewHolder>(
                 SingleCommentWater.class,
                 R.layout.activity_single_comment_water,
@@ -176,6 +148,7 @@ public class SingleArticleWater extends AppCompatActivity {
                 viewHolder.setComment(model.getComment());
                 viewHolder.setEmail(model.getEmail());
                 viewHolder.setProfile(model.getProfile());
+                viewHolder.setDate(model.getDate());
 
                 final String comment_key = getRef(position).getKey();
                 final String userId = model.getUid();
@@ -196,20 +169,13 @@ public class SingleArticleWater extends AppCompatActivity {
                     viewHolder.mView.setBackgroundColor(Color.GRAY);
                 }*/
 
-
-
                 if(PcurrentUser.matches(Poster))//這行
-
-                   {
+                 {
                        viewHolder.mMenu.setVisibility(View.VISIBLE);
-
-
-
-                }
+                 }
                 else
                 {
                     viewHolder.mMenu.setVisibility(View.INVISIBLE);
-
                 }
 
                 viewHolder.mMenu.setOnClickListener(new View.OnClickListener() {
@@ -236,10 +202,7 @@ public class SingleArticleWater extends AppCompatActivity {
                                     {
                                         Toast toast = Toast.makeText(SingleArticleWater.this, "師傅已被選擇，無法重複選擇", Toast.LENGTH_SHORT);
                                         toast.show();
-
-
                                     }
-
                                 }
 
                                 if(i == 1) {
@@ -285,10 +248,8 @@ public class SingleArticleWater extends AppCompatActivity {
                         startActivity(profileIntent);
                     }
                 });
-
             }
         };
-
         mCommentList.setAdapter(firebaseRecyclerAdapter);
     }
 
@@ -321,6 +282,10 @@ public class SingleArticleWater extends AppCompatActivity {
             Picasso.get().load(profile).placeholder(R.drawable.defaultavatar).into(user_profile);
         }
 
+        public  void  setDate(String date){
+            TextView post_date = (TextView) mView.findViewById(R.id.date);
+            post_date.setText(date);
+        }
 
     }
 
@@ -338,9 +303,8 @@ public class SingleArticleWater extends AppCompatActivity {
 
     public void addCommentList() {
         final String comment = Comment.getText().toString().trim();
-
         final DatabaseReference newPost = mCommentDB.push();
-
+        
             if (comment.matches(""))
             {
                 Toast toast = Toast.makeText(SingleArticleWater.this, "請輸入回覆", Toast.LENGTH_SHORT);
@@ -352,6 +316,8 @@ public class SingleArticleWater extends AppCompatActivity {
                 newPost.child("isselect").setValue("false");
                 newPost.child("email").setValue(mCurrentUser.getEmail()+"("+id+")");
                 newPost.child("profile").setValue(image);
+                final String currentDate = DateFormat.getDateInstance().format(new Date());
+                newPost.child("date").setValue(currentDate);
                 Toast toast = Toast.makeText(SingleArticleWater.this, "回覆成功", Toast.LENGTH_SHORT);
                 toast.show();
                 CommentText = comment;

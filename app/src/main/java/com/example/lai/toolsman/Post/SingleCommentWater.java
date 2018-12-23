@@ -5,16 +5,18 @@ public class SingleCommentWater {
     private String Email;
     private String Profile;
     private String uid;
+    private String date;
 
     public SingleCommentWater() {
 
     }
 
-    public SingleCommentWater(String comment, String email, String profile, String uid) {
+    public SingleCommentWater(String comment, String email, String profile, String uid, String date) {
         Comment = comment;
         Email = email;
         Profile = profile;
         this.uid = uid;
+        this.date = date;
     }
 
     public String getUid() {
@@ -47,5 +49,13 @@ public class SingleCommentWater {
 
     public void setProfile(String profile) {
         Profile = profile;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

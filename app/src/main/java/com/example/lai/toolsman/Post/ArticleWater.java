@@ -6,16 +6,18 @@ public class ArticleWater {
     private String image;
     private String username;
     private String Profile;
+    private String date;
 
     public ArticleWater(){
 
     }
-    public ArticleWater(String title, String desc, String image, String username, String profile) {
+    public ArticleWater(String title, String desc, String image, String username, String profile, String date) {
         this.title = title;
         this.desc = desc;
         this.username = username;
         this.image = image;
         this.Profile = profile;
+        this.date = date;
     }
     public String getTitle() {
         return title;
@@ -56,5 +58,13 @@ public class ArticleWater {
 
     public void setProfile(String profile) {
         this.Profile = profile;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

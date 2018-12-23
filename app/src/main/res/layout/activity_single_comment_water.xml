@@ -34,13 +34,13 @@
             />
 
         <TextView
-            android:id="@+id/Date"
+            android:id="@+id/date"
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:layout_alignBottom="@+id/profile"
             android:layout_marginStart="10dp"
-            android:text="Date"
-            android:layout_toEndOf="@+id/profile"/>
+            android:layout_toEndOf="@+id/profile"
+            android:text="Date" />
 
         <TextView
             android:id="@+id/postComment"

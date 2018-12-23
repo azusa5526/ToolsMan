@@ -24,10 +24,16 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class PostWater extends AppCompatActivity {
 
@@ -174,6 +180,12 @@ public class PostWater extends AppCompatActivity {
                             newPost.child("uid").setValue(mCurrentUser.getUid());
                             newPost.child("select").setValue("false");
                             newPost.child("Profile").setValue(image);
+
+                            //long time=System.currentTimeMillis();
+                            //newPost.child("timestamp").setValue(time);
+                            final String currentDate = DateFormat.getDateInstance().format(new Date());
+                            newPost.child("date").setValue(currentDate);
+
 
 
 
