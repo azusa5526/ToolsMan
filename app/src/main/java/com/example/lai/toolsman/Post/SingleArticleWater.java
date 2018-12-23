@@ -3,6 +3,7 @@ package com.example.lai.toolsman.Post;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -156,12 +157,17 @@ public class SingleArticleWater extends AppCompatActivity {
                 //viewHolder.mView.setBackgroundColor(Color.WHITE);
 
 
-                /*if (selected.matches("false")) {
-                    viewHolder.mView.setBackgroundColor(Color.WHITE);
+             if (selected.matches("false")) {
+
+                 AddComment.setEnabled(true);
                 }
                 else {
-                    viewHolder.mView.setBackgroundColor(Color.GRAY);
-                }*/
+                 viewHolder.mView.setBackgroundColor(Color.GRAY);
+                 AddComment.setEnabled(false);
+                 Comment.setText("已有師傅被選擇");
+                 Comment.setEnabled(false);
+
+                }
                 /*if (mCommentDB.child(comment_key).child("isselect").equals("false")) {
                     viewHolder.mView.setBackgroundColor(Color.WHITE);
                 }
